@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog & News - Iqra Online Mart</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Language Selector and Theme Toggle -->
+    <div class="header-controls">
+        <div class="language-selector">
+            <button id="langBtn" class="lang-btn">
+                <i class="fas fa-globe"></i> English
+            </button>
+            <div id="langDropdown" class="lang-dropdown">
+                <button data-lang="en" class="lang-option active">English</button>
+                <button data-lang="ur" class="lang-option">اردو</button>
+                <button data-lang="ar" class="lang-option">العربية</button>
+                <button data-lang="es" class="lang-option">Español</button>
+                <button data-lang="bn" class="lang-option">বাংলা</button>
+            </div>
+        </div>
+
+        <div class="theme-toggle">
+            <button id="themeBtn" class="theme-btn" title="Toggle Day/Night Mode">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <h1 class="logo">Iqra<span>Online Mart</span></h1>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#products">Products</a></li>
+                    <li><a href="index.html#categories">Categories</a></li>
+                    <li><a href="index.html#about">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="blog.html" class="active">Blog</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <button class="cart-btn"><i class="fas fa-shopping-cart"></i> Cart (0)</button>
+                <button class="search-btn"><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Blog Section -->
+    <section class="blog">
+        <div class="container">
+            <h2 class="section-title">Latest News & Updates</h2>
+            <div class="blog-posts">
+                <!-- Blog posts will be dynamically generated -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Iqra<span>Online Mart</span></h3>
+                    <p>Your trusted online shopping destination</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html#products">Products</a></li>
+                        <li><a href="index.html#categories">Categories</a></li>
+                        <li><a href="index.html#about">About</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Us</h4>
+                    <p><i class="fas fa-phone"></i> +880 1234 567890</p>
+                    <p><i class="fas fa-envelope"></i> support@iqraonlinemart.com</p>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Shopping Street, City</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Follow Us</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Iqra Online Mart. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Sample blog posts data
+        const blogPosts = [
+            {
+                id: 1,
+                title: "Welcome to Iqra Online Mart - Our Grand Opening!",
+                excerpt: "We're thrilled to announce the launch of Iqra Online Mart, bringing you the best in online shopping with quality products at unbeatable prices.",
+                date: "January 15, 2026",
+                readTime: "3 min read",
+                image: "fa-store",
+                category: "Announcement",
+                content: `
+                    <p>Today marks a significant milestone in our journey as we officially launch Iqra Online Mart. After months of preparation, we're excited to open our virtual doors to customers across Bangladesh and beyond.</p>
+                    <p>Our mission is simple: to provide a seamless online shopping experience where you can find everything you need in one place, from electronics and fashion to home essentials and groceries.</p>
+                    <p>What sets us apart:</p>
+                    <ul>
+                        <li>Curated product selection from trusted brands</li>
+                        <li>Competitive pricing with regular discounts</li>
+                        <li>Fast and reliable delivery across Bangladesh</li>
+                        <li>Secure payment options including Cash on Delivery</li>
+                        <li>Dedicated customer support available 24/7</li>
+                    </ul>
+                    <p>To celebrate our launch, we're offering special discounts on all categories for the first week. Don't miss out on this opportunity to shop smart and save big!</p>
+                `
+            },
+            {
+                id: 2,
+                title: "Top 10 Electronics Deals This Week",
+                excerpt: "Discover the hottest tech deals available now on Iqra Online Mart - from smartphones to smart home devices.",
+                date: "January 12, 2026",
+                readTime: "4 min read",
+                image: "fa-laptop",
+                category: "Electronics",
+                content: `
+                    <p>Looking to upgrade your tech game? This week we've got incredible deals on the latest electronics that you won't want to miss!</p>
+                    <h3>Featured Deals:</h3>
+                    <ol>
+                        <li><strong>Smartphone Bonanza:</strong> Get up to 30% off on latest Android and iOS devices</li>
+                        <li><strong>Smart Home Starter Kit:</strong> Lights, plugs, and speakers - all bundled for maximum savings</li>
+                        <li><strong>Gaming Gear:</strong> Consoles, controllers, and games at special prices</li>
+                        <li><strong>Audio Excellence:</strong> Premium headphones and speakers with crystal clear sound</li>
+                        <li><br>Computing Power:</strong> Laptops and accessories for work and play</li>
+                    </ol>
+                    <p>Remember, these deals are for a limited time only. Stock is limited, so act fast to secure your favorite tech items at unbeatable prices!</p>
+                `
+            },
+            {
+                id: 3,
+                title: "Winter Fashion Collection Now Live",
+                excerpt: "Stay warm and stylish with our new winter collection featuring coats, sweaters, and accessories.",
+                date: "January 10, 2026",
+                readTime: "2 min read",
+                image: "fa-tshirt",
+                category: "Fashion",
+                content: `
+                    <p>As the temperature drops, it's time to update your wardrobe with cozy and fashionable winter essentials. Our new winter collection has arrived, and it's packed with everything you need to stay comfortable and stylish all season long.</p>
+                    <h3>Collection Highlights:</h3>
+                    <ul>
+                        <li><strong>Luxury Coats:</strong> Wool blends, parkas, and trench coats in classic and contemporary styles</li>
+                        <li><strong>Cozy Sweaters:</strong> Cashmere, merino wool, and cable knits for ultimate warmth</li>
+                        <li><strong>Winter Accessories:</strong> Scarves, gloves, hats, and earmuffs to complete your look</li>
+                        <li><strong>Footwear:</strong> Insulated boots, waterproof shoes, and cozy slippers</li>
+                        <li><strong>Layering Pieces:</strong> Thermals, base layers, and vests for flexible warmth</li>
+                    </ul>
+                    <p>All items in our winter collection are carefully selected for quality, comfort, and style. Plus, enjoy special launch discounts on select items for a limited time!</p>
+                `
+            }
+        ];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const blogPostsContainer = document.querySelector('.blog-posts');
+            blogPostsContainer.innerHTML = '';
+
+            blogPosts.forEach(post => {
+                const postElement = document.createElement('div');
+                postElement.className = 'blog-post animate-on-scroll';
+                postElement.innerHTML = `
+                    <div class="post-content">
+                        <span class="post-category">${post.category}</span>
+                        <h3 class="post-title">${post.title}</h3>
+                        <p class="post-excerpt">${post.excerpt}</p>
+                        <div class="post-meta">
+                            <span><i class="fas fa-calendar"></i> ${post.date}</span>
+                            <span><i class="fas fa-clock"></i> ${post.readTime}</span>
+                        </div>
+                        <a href="#" class="btn-primary read-more">Read More</a>
+                    </div>
+                `;
+                blogPostsContainer.appendChild(postElement);
+            });
+
+            // Add read more functionality
+            document.querySelectorAll('.read-more').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const postElement = button.closest('.blog-post');
+                    const postId = parseInt(postElement.dataset.postId || '1');
+                    showBlogPostModal(postId);
+                });
+            });
+
+            // Trigger animations
+            setTimeout(() => {
+                document.querySelectorAll('.animate-on-scroll').forEach(el => {
+                    el.classList.add('animate');
+                });
+            }, 100);
+        });
+
+        function showBlogPostModal(postId) {
+            const post = blogPosts.find(p => p.id === postId);
+            if (!post) return;
+
+            // Create modal
+            const modal = document.createElement('div');
+            modal.className = 'blog-modal';
+            modal.innerHTML = `
+                <div class="blog-modal-content">
+                    <span class="close-modal">&times;</span>
+                    <div class="post-header">
+                        <span class="post-category">${post.category}</span>
+                        <h2 class="post-title">${post.title}</h2>
+                        <div class="post-meta">
+                            <span><i class="fas fa-calendar"></i> ${post.date}</span>
+                            <span><i class="fas fa-clock"></i> ${post.readTime}</span>
+                        </div>
+                    </div>
+                    <div class="post-image">
+                        <i class="fas ${post.image}" style="font-size: 4rem;"></i>
+                    </div>
+                    <div class="post-content">
+                        ${post.content}
+                    </div>
+                </div>
+            `;
+
+            document.body.appendChild(modal);
+
+            // Show modal
+            setTimeout(() => {
+                modal.classList.add('show');
+            }, 100);
+
+            // Close modal
+            modal.querySelector('.close-modal').addEventListener('click', () => {
+                modal.classList.remove('show');
+                setTimeout(() => {
+                    modal.remove();
+                }, 300);
+            });
+
+            // Close on outside click
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.remove('show');
+                    setTimeout(() => {
+                        modal.remove();
+                    }, 300);
+                }
+            });
+        }
+    </script>
+</body>
+</html>

@@ -9,16 +9,25 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <!-- Language Selector -->
-    <div class="language-selector">
-        <button id="langBtn" class="lang-btn">
-            <i class="fas fa-globe"></i> English
-        </button>
-        <div id="langDropdown" class="lang-dropdown">
-            <button data-lang="en" class="lang-option active">English</button>
-            <button data-lang="ur" class="lang-option">اردو</button>
-            <button data-lang="ar" class="lang-option">العربية</button>
-            <button data-lang="es" class="lang-option">Español</button>
+    <!-- Language Selector and Theme Toggle -->
+    <div class="header-controls">
+        <div class="language-selector">
+            <button id="langBtn" class="lang-btn">
+                <i class="fas fa-globe"></i> English
+            </button>
+            <div id="langDropdown" class="lang-dropdown">
+                <button data-lang="en" class="lang-option active">English</button>
+                <button data-lang="ur" class="lang-option">اردو</button>
+                <button data-lang="ar" class="lang-option">العربية</button>
+                <button data-lang="es" class="lang-option">Español</button>
+                <button data-lang="bn" class="lang-option">বাংলা</button>
+            </div>
+        </div>
+
+        <div class="theme-toggle">
+            <button id="themeBtn" class="theme-btn" title="Toggle Day/Night Mode">
+                <i class="fas fa-moon"></i>
+            </button>
         </div>
     </div>
 
