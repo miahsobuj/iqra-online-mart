@@ -93,12 +93,37 @@ const translations = {
         sports_fitness: "Deportes y Fitness",
         pet_supplies: "Suministros para Mascotas",
         about_title: "Sobre Iqra Online Mart",
-        about_text1: "En Iqra Online Mart, nos comprometemos a brindarle la mejor experiencia de compra en línea. Nuestra misión es traerle productos de calidad de todo el mundo directamente a su puerta, manteniendo precios competitivos y un servicio al cliente excepcional.",
+        about_text1: "En Iqra Online Mart, nos comprometemos a brindarle la mejor experiencia de compra en línea. Nuestra misión es traerle productos de calidad de todo el mundo direttamente a su puerta, manteniendo precios competitivi y un servicio al cliente excepcional.",
         about_text2: "Creemos que las compras deben ser agradables, convenientes y accesibles para todos. Por eso hemos creado una plataforma fácil de usar, segura y llena de productos increíbles en diversas categorías.",
         quick_links: "Enlaces Rápidos",
         contact_us: "Contáctenos",
         follow_us: "Síguenos",
         copyright: "© 2026 Iqra Online Mart. Todos los derechos reservados."
+    },
+    bn: {
+        home: "বাস",
+        products: "পণ্য",
+        categories: "বিষয়",
+        about: "আমাদের সম্পর্কে",
+        contact: "যোগাযোগ",
+        cart: "কার্ট",
+        search: "অনুসন্ধান",
+        welcome: "Iqra Online Mart-এ স্বাগতম",
+        subtitle: "আপনার একমাত্র গন্তব্য গুণমানের পণ্য সাশ্রয়ী দামে",
+        shop_now: "এখনই কেনাকাটা করুন",
+        electronics: "ইলেকট্রনিক্স",
+        fashion: "ফ্যাশন",
+        home_living: "বাস & জীবন",
+        books_education: "বই ও শিক্ষা",
+        sports_fitness: "খেলা ও ফিটনেস",
+        pet_supplies: "পোষাল প্রাণী সরঞ্জাম",
+        about_title: "Iqra Online Martbar বিষয়ে",
+        about_text1: "Iqra Online Mart-এ, আমরা আপনাকে সেরা অনলাইন শপিং অভিজ্ঞতা প্রদান করতে দৃঢ়বদ্ধ। আমাদের মিশন হল বিশ্বব্যাপী থেকে গুণমানের পণ্য আপনার দরজা টাকতে আনা, প্রতিযোগিতামূলক দাম নিশ্চিত করা এবং অসাধারণ গ্রাহক সেবা প্রদান করা।",
+        about_text2: "আমরা বিশ্বাস করি যে শপিং должно být 즐거운, সুবিধাজনক এবং সবাই অ্যাক্সেস করতে পারে। এ deshalb আমরা ব্যবহার하기에 편리하고, নিরাপদ এবং বিভিন্ন বিভuciones এর আশ্চর্যজনক পণ্য দিয়ে পূর্ণ একটি প্ল্যাটফর্ম তৈরি করেছি।",
+        quick_links: "দ্রুত লিঙ্ক",
+        contact_us: "যোগাযোগ করুন",
+        follow_us: "আমাদের অনুসরণ করুন",
+        copyright: "© 2026 Iqra Online Mart. সব权리 সংরক্ষিত।"
     }
 };
 
@@ -203,6 +228,7 @@ let cartItems = [];
 const langBtn = document.getElementById('langBtn');
 const langDropdown = document.getElementById('langDropdown');
 const langOptions = document.querySelectorAll('.lang-option');
+const themeBtn = document.getElementById('themeBtn');
 const searchBtn = document.querySelector('.search-btn');
 const searchModal = document.getElementById('searchModal');
 const closeModal = document.querySelector('.close-modal');
@@ -216,6 +242,7 @@ const cartBtn = document.querySelector('.cart-btn');
 document.addEventListener('DOMContentLoaded', () => {
     loadProducts();
     setupLanguageSelector();
+    setupThemeToggle();
     setupSearchModal();
     setupCart();
     setupAnimations();
@@ -311,6 +338,43 @@ function setupLanguageSelector() {
             langDropdown.classList.remove('active');
         }
     });
+}
+
+// Theme Toggle Functions
+function setupThemeToggle() {
+    // Check for saved theme preference or use system preference
+    const savedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    if (savedTheme === 'day-mode' || (!savedTheme && !prefersDark)) {
+        enableDayMode();
+    } else {
+        enableNightMode();
+    }
+
+    themeBtn.addEventListener('click', () => {
+        if (document.body.classList.contains('day-mode')) {
+            enableNightMode();
+        } else {
+            enableDayMode();
+        }
+    });
+}
+
+function enableDayMode() {
+    document.body.classList.add('day-mode');
+    document.documentElement.classList.add('day-mode');
+    themeBtn.innerHTML = '<i class="fas fa-sun"></i>';
+    themeBtn.title = "Switch to Night Mode";
+    localStorage.setItem('theme', 'day-mode');
+}
+
+function enableNightMode() {
+    document.body.classList.remove('day-mode');
+    document.documentElement.classList.remove('day-mode');
+    themeBtn.innerHTML = '<i class="fas fa-moon"></i>';
+    themeBtn.title = "Switch to Day Mode";
+    localStorage.setItem('theme', 'night-mode');
 }
 
 function updateLanguage() {
@@ -478,6 +542,9 @@ function showNotification(message) {
     // Create notification element
     const notification = document.createElement('div');
     notification.className = 'notification';
+    if (document.body.classList.contains('day-mode')) {
+        notification.classList.add('day-mode');
+    }
     notification.innerHTML = `
         <i class="fas fa-check-circle"></i>
         <span>${message}</span>
@@ -571,6 +638,13 @@ style.textContent = `
 
     .notification span {
         font-weight: 500;
+    }
+
+    /* Day mode notification */
+    .notification.day-mode {
+        background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+        color: var(--text-primary);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
     }
 `;
 document.head.appendChild(style);
