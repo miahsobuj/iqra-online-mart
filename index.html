@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iqra Online Mart</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Language Selector -->
+    <div class="language-selector">
+        <button id="langBtn" class="lang-btn">
+            <i class="fas fa-globe"></i> English
+        </button>
+        <div id="langDropdown" class="lang-dropdown">
+            <button data-lang="en" class="lang-option active">English</button>
+            <button data-lang="ur" class="lang-option">اردو</button>
+            <button data-lang="ar" class="lang-option">العربية</button>
+            <button data-lang="es" class="lang-option">Español</button>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <h1 class="logo">Iqra<span>Online Mart</span></h1>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#products">Products</a></li>
+                    <li><a href="#categories">Categories</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <button class="cart-btn"><i class="fas fa-shopping-cart"></i> Cart (0)</button>
+                <button class="search-btn"><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Search Modal -->
+    <div id="searchModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Search Products</h2>
+            <input type="text" id="searchInput" placeholder="Search for products...">
+            <button id="searchSubmit">Search</button>
+            <div id="searchResults"></div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h2>Welcome to Iqra Online Mart</h2>
+                <p>Your one-stop shop for quality products at affordable prices</p>
+                <button class="btn-primary">Shop Now</button>
+            </div>
+            <div class="hero-animation">
+                <div class="floating-icons">
+                    <i class="fas fa-mobile-alt"></i>
+                    <i class="fas fa-laptop"></i>
+                    <i class="fas fa-headphones"></i>
+                    <i class="fas fa-watch"></i>
+                    <i class="fas fa-gamepad"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section id="categories" class="categories">
+        <div class="container">
+            <h2 class="section-title">Shop by Category</h2>
+            <div class="categories-grid">
+                <div class="category-card">
+                    <i class="fas fa-mobile-alt category-icon"></i>
+                    <h3>Electronics</h3>
+                    <p>Latest gadgets and devices</p>
+                </div>
+                <div class="category-card">
+                    <i class="fas fa-tshirt category-icon"></i>
+                    <h3>Fashion</h3>
+                    <p>Trendy clothing & accessories</p>
+                </div>
+                <div class="category-card">
+                    <i class="fas fa-home category-icon"></i>
+                    <h3>Home & Living</h3>
+                    <p>Furniture & home essentials</p>
+                </div>
+                <div class="category-card">
+                    <i class="fas fa-book category-icon"></i>
+                    <h3>Books & Education</h3>
+                    <p>Learning materials & books</p>
+                </div>
+                <div class="category-card">
+                    <i class="fas fa-running category-icon"></i>
+                    <h3>Sports & Fitness</h3>
+                    <p>Equipment & activewear</p>
+                </div>
+                <div class="category-card">
+                    <i class="fas fa-paw category-icon"></i>
+                    <h3>Pet Supplies</h3>
+                    <p>Everything for your pets</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section id="products" class="products">
+        <div class="container">
+            <h2 class="section-title">Featured Products</h2>
+            <div class="products-grid">
+                <!-- Product cards will be dynamically generated -->
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="about-content">
+                <h2>About Iqra Online Mart</h2>
+                <p>At Iqra Online Mart, we're committed to providing you with the best online shopping experience. Our mission is to bring quality products from around the world right to your doorstep, all while ensuring competitive prices and exceptional customer service.</p>
+                <p>We believe that shopping should be enjoyable, convenient, and accessible to everyone. That's why we've built a platform that's easy to use, secure, and filled with amazing products across various categories.</p>
+            </div>
+            <div class="about-image">
+                <div class="animated-shape"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Iqra<span>Online Mart</span></h3>
+                    <p>Your trusted online shopping destination</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#products">Products</a></li>
+                        <li><a href="#categories">Categories</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Us</h4>
+                    <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                    <p><i class="fas fa-envelope"></i> support@iqraonlinemart.com</p>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Shopping Street, City</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Follow Us</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Iqra Online Mart. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
