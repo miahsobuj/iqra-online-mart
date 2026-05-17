@@ -12,9 +12,7 @@
     <!-- Language Selector and Theme Toggle -->
     <div class="header-controls">
         <div class="language-selector">
-            <button id="langBtn" class="lang-btn">
-                <i class="fas fa-globe"></i> English
-            </button>
+            <button id="langBtn" class="lang-btn"><i class="fas fa-globe"></i> English</button>
             <div id="langDropdown" class="lang-dropdown">
                 <button data-lang="en" class="lang-option active">English</button>
                 <button data-lang="ur" class="lang-option">اردو</button>
@@ -25,45 +23,34 @@
         </div>
 
         <div class="theme-toggle">
-            <button id="themeBtn" class="theme-btn" title="Toggle Day/Night Mode">
-                <i class="fas fa-moon"></i>
-            </button>
+            <button id="themeBtn" class="theme-btn" title="Toggle Day/Night Mode"><i class="fas fa-moon"></i></button>
         </div>
     </div>
 
     <!-- Header -->
     <header>
         <div class="container">
-            <h1 class="logo">Iqra<span>Online Mart</span></h1>
+            <div class="logo">
+                Iqra <span>Mart</span>
+            </div>
             <nav>
                 <ul class="nav-links">
-                    <li><a href="#home">Home</a></li>
+                    <li><a href="#">Home</a></li>
                     <li><a href="#products">Products</a></li>
                     <li><a href="#categories">Categories</a></li>
                     <li><a href="#about">About</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="contact.html">Contact</a></li>
                 </ul>
             </nav>
             <div class="header-actions">
-                <button class="cart-btn"><i class="fas fa-shopping-cart"></i> Cart (0)</button>
-                <button class="search-btn"><i class="fas fa-search"></i></button>
+                <button class="cart-btn" title="Cart"><i class="fas fa-shopping-cart"></i> Cart (0)</button>
+                <button class="search-btn" title="Search"><i class="fas fa-search"></i></button>
             </div>
         </div>
     </header>
 
-    <!-- Search Modal -->
-    <div id="searchModal" class="modal">
-        <div class="modal-content">
-            <span class="close-modal">&times;</span>
-            <h2>Search Products</h2>
-            <input type="text" id="searchInput" placeholder="Search for products...">
-            <button id="searchSubmit">Search</button>
-            <div id="searchResults"></div>
-        </div>
-    </div>
-
     <!-- Hero Section -->
-    <section id="home" class="hero">
+    <section class="hero">
         <div class="container">
             <div class="hero-content">
                 <h2>Welcome to Iqra Online Mart</h2>
@@ -72,67 +59,66 @@
             </div>
             <div class="hero-animation">
                 <div class="floating-icons">
-                    <i class="fas fa-mobile-alt"></i>
-                    <i class="fas fa-laptop"></i>
-                    <i class="fas fa-headphones"></i>
-                    <i class="fas fa-watch"></i>
-                    <i class="fas fa-gamepad"></i>
+                    <i class="fas fa-shopping-bag"></i>
+                    <i class="fas fa-shipping-fast"></i>
+                    <i class="fas fa-box-open"></i>
+                    <i class="fas fa-cart-arrow-down"></i>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Categories Section -->
-    <section id="categories" class="categories">
+    <section class="categories" id="categories">
         <div class="container">
-            <h2 class="section-title">Shop by Category</h2>
+            <h2 class="section-title">Categories</h2>
             <div class="categories-grid">
                 <div class="category-card">
-                    <i class="fas fa-mobile-alt category-icon"></i>
+                    <i class="fas fa-laptop category-icon"></i>
                     <h3>Electronics</h3>
-                    <p>Latest gadgets and devices</p>
+                    <p>Latest gadgets and tech accessories</p>
                 </div>
                 <div class="category-card">
                     <i class="fas fa-tshirt category-icon"></i>
                     <h3>Fashion</h3>
-                    <p>Trendy clothing & accessories</p>
+                    <p>Trendy clothing and accessories</p>
                 </div>
                 <div class="category-card">
                     <i class="fas fa-home category-icon"></i>
                     <h3>Home & Living</h3>
-                    <p>Furniture & home essentials</p>
+                    <p>Furniture, decor & essentials</p>
                 </div>
                 <div class="category-card">
                     <i class="fas fa-book category-icon"></i>
                     <h3>Books & Education</h3>
-                    <p>Learning materials & books</p>
+                    <p>Knowledge and learning resources</p>
                 </div>
                 <div class="category-card">
-                    <i class="fas fa-running category-icon"></i>
+                    <i class="fas fa-dumbbell category-icon"></i>
                     <h3>Sports & Fitness</h3>
-                    <p>Equipment & activewear</p>
+                    <p>Equipment for active lifestyles</p>
                 </div>
                 <div class="category-card">
                     <i class="fas fa-paw category-icon"></i>
                     <h3>Pet Supplies</h3>
-                    <p>Everything for your pets</p>
+                    <p>Everything for your furry friends</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Featured Products -->
-    <section id="products" class="products">
+    <!-- Products Section -->
+    <section class="products" id="products">
         <div class="container">
             <h2 class="section-title">Featured Products</h2>
             <div class="products-grid">
-                <!-- Product cards will be dynamically generated -->
+                <!-- Products will be injected here by JavaScript -->
             </div>
         </div>
     </section>
 
     <!-- About Section -->
-    <section id="about" class="about">
+    <section class="about" id="about">
         <div class="container">
             <div class="about-content">
                 <h2>About Iqra Online Mart</h2>
@@ -150,40 +136,61 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h3>Iqra<span>Online Mart</span></h3>
-                    <p>Your trusted online shopping destination</p>
-                </div>
-                <div class="footer-section">
                     <h4>Quick Links</h4>
                     <ul>
-                        <li><a href="#home">Home</a></li>
+                        <li><a href="#">Home</a></li>
                         <li><a href="#products">Products</a></li>
                         <li><a href="#categories">Categories</a></li>
                         <li><a href="#about">About</a></li>
-                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="contact.html">Contact</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
                     <h4>Contact Us</h4>
-                    <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
-                    <p><i class="fas fa-envelope"></i> support@iqraonlinemart.com</p>
-                    <p><i class="fas fa-map-marker-alt"></i> 123 Shopping Street, City</p>
+                    <p><i class="fas fa-phone"></i> +123 456 7890</p>
+                    <p><i class="fas fa-envelope"></i> info@iqramart.com</p>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Market Street, Dhaka</p>
                 </div>
                 <div class="footer-section">
                     <h4>Follow Us</h4>
                     <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab facebook-f"></i></a>
+                        <a href="#"><i class="fab twitter"></i></a>
+                        <a href="#"><i class="fab instagram"></i></a>
+                        <a href="#"><i class="fab linkedin-in"></i></a>
+                        <a href="#"><i class="fab youtube"></i></a>
                     </div>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2026 Iqra Online Mart. All rights reserved.</p>
+                © 2026 Iqra Online Mart. All rights reserved.
             </div>
         </div>
     </footer>
+
+    <!-- Search Modal -->
+    <div id="searchModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Search Products</h2>
+            <input type="text" id="searchInput" placeholder="Search for products...">
+            <button id="searchSubmit">Search</button>
+            <div id="searchResults"></div>
+        </div>
+    </div>
+
+    <!-- Cart Modal -->
+    <div id="cartModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Your Cart</h2>
+            <div id="cartItems"></div>
+            <div id="cartTotal">
+                <p>Total: $<span id="totalAmount">0.00</span></p>
+                <button class="btn-primary" id="checkoutBtn">Proceed to Checkout</button>
+            </div>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
