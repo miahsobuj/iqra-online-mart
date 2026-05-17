@@ -26,13 +26,13 @@ const translations = {
         copyright: "© 2026 Iqra Online Mart. All rights reserved."
     },
     ur: {
-        home: "ホーム",
-        products: "製品",
-        categories: "カテゴリー",
-        about: "私たちについて",
-        contact: "お問い合わせ",
-        cart: "カート",
-        search: "検索",
+        home: "صفحه اصلی",
+        products: "محصولات",
+        categories: "دسته بندی",
+        about: "درباره ما",
+        contact: "تماس با ما",
+        cart: "سبد خرید",
+        search: "جستجو",
         welcome: "Iqra Online Martへようこそ",
         subtitle: "品質の高い製品を手頃な価格で購入できるワンストップショップ",
         shop_now: "今すぐショッピング",
@@ -69,7 +69,7 @@ const translations = {
         pet_supplies: "مستلزمات الحيوانات الأليفة",
         about_title: "حول Iqra Online Mart",
         about_text1: "في Iqra Online Mart، نحن ملتزمون بتوفير أفضل تجربة تسوق عبر الإنترنت لك. مهمتنا هي إحضار منتجات عالية الجودة من جميع أنحاء العالم مباشرة إلى عتبة داركم، مع الحفاظ على أسعار تنافسية وخدمة عملاء استثنائية.",
-        about_text2: "نعتقد أن التسوق يجب أن يكون ممتعًا ومريحًا ويمكن للجميع الوصول إليه. لهذا السبب أنشأنا منصة سهلة الاستخدام وآمنة ومليئة بالمنتقات الرائعة عبر فئات متعددة.",
+        about_text2: "نعتقد أن التسوق يجب أن يكون ممتعًا ومريحًا ويمكن للجميع الوصول إليه. لهذا السبب أنشأنا منصة سهلة الاستخدام وآمنة ومليئة بالمنتجات الرائعة عبر فئات متعددة.",
         quick_links: "روابط سريعة",
         contact_us: "اتصل بنا",
         follow_us: "اتبعنا",
@@ -93,7 +93,7 @@ const translations = {
         sports_fitness: "Deportes y Fitness",
         pet_supplies: "Suministros para Mascotas",
         about_title: "Sobre Iqra Online Mart",
-        about_text1: "En Iqra Online Mart, nos comprometemos a brindarle la mejor experiencia de compra en línea. Nuestra misión es traerle productos de calidad de todo el mundo direttamente a su puerta, manteniendo precios competitivi y un servicio al cliente excepcional.",
+        about_text1: "En Iqra Online Mart, nos comprometemos a brindarle la mejor experiencia de compra en línea. Nuestra misión es traerle productos de calidad de todo el mundo directamente a su puerta, manteniendo precios competitivi y un servicio al cliente excepcional.",
         about_text2: "Creemos que las compras deben ser agradables, convenientes y accesibles para todos. Por eso hemos creado una plataforma fácil de usar, segura y llena de productos increíbles en diversas categorías.",
         quick_links: "Enlaces Rápidos",
         contact_us: "Contáctenos",
@@ -119,11 +119,11 @@ const translations = {
         pet_supplies: "পোষাল প্রাণী সরঞ্জাম",
         about_title: "Iqra Online Mart সম্পর্কে",
         about_text1: "Iqra Online Mart-এ, আমরা আপনাকে সেরা অনলাইন শপিং অভিজ্ঞতা প্রদান করতে দৃঢ়বদ্ধ। আমাদের মিশন হল বিশ্বব্যাপী থেকে গুণমানের পণ্য আপনার দরজা টাকতে আনা, প্রতিযোগিতামূলক দাম নিশ্চিত করা এবং অসাধারণ গ্রাহক সেবা প্রদান করা।",
-        about_text2: "আমরা বিশ্বাস করি যে শপিং должно být 즐거운, সুবিধাজনক এবং সবাই অ্যাক্সেস করতে পারে। এ deshalb আমরা ব্যবহার하기에 편리하고, নিরাপদ এবং বিভিন্ন বিভuciones এর আশ্চর্যজনক পণ্য দিয়ে পূর্ণ একটি প্ল্যাটফর্ম তৈরি করেছি।",
+        about_text2: "আমরা বিশ্বাস করি যে শপিং باید উপভোগ্য, সুবিধাজনক এবং всі लोग অ্যাক্সেস করতে পারে। এই原因で আমরা ব্যবহারしやすく、 सुरक्षित и विभिन्न বিভuced এর আশ্চর্যজনক পণ্যে পূর্ণ একটি প্ল্যাটফর্ম তৈরি করেছি।",
         quick_links: "দ্রুত লিঙ্ক",
         contact_us: "যোগাযোগ করুন",
         follow_us: "আমাদের অনুসরণ করুন",
-        copyright: "© 2026 Iqra Online Mart. সব权리 সংরক্ষিত।"
+        copyright: "© 2026 Iqra Online Mart. সব 권리 сохранен。"
     }
 };
 
@@ -237,6 +237,11 @@ const searchSubmit = document.getElementById('searchSubmit');
 const searchResults = document.getElementById('searchResults');
 const productsGrid = document.querySelector('.products-grid');
 const cartBtn = document.querySelector('.cart-btn');
+const cartModal = document.getElementById('cartModal');
+const cartCloseModal = document.querySelector('#cartModal .close-modal');
+const cartItemsContainer = document.getElementById('cartItems');
+const cartTotalAmount = document.getElementById('totalAmount');
+const checkoutBtn = document.getElementById('checkoutBtn');
 
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
@@ -244,6 +249,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setupLanguageSelector();
     setupThemeToggle();
     setupSearchModal();
+    setupCartModal();
     setupCart();
     setupAnimations();
 });
@@ -503,6 +509,128 @@ function performSearch() {
     }, 500);
 }
 
+// Cart Modal Functions
+function setupCartModal() {
+    // Open cart modal when cart button is clicked
+    cartBtn.addEventListener('click', () => {
+        renderCartItems();
+        cartModal.style.display = 'block';
+    });
+
+    // Close cart modal
+    cartCloseModal.addEventListener('click', () => {
+        cartModal.style.display = 'none';
+    });
+
+    // Close cart modal when clicking outside
+    window.addEventListener('click', (e) => {
+        if (e.target === cartModal) {
+            cartModal.style.display = 'none';
+        }
+    });
+
+    // Checkout button
+    checkoutBtn.addEventListener('click', () => {
+        if (cartItems.length === 0) {
+            alert('Your cart is empty!');
+            return;
+        }
+        // Here you would typically redirect to a checkout page
+        alert('Proceeding to checkout... (This is a demo)')
+        // For demo, we'll just clear the cart and close the modal
+        cartItems = [];
+        updateCartDisplay();
+        cartModal.style.display = 'none';
+    });
+}
+
+function renderCartItems() {
+    if (cartItems.length === 0) {
+        cartItemsContainer.innerHTML = '<p class="text-center">Your cart is empty.</p>';
+        cartTotalAmount.textContent = '0.00';
+        return;
+    }
+
+    cartItemsContainer.innerHTML = '';
+    let total = 0;
+
+    cartItems.forEach(item => {
+        const itemTotal = item.price * item.quantity;
+        total += itemTotal;
+
+        const cartItem = document.createElement('div');
+        cartItem.className = 'cart-item';
+        cartItem.innerHTML = `
+            <div class="cart-item-info">
+                <h4>${item.name}</h4>
+                <p>Price: $${item.price.toFixed(2)}</p>
+            </div>
+            <div class="cart-item-controls">
+                <button class="cart-item-btn decrease" data-id="${item.id}">-</button>
+                <span class="cart-item-quantity">${item.quantity}</span>
+                <button class="cart-item-btn increase" data-id="${item.id}">+</button>
+                <button class="cart-item-btn remove" data-id="${item.id}">&times;</button>
+            </div>
+            <div class="cart-item-total">$${itemTotal.toFixed(2)}</div>
+        `;
+        cartItemsContainer.appendChild(cartItem);
+    });
+
+    cartTotalAmount.textContent = total.toFixed(2);
+
+    // Add event listeners to cart item buttons
+    cartItemsContainer.querySelectorAll('.decrease').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const productId = parseInt(e.target.dataset.id);
+            decreaseCartItem(productId);
+        });
+    });
+
+    cartItemsContainer.querySelectorAll('.increase').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const productId = parseInt(e.target.dataset.id);
+            increaseCartItem(productId);
+        });
+    });
+
+    cartItemsContainer.querySelectorAll('.remove').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const productId = parseInt(e.target.dataset.id);
+            removeCartItem(productId);
+        });
+    });
+}
+
+function decreaseCartItem(productId) {
+    const item = cartItems.find(item => item.id === productId);
+    if (item) {
+        if (item.quantity > 1) {
+            item.quantity -= 1;
+        } else {
+            // If quantity is 1, removing the item is equivalent to decreasing to 0
+            removeCartItem(productId);
+            return;
+        }
+        updateCartDisplay();
+        renderCartItems();
+    }
+}
+
+function increaseCartItem(productId) {
+    const item = cartItems.find(item => item.id === productId);
+    if (item) {
+        item.quantity += 1;
+        updateCartDisplay();
+        renderCartItems();
+    }
+}
+
+function removeCartItem(productId) {
+    cartItems = cartItems.filter(item => item.id !== productId);
+    updateCartDisplay();
+    renderCartItems();
+}
+
 // Cart Functions
 function setupCart() {
     updateCartDisplay();
@@ -645,6 +773,62 @@ style.textContent = `
         background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
         color: var(--text-primary);
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Cart item styles */
+    .cart-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .cart-item-info h4 {
+        margin: 0 0 0.5rem 0;
+    }
+
+    .cart-item-info p {
+        margin: 0;
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+    }
+
+    .cart-item-controls {
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+    }
+
+    .cart-item-btn {
+        background: rgba(30, 41, 59, 0.6);
+        border: 1px solid var(--border-color);
+        color: var(--text-primary);
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: var(--transition-speed);
+    }
+
+    .cart-item-btn:hover {
+        background: var(--primary-color);
+        color: white;
+    }
+
+    .cart-item-quantity {
+        min-width: 20px;
+        text-align: center;
+        font-weight: 600;
+    }
+
+    .cart-item-total {
+        font-weight: 600;
+        min-width: 80px;
+        text-align: right;
     }
 `;
 document.head.appendChild(style);
