@@ -212,6 +212,7 @@ const TRANSLATIONS = {
         noOrdersYet: 'You have no orders yet.',
         startShopping: 'Start Shopping',
         qty: 'Qty',
+        source: 'Source',
         shippingNote: 'Free shipping over ৳1000',
         signedInAs: 'Signed in as',
         sendToNumber: 'Send payment to',
@@ -324,6 +325,7 @@ const TRANSLATIONS = {
         noOrdersYet: 'আপনার কোনো অর্ডার নেই।',
         startShopping: 'শপিং শুরু করুন',
         qty: 'সংখ্যা',
+        source: 'সোর্স',
         shippingNote: '৳১০০০ এর উপরে ফ্রি শিপিং',
         signedInAs: 'সাইন ইন করা আছে',
         sendToNumber: 'পেমেন্ট পাঠান এই নম্বরে',
@@ -1263,14 +1265,25 @@ const UI = {
         // Settings → footer/contact
         const s = Store.state.settings;
         document.querySelectorAll('[data-cms="site-name"]').forEach(el => el.textContent = s.siteName || '');
+        document.querySelectorAll('[data-cms="motto"]').forEach(el => el.textContent = s.motto || '');
+        document.querySelectorAll('[data-cms="tagline"]').forEach(el => el.textContent = s.tagline || '');
         document.querySelectorAll('[data-cms="phone"]').forEach(el => el.textContent = s.phone || '');
         document.querySelectorAll('[data-cms="email"]').forEach(el => el.textContent = s.email || '');
         document.querySelectorAll('[data-cms="address"]').forEach(el => el.textContent = s.address || '');
+        document.querySelectorAll('[data-cms="currency"]').forEach(el => el.textContent = s.currency || '৳');
+        document.querySelectorAll('[data-cms="repo-link"]').forEach(el => {
+            if (s.repoUrl) { el.href = s.repoUrl; el.style.display = ''; }
+        });
         if (s.copyright) {
             document.querySelectorAll('[data-cms="copyright"]').forEach(el => el.textContent = s.copyright);
         }
         if (s.footerTagline) {
             document.querySelectorAll('[data-cms="footer-tagline"]').forEach(el => el.textContent = s.footerTagline);
+        }
+        // Title tag
+        if (s.siteName) {
+            const titleSuffix = ' — ' + s.siteName;
+            if (!document.title.includes(titleSuffix)) document.title = document.title.split(' — ')[0] + titleSuffix;
         }
         // Social links
         document.querySelectorAll('[data-cms-link]').forEach(el => {
@@ -1398,6 +1411,27 @@ const Admin = {
         document.querySelector(`[data-section="${section}"]`)?.classList.add('active');
         document.querySelectorAll('.admin-content-section').forEach(s => s.style.display = 'none');
         document.querySelector(`#section-${section}`).style.display = 'block';
+        // Close mobile sidebar after navigation
+        Admin.closeSidebar();
+    },
+
+    bindSidebarToggle() {
+        const toggle = document.getElementById('adminSidebarToggle');
+        const close = document.getElementById('adminSidebarClose');
+        const overlay = document.getElementById('adminSidebarOverlay');
+        const sidebar = document.querySelector('.admin-sidebar');
+        if (!toggle || !sidebar) return;
+        toggle.addEventListener('click', () => {
+            sidebar.classList.add('is-open');
+            overlay?.classList.add('is-open');
+        });
+        close?.addEventListener('click', () => Admin.closeSidebar());
+        overlay?.addEventListener('click', () => Admin.closeSidebar());
+    },
+
+    closeSidebar() {
+        document.querySelector('.admin-sidebar')?.classList.remove('is-open');
+        document.getElementById('adminSidebarOverlay')?.classList.remove('is-open');
     },
 
     renderRecentOrders() {
@@ -1649,16 +1683,65 @@ const Admin = {
         const s = Store.state.settings;
         form.querySelector('[name=siteName]').value = s.siteName || '';
         form.querySelector('[name=tagline]').value = s.tagline || '';
+        form.querySelector('[name=motto]').value = s.motto || '';
+        form.querySelector('[name=repoUrl]').value = s.repoUrl || '';
         form.querySelector('[name=email]').value = s.email || '';
         form.querySelector('[name=phone]').value = s.phone || '';
         form.querySelector('[name=address]').value = s.address || '';
         form.querySelector('[name=currency]').value = s.currency || '$';
         form.querySelector('[name=freeShippingThreshold]').value = s.freeShippingThreshold || 100;
+        form.querySelector('[name=enableSound]').checked = s.enableSound !== false;
+        form.querySelector('[name=enableTrail]').checked = s.enableTrail !== false;
         form.querySelector('[name=adminUsername]').value = (s.adminCredentials && s.adminCredentials.username) || 'admin';
         form.querySelector('[name=facebook]').value = s.facebook || '';
         form.querySelector('[name=twitter]').value = s.twitter || '';
         form.querySelector('[name=instagram]').value = s.instagram || '';
         form.querySelector('[name=linkedin]').value = s.linkedin || '';
+        Admin.renderPaymentGatewaysEditor();
+    },
+
+    renderPaymentGatewaysEditor() {
+        const wrap = document.querySelector('#paymentGatewaysEditor');
+        if (!wrap) return;
+        const gateways = Store.state.settings.paymentGateways || {};
+        const defs = [
+            { key: 'cod', label: 'Cash on Delivery', defaultLabelBn: 'ক্যাশ অন ডেলিভারি', hasNumber: false, icon: 'fa-money-bill-wave' },
+            { key: 'bkash', label: 'bKash', defaultLabelBn: 'বিকাশ', hasNumber: true, icon: 'fa-mobile-alt', color: '#E2136E' },
+            { key: 'nagad', label: 'Nagad', defaultLabelBn: 'নগদ', hasNumber: true, icon: 'fa-mobile-alt', color: '#F6921E' },
+            { key: 'rocket', label: 'Rocket', defaultLabelBn: 'রকেট', hasNumber: true, icon: 'fa-mobile-alt', color: '#8C3494' },
+            { key: 'card', label: 'Credit/Debit Card', defaultLabelBn: 'কার্ড', hasNumber: false, icon: 'fa-credit-card', color: '#7c3aed' }
+        ];
+        wrap.innerHTML = defs.map(d => {
+            const g = gateways[d.key] || {};
+            return `
+                <div class="gateway-row" style="background:var(--bg-elevated);padding:1rem;border-radius:var(--radius-md);margin-bottom:0.75rem;border:1px solid var(--border-color);">
+                    <div class="form-row" style="align-items:center;margin-bottom:0.5rem;">
+                        <label style="display:flex;align-items:center;gap:0.5rem;flex:1;">
+                            <input type="checkbox" name="pg_${d.key}_enabled" ${g.enabled ? 'checked' : ''} style="width:auto;">
+                            <i class="fas ${d.icon}" style="color:${d.color || 'var(--text-tertiary)'}"></i>
+                            <strong>${d.label}</strong>
+                        </label>
+                        ${g.color ? `<input type="color" name="pg_${d.key}_color" value="${g.color || d.color}" style="width:40px;height:30px;border:none;background:transparent;">` : ''}
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" style="font-size:0.85rem;">Label (EN)</label>
+                            <input class="form-input" name="pg_${d.key}_label" value="${g.label || d.label}">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" style="font-size:0.85rem;">Label (BN)</label>
+                            <input class="form-input" name="pg_${d.key}_labelBn" value="${g.labelBn || d.defaultLabelBn}">
+                        </div>
+                    </div>
+                    ${d.hasNumber ? `
+                        <div class="form-group" style="margin-bottom:0;">
+                            <label class="form-label" style="font-size:0.85rem;">Merchant Number</label>
+                            <input class="form-input" name="pg_${d.key}_number" value="${g.number || ''}" placeholder="01XXXXXXXXX">
+                        </div>
+                    ` : ''}
+                </div>
+            `;
+        }).join('');
     },
 
     setupSettingsForm() {
@@ -1667,15 +1750,34 @@ const Admin = {
         form.onsubmit = e => {
             e.preventDefault();
             const data = Object.fromEntries(new FormData(form));
+            // Payment gateways
+            const pgKeys = ['cod','bkash','nagad','rocket','card'];
+            const paymentGateways = { ...(Store.state.settings.paymentGateways || {}) };
+            pgKeys.forEach(k => {
+                paymentGateways[k] = {
+                    ...(paymentGateways[k] || {}),
+                    enabled: data[`pg_${k}_enabled`] === 'on',
+                    label: data[`pg_${k}_label`] || paymentGateways[k]?.label,
+                    labelBn: data[`pg_${k}_labelBn`] || paymentGateways[k]?.labelBn,
+                    number: data[`pg_${k}_number`] || paymentGateways[k]?.number || '',
+                    color: data[`pg_${k}_color`] || paymentGateways[k]?.color,
+                    icon: paymentGateways[k]?.icon || (k === 'cod' ? 'fa-money-bill-wave' : k === 'card' ? 'fa-credit-card' : 'fa-mobile-alt')
+                };
+            });
             Store.state.settings = {
                 ...Store.state.settings,
                 siteName: data.siteName,
                 tagline: data.tagline,
+                motto: data.motto,
+                repoUrl: data.repoUrl,
                 email: data.email,
                 phone: data.phone,
                 address: data.address,
                 currency: data.currency,
                 freeShippingThreshold: parseFloat(data.freeShippingThreshold),
+                enableSound: data.enableSound === 'on',
+                enableTrail: data.enableTrail === 'on',
+                paymentGateways,
                 facebook: data.facebook,
                 twitter: data.twitter,
                 instagram: data.instagram,

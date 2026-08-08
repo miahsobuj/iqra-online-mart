@@ -12,8 +12,17 @@
 </head>
 <body>
     <div class="admin-layout">
+        <!-- Mobile sidebar toggle -->
+        <button id="adminSidebarToggle" class="admin-sidebar-toggle" aria-label="Toggle menu">
+            <i class="fas fa-bars"></i>
+        </button>
+        <div id="adminSidebarOverlay" class="admin-sidebar-overlay"></div>
+
         <!-- Sidebar -->
         <aside class="admin-sidebar">
+            <button id="adminSidebarClose" class="admin-sidebar-close" aria-label="Close menu">
+                <i class="fas fa-times"></i>
+            </button>
             <div class="admin-logo">
                 <div class="admin-logo-mark"><i class="fas fa-cube"></i></div>
                 <span>Iqra CMS</span>
@@ -260,6 +269,16 @@
                         </div>
                         <div class="form-row">
                             <div class="form-group">
+                                <label class="form-label">Motto</label>
+                                <input class="form-input" name="motto" placeholder="Quality Over Quantity">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Repository URL</label>
+                                <input class="form-input" name="repoUrl" placeholder="https://github.com/user/repo">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
                                 <label class="form-label">Email</label>
                                 <input class="form-input" name="email" type="email">
                             </div>
@@ -278,10 +297,23 @@
                                 <input class="form-input" name="currency" maxlength="3">
                             </div>
                             <div class="form-group">
-                                <label class="form-label">Free Shipping Threshold ($)</label>
+                                <label class="form-label">Free Shipping Threshold</label>
                                 <input class="form-input" name="freeShippingThreshold" type="number">
                             </div>
                         </div>
+                        <h3 style="margin:2rem 0 1rem;">Storefront Effects</h3>
+                        <div class="form-row">
+                            <label class="form-group" style="flex-direction:row;align-items:center;gap:0.5rem;">
+                                <input type="checkbox" name="enableSound" style="width:auto;">
+                                <span>Enable sound effects</span>
+                            </label>
+                            <label class="form-group" style="flex-direction:row;align-items:center;gap:0.5rem;">
+                                <input type="checkbox" name="enableTrail" style="width:auto;">
+                                <span>Enable mouse/touch trail</span>
+                            </label>
+                        </div>
+                        <h3 style="margin:2rem 0 1rem;">Payment Gateways</h3>
+                        <div id="paymentGatewaysEditor"></div>
                         <h3 style="margin:2rem 0 1rem;">Admin Credentials</h3>
                         <div class="form-row">
                             <div class="form-group">
@@ -513,6 +545,7 @@
                     Admin.setupSettingsForm();
                     Admin.setupPagesForm();
                     Admin.setupSearchFilter();
+                    Admin.bindSidebarToggle();
                 }
             }, 200);
         });
