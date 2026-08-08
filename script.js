@@ -8,27 +8,35 @@
 // ============================================
 
 const DEFAULT_PRODUCTS = [
-    { id: 1, name: 'Wireless Bluetooth Headphones', price: 89.99, oldPrice: 129.99, category: 'Electronics', rating: 4.5, reviews: 128, badge: 'hot', icon: 'fa-headphones', description: 'High-quality wireless headphones with active noise cancellation and 30-hour battery life. Premium sound quality with deep bass.', stock: 45, featured: true, status: 'active', createdAt: '2026-01-15' },
-    { id: 2, name: 'Smart Watch Series 5', price: 199.99, oldPrice: 249.99, category: 'Electronics', rating: 4.7, reviews: 89, badge: 'new', icon: 'fa-watch', description: 'Advanced smartwatch with health tracking, GPS, and water resistance. Stay connected and healthy.', stock: 32, featured: true, status: 'active', createdAt: '2026-02-01' },
-    { id: 3, name: 'Designer Cotton T-Shirt', price: 24.99, oldPrice: null, category: 'Fashion', rating: 4.3, reviews: 234, badge: null, icon: 'fa-tshirt', description: 'Premium quality cotton t-shirt with modern design and comfortable fit. Available in multiple colors.', stock: 120, featured: true, status: 'active', createdAt: '2026-02-10' },
-    { id: 4, name: 'Leather Handbag Collection', price: 79.99, oldPrice: 119.99, category: 'Fashion', rating: 4.6, reviews: 156, badge: 'sale', icon: 'fa-handbag', description: 'Elegant leather handbags in various colors and styles. Handcrafted with attention to detail.', stock: 67, featured: true, status: 'active', createdAt: '2026-01-20' },
-    { id: 5, name: 'Modern Coffee Table', price: 149.99, oldPrice: null, category: 'Home & Living', rating: 4.4, reviews: 45, badge: null, icon: 'fa-table', description: 'Contemporary design coffee table with tempered glass and wooden legs. Perfect for modern living rooms.', stock: 18, featured: true, status: 'active', createdAt: '2026-02-15' },
-    { id: 6, name: 'Organic Bedding Set', price: 89.99, oldPrice: 119.99, category: 'Home & Living', rating: 4.2, reviews: 78, badge: 'sale', icon: 'fa-bed', description: 'Luxury organic cotton bedding set for ultimate comfort. Hypoallergenic and eco-friendly.', stock: 54, featured: false, status: 'active', createdAt: '2026-01-25' },
-    { id: 7, name: 'Python Programming Guide', price: 34.99, oldPrice: null, category: 'Books & Education', rating: 4.8, reviews: 312, badge: 'hot', icon: 'fa-book', description: 'Complete guide to Python programming from beginner to advanced levels. Includes practical projects.', stock: 200, featured: true, status: 'active', createdAt: '2026-02-05' },
-    { id: 8, name: 'Yoga Mat Premium', price: 29.99, oldPrice: 39.99, category: 'Sports & Fitness', rating: 4.5, reviews: 167, badge: 'sale', icon: 'fa-person-praying', description: 'Non-slip yoga mat with alignment guides and carrying strap. Eco-friendly materials.', stock: 89, featured: false, status: 'active', createdAt: '2026-02-12' },
-    { id: 9, name: 'Dog Food Premium Pack', price: 45.99, oldPrice: null, category: 'Pet Supplies', rating: 4.6, reviews: 92, badge: null, icon: 'fa-dog', description: 'Nutritious dog food for all breeds and life stages. Made with natural ingredients.', stock: 76, featured: false, status: 'active', createdAt: '2026-01-30' },
-    { id: 10, name: 'Cat Tree Tower', price: 69.99, oldPrice: 89.99, category: 'Pet Supplies', rating: 4.3, reviews: 54, badge: null, icon: 'fa-cat', description: 'Multi-level cat tree with scratching posts and cozy hideaways. Perfect for indoor cats.', stock: 23, featured: false, status: 'active', createdAt: '2026-02-08' },
-    { id: 11, name: 'Mechanical Gaming Keyboard', price: 129.99, oldPrice: 159.99, category: 'Electronics', rating: 4.8, reviews: 245, badge: 'new', icon: 'fa-keyboard', description: 'RGB mechanical gaming keyboard with hot-swappable switches. Premium typing experience.', stock: 41, featured: true, status: 'active', createdAt: '2026-03-01' },
-    { id: 12, name: 'Running Shoes Pro', price: 99.99, oldPrice: null, category: 'Sports & Fitness', rating: 4.6, reviews: 189, badge: 'hot', icon: 'fa-shoe-prints', description: 'Lightweight running shoes with responsive cushioning. Perfect for daily training.', stock: 95, featured: true, status: 'active', createdAt: '2026-02-20' }
+    { id: 1, name: 'Wireless Bluetooth Headphones', nameBn: '�য়্যারলেস ব্লুটুথ হেডফোন', price: 2499, oldPrice: 3499, category: 'Electronics', rating: 4.5, reviews: 128, badge: 'hot', icon: 'fa-headphones', description: 'High-quality wireless headphones with active noise cancellation and 30-hour battery life.', descriptionBn: 'উচ্চমানের ওয়্যারলেস হেডফোন, অ্যাক্টিভ নয়েজ ক্যান্সেলেশন এবং ৩০ ঘন্টা ব্যাটারি লাইফ।', stock: 45, featured: true, status: 'active', createdAt: '2026-01-15' },
+    { id: 2, name: 'Smart Watch Series 5', nameBn: 'স্�ার্ট ওয়াচ সিরিজ ৫', price: 4999, oldPrice: 6999, category: 'Electronics', rating: 4.7, reviews: 89, badge: 'new', icon: 'fa-watch', description: 'Advanced smartwatch with health tracking, GPS, and water resistance.', descriptionBn: 'উন্নত স্মার্টওয়াচ, হেলথ ট্র্যাকিং, জিপিএস এবং ওয়াটার রেজিস্ট্যান্ট।', stock: 32, featured: true, status: 'active', createdAt: '2026-02-01' },
+    { id: 3, name: 'Designer Cotton T-Shirt', nameBn: 'ডিজাইনার কটন টি-শার্ট', price: 599, oldPrice: null, category: 'Fashion', rating: 4.3, reviews: 234, badge: null, icon: 'fa-tshirt', description: 'Premium quality cotton t-shirt with modern design and comfortable fit.', descriptionBn: 'উচ্চমানের কটন �ি-শার্ট, আধুনিক ডিজাইন এবং আরামদায়ক।', stock: 120, featured: true, status: 'active', createdAt: '2026-02-10' },
+    { id: 4, name: 'Leather Handbag Collection', nameBn: 'লেদার হ্যান্ডব্যাগ কালেকশন', price: 1899, oldPrice: 2999, category: 'Fashion', rating: 4.6, reviews: 156, badge: 'sale', icon: 'fa-handbag', description: 'Elegant leather handbags in various colors and styles.', descriptionBn: 'বিভিন্ন রঙ ও স্টাইলের মার্জিত চাম�়ার হাতব্যাগ।', stock: 67, featured: true, status: 'active', createdAt: '2026-01-20' },
+    { id: 5, name: 'Modern Coffee Table', nameBn: 'মডার্ন ক�ি টেবিল', price: 3999, oldPrice: null, category: 'Home & Living', rating: 4.4, reviews: 45, badge: null, icon: 'fa-table', description: 'Contemporary design coffee table with tempered glass and wooden legs.', descriptionBn: 'টেম্পার্ড গ্লাস ও কাঠের পায়ার সাথে সমকালীন ডিজাইনের কফি টেবিল।', stock: 18, featured: true, status: 'active', createdAt: '2026-02-15' },
+    { id: 6, name: 'Organic Bedding Set', nameBn: 'অর্গানিক বেডিং সেট', price: 2299, oldPrice: 3199, category: 'Home & Living', rating: 4.2, reviews: 78, badge: 'sale', icon: 'fa-bed', description: 'Luxury organic cotton bedding set for ultimate comfort.', descriptionBn: 'সর্বোচ্চ আরামের জন্য বিলাসবহুল অর্গানিক কটন বেডিং সেট।', stock: 54, featured: false, status: 'active', createdAt: '2026-01-25' },
+    { id: 7, name: 'Python Programming Guide', nameBn: 'পাইথন প্রোগ্রামিং গাইড', price: 899, oldPrice: null, category: 'Books & Education', rating: 4.8, reviews: 312, badge: 'hot', icon: 'fa-book', description: 'Complete guide to Python programming from beginner to advanced levels.', descriptionBn: 'প্রাথমিক থেকে �ন্নত স্তর পর্যন্ত পাইথন প্রোগ্রামিংয়ের সম্পূর্ণ গাইড।', stock: 200, featured: true, status: 'active', createdAt: '2026-02-05' },
+    { id: 8, name: 'Yoga Mat Premium', nameBn: 'যোগ ম্যাট প্রিমিয়াম', price: 799, oldPrice: 1199, category: 'Sports & Fitness', rating: 4.5, reviews: 167, badge: 'sale', icon: 'fa-person-praying', description: 'Non-slip yoga mat with alignment guides and carrying strap.', descriptionBn: 'নন-স্�িপ যোগ ম্যাট, অ্যালাইনমেন্� গাইড এবং ক্যারি স্ট্র্যাপ সহ।', stock: 89, featured: false, status: 'active', createdAt: '2026-02-12' },
+    { id: 9, name: 'Premium Basmati Rice 5kg', nameBn: 'প্রিমিয়াম বাসমতি চাল ৫ কেজি', price: 650, oldPrice: 750, category: 'Groceries', rating: 4.7, reviews: 89, badge: 'hot', icon: 'fa-shopping-basket', description: 'Premium quality aged basmati rice, perfect for biryani and pulao.', descriptionBn: 'প্রিমিয়াম মানের পুরনো বাসমতি চাল, বিরিয়ানি ও পোলাওয়ের জন্য নিখুঁত।', stock: 200, featured: true, status: 'active', createdAt: '2026-03-10' },
+    { id: 10, name: 'Organic Honey 500g', nameBn: 'অর্গানিক মধু ৫০০ গ্রাম', price: 450, oldPrice: null, category: 'Groceries', rating: 4.8, reviews: 145, badge: null, icon: 'fa-jar', description: 'Pure organic honey from Sundarbans. No added sugar.', descriptionBn: 'সুন্দরবনের খাঁটি অর্গানিক মধু। কোনো চিনি যোগ করা হয়নি।', stock: 150, featured: true, status: 'active', createdAt: '2026-03-12' },
+    { id: 11, name: 'Vitamin C Serum', nameBn: 'ভিটামিন সি সিরাম', price: 599, oldPrice: 899, category: 'Beauty & Care', rating: 4.6, reviews: 234, badge: 'sale', icon: 'fa-spa', description: 'Brightening vitamin C serum for radiant and youthful skin.', descriptionBn: 'উজ্জ্বল ত্বকের জন্য ভিটামিন সি ব্রাইটেনিং সিরাম।', stock: 78, featured: true, status: 'active', createdAt: '2026-03-15' },
+    { id: 12, name: 'Multivitamin Supplement', nameBn: 'মাল্টিভিটামিন সা�্লিমেন্ট', price: 350, oldPrice: 450, category: 'Pharmacy & Health', rating: 4.5, reviews: 178, badge: null, icon: 'fa-heartbeat', description: 'Daily multivitamin supplement with essential vitamins and minerals.', descriptionBn: 'প্রয়োজনীয় ভিটামিন ও মিনারেল সহ দৈনিক মাল্টিভিটামিন সা�্লিমেন্ট।', stock: 250, featured: false, status: 'active', createdAt: '2026-03-08' },
+    { id: 13, name: 'Educational Toy Set', nameBn: 'শিক্ষামূলক খেলনা সেট', price: 1299, oldPrice: null, category: 'Kids & Baby', rating: 4.7, reviews: 92, badge: 'new', icon: 'fa-baby', description: 'Educational toy set for kids aged 3-8. Safe and non-toxic materials.', descriptionBn: '৩-৮ বছর বয়সী শিশুদের জন্য শিক্ষামূলক খেলনা সেট। নিরাপদ ও নন-টক্সিক।', stock: 60, featured: true, status: 'active', createdAt: '2026-03-18' },
+    { id: 14, name: 'Mechanical Gaming Keyboard', nameBn: 'মেকানিক্যাল গেমিং কীবোর্ড', price: 3299, oldPrice: 4499, category: 'Electronics', rating: 4.8, reviews: 245, badge: 'new', icon: 'fa-keyboard', description: 'RGB mechanical gaming keyboard with hot-swappable switches.', descriptionBn: 'RGB মেকানিক্যাল গেমিং কীবোর্ড, হট-সোয়াপেবল সুইচ সহ।', stock: 41, featured: true, status: 'active', createdAt: '2026-03-01' },
+    { id: 15, name: 'Running Shoes Pro', nameBn: 'রানিং শু প্রো', price: 2499, oldPrice: null, category: 'Sports & Fitness', rating: 4.6, reviews: 189, badge: 'hot', icon: 'fa-shoe-prints', description: 'Lightweight running shoes with responsive cushioning.', descriptionBn: 'হালকা ওজনের রানিং শু, প্রতিক্রিয়াশীল কুশনিং সহ।', stock: 95, featured: true, status: 'active', createdAt: '2026-02-20' },
+    { id: 16, name: 'Premium Dog Food', nameBn: 'প্রিমিয়াম কুকুরের খাবার', price: 1199, oldPrice: null, category: 'Pet Supplies', rating: 4.6, reviews: 92, badge: null, icon: 'fa-dog', description: 'Nutritious dog food for all breeds and life stages.', descriptionBn: 'সব জাতের কুকুরের জন্য পুষ্টিকর খাবার।', stock: 76, featured: false, status: 'active', createdAt: '2026-01-30' }
 ];
 
 const DEFAULT_CATEGORIES = [
-    { id: 'electronics', name: 'Electronics', icon: 'fa-laptop', description: 'Latest gadgets and tech accessories' },
-    { id: 'fashion', name: 'Fashion', icon: 'fa-tshirt', description: 'Trendy clothing and accessories' },
-    { id: 'home', name: 'Home & Living', icon: 'fa-home', description: 'Furniture, decor & essentials' },
-    { id: 'books', name: 'Books & Education', icon: 'fa-book', description: 'Knowledge and learning resources' },
-    { id: 'sports', name: 'Sports & Fitness', icon: 'fa-dumbbell', description: 'Equipment for active lifestyles' },
-    { id: 'pets', name: 'Pet Supplies', icon: 'fa-paw', description: 'Everything for your furry friends' }
+    { id: 'electronics', name: 'Electronics', nameBn: 'ইলেকট্রনিক্স', icon: 'fa-laptop', description: 'Latest gadgets and tech accessories', descriptionBn: 'সর্বশেষ গ্যাজেট ও প্রযুক্তি পণ্য' },
+    { id: 'fashion', name: 'Fashion', nameBn: 'ফ্যাশন', icon: 'fa-tshirt', description: 'Trendy clothing and accessories', descriptionBn: 'আধুনিক পোশাক ও এক্সেসরিজ' },
+    { id: 'home', name: 'Home & Living', nameBn: 'ঘর � বসবাস', icon: 'fa-home', description: 'Furniture, decor & essentials', descriptionBn: 'আসবাবপত্র, সাজসজ্জা ও প্রয়োজনীয় জিনিস' },
+    { id: 'groceries', name: 'Groceries', nameBn: 'মুদি�ানা', icon: 'fa-shopping-basket', description: 'Fresh food and daily essentials', descriptionBn: 'তাজা খাবার ও দৈনন্দিন প্রয়োজনীয় জিনিস' },
+    { id: 'beauty', name: 'Beauty & Care', nameBn: 'সৌন্দর্য ও যত্ন', icon: 'fa-spa', description: 'Cosmetics, skincare and wellness', descriptionBn: 'প্রসাধনী, ত্বকের �ত্ন ও সুস্থতা' },
+    { id: 'books', name: 'Books & Education', nameBn: 'বই ও শিক্�া', icon: 'fa-book', description: 'Knowledge and learning resources', descriptionBn: 'জ্�ান ও শিক্ষা সম্পদ' },
+    { id: 'sports', name: 'Sports & Fitness', nameBn: 'খেলা ও ফিটনেস', icon: 'fa-dumbbell', description: 'Equipment for active lifestyles', descriptionBn: 'সক্রিয় জীবনযাপনের সর�্জাম' },
+    { id: 'kids', name: 'Kids & Baby', nameBn: 'শিশু ও শিশু', icon: 'fa-baby', description: 'Toys, clothing and baby essentials', descriptionBn: 'খেলনা, পোশাক ও শিশু প্রয়োজনীয় জিনিস' },
+    { id: 'pharmacy', name: 'Pharmacy & Health', nameBn: 'ফার্মেসি ও স্বাস্থ্য', icon: 'fa-heartbeat', description: 'Medicines and health products', descriptionBn: 'ওষুধ ও স্বাস্থ্য পণ্য' },
+    { id: 'pets', name: 'Pet Supplies', nameBn: 'পোষা প্রাণী', icon: 'fa-paw', description: 'Everything for your furry friends', descriptionBn: 'আপনার পোষা প্রাণীদের জন্য সবকিছু' }
 ];
 
 const DEFAULT_BLOG_POSTS = [
@@ -80,12 +88,26 @@ const DEFAULT_BLOG_POSTS = [
 
 const DEFAULT_SETTINGS = {
     siteName: 'Iqra Online Mart',
+    motto: 'Quality Over Quantity',
     tagline: 'Your premium online shopping destination',
-    email: 'support@iqramart.com',
-    phone: '+880 1234 567890',
-    address: '123 Shopping Street, Dhaka, Bangladesh',
-    currency: '$',
-    freeShippingThreshold: 100,
+    email: 'iqrabintesobuj@gmail.com',
+    phone: '01617040846',
+    address: 'Savar, Dhaka, Bangladesh',
+    currency: '৳',
+    currencyCode: 'BDT',
+    freeShippingThreshold: 1000,
+    repoUrl: 'https://github.com/miahsobuj/iqraonlinemart',
+    primaryLanguage: 'en',
+    supportedLanguages: ['en', 'bn'],
+    enableSound: true,
+    enableTrail: true,
+    paymentGateways: {
+        cod: { enabled: true, label: 'Cash on Delivery', labelBn: 'ক্যাশ অন ডেলিভারি', icon: 'fa-money-bill-wave' },
+        bkash: { enabled: true, label: 'bKash', number: '01617040846', type: 'personal', icon: 'fa-mobile-alt', color: '#E2136E', labelBn: 'বিকাশ' },
+        nagad: { enabled: true, label: 'Nagad', number: '01617040846', type: 'personal', icon: 'fa-mobile-alt', color: '#F6921E', labelBn: 'নগদ' },
+        rocket: { enabled: true, label: 'Rocket', number: '01617040846', type: 'personal', icon: 'fa-mobile-alt', color: '#8C3494', labelBn: 'রকেট' },
+        card: { enabled: false, label: 'Credit/Debit Card', provider: 'stripe', icon: 'fa-credit-card', labelBn: 'কার্ড' }
+    },
     adminCredentials: { username: 'admin', password: 'admin123' }
 };
 
@@ -95,7 +117,7 @@ const TRANSLATIONS = {
         contact: 'Contact', cart: 'Cart', search: 'Search', blog: 'Blog', admin: 'Admin',
         welcome: 'Welcome to the Future of',
         welcomeHighlight: 'Online Shopping',
-        subtitle: 'Discover thousands of premium products across electronics, fashion, home, and more — all with fast delivery and secure checkout.',
+        subtitle: 'Quality products, fast delivery, secure checkout — Quality Over Quantity.',
         shopNow: 'Shop Now', explore: 'Explore Categories',
         heroBadge: 'New Collection 2026',
         stat1Value: '50K+', stat1Label: 'Happy Customers',
@@ -108,8 +130,8 @@ const TRANSLATIONS = {
         categoriesSubtitle: 'Find exactly what you need from our diverse range of product categories',
         whyChooseUs: 'Why Choose', whyGradient: 'Us',
         whySubtitle: 'Experience the best in online shopping with our premium services',
-        feature1Title: 'Free Shipping', feature1Desc: 'On orders over $100',
-        feature2Title: 'Secure Payment', feature2Desc: '100% protected checkout',
+        feature1Title: 'Free Shipping', feature1Desc: 'On orders over ৳1000',
+        feature2Title: 'Secure Payment', feature2Desc: 'bKash, Nagad & COD supported',
         feature3Title: '24/7 Support', feature3Desc: 'Dedicated customer care',
         feature4Title: 'Easy Returns', feature4Desc: '30-day return policy',
         testimonialsTag: 'Testimonials',
@@ -131,7 +153,7 @@ const TRANSLATIONS = {
         emptyCartDesc: 'Start shopping and add items to your cart',
         quickLinks: 'Quick Links', contactUs: 'Contact Us',
         followUs: 'Follow Us', newsletter: 'Newsletter',
-        copyright: '© 2026 Iqra Online Mart. All rights reserved.',
+        copyright: '© 2026 Iqra Online Mart. Quality Over Quantity. All rights reserved.',
         privacy: 'Privacy Policy', terms: 'Terms of Service',
         searchPlaceholder: 'Search for products, categories, brands...',
         noResults: 'No products found',
@@ -142,199 +164,178 @@ const TRANSLATIONS = {
         reviews: 'reviews',
         allCategories: 'All',
         sortDefault: 'Default', sortPriceLow: 'Price: Low to High',
-        sortPriceHigh: 'Price: High to Low', sortRating: 'Top Rated', sortNewest: 'Newest'
-    },
-    ur: {
-        home: 'گ�ر', products: 'مصنوعات', categories: 'زمرے', about: '�مارے بارے میں',
-        contact: 'رابطہ', cart: 'کارٹ', search: 'تلاش', blog: 'بلاگ', admin: 'ایڈمن',
-        welcome: 'مستقبل کا استقبال ہے', welcomeHighlight: 'آن لائن شاپنگ',
-        subtitle: 'الیکٹرانکس، فیشن، گھریلو اور مزید بہت کچھ میں ہزاروں معیاری مصنوعات دریافت کریں۔',
-        shopNow: 'ابھی خریدی�', explore: 'زمرے دیکھیں',
-        heroBadge: 'نئی مجموعہ 2026',
-        stat1Value: '50K+', stat1Label: 'خوش گاہک',
-        stat2Value: '10K+', stat2Label: 'مصنوعات',
-        stat3Value: '99%', stat3Label: 'اطمینان',
-        featuredProducts: 'نمایاں', featuredGradient: 'مصنوعات',
-        featuredSubtitle: 'ہمارے منتخب مجموعے سے پسندیدہ',
-        categoriesTag: 'دیکھیں',
-        categoriesTitle: 'خریدیں بذریعہ', categoriesGradient: 'زمرہ',
-        categoriesSubtitle: 'ہمارے متنوع زمروں سے بالکل وہی تلاش کریں جو آپ کو چاہی�',
-        whyChooseUs: 'ہمیں کیوں', whyGradient: 'چنیں',
-        whySubtitle: 'ہماری اعلیٰ خدمات کے ساتھ بہترین آن لائن شاپنگ کا تجربہ',
-        feature1Title: 'مفت ترسیل', feature1Desc: '$100 سے زیادہ ک� آرڈرز پر',
-        feature2Title: 'محفوظ ادائیگی', feature2Desc: '100% محفوظ چیک آؤٹ',
-        feature3Title: '24/7 معاونت', feature3Desc: 'وقف صارف کی دیکھ بھال',
-        feature4Title: 'آسان واپسی', feature4Desc: '30 دن کی واپسی کی پالیسی',
-        testimonialsTag: 'تعریفات',
-        testimonialsTitle: 'ہمارے', testimonialsGradient: 'صارفین کیا کہتے ہیں',
-        testimonialsSubtitle: 'ہماری قیمتی کمیونٹی سے اصل تاثرات',
-        blogTag: 'تازہ ترین خبریں',
-        blogTitle: 'ہمارے', blogGradient: 'بلاگ سے',
-        blogSubtitle: 'شاپنگ تجاویز، رجحانات اور خصوصی کہانیوں سے اپ ڈیٹ رہیں',
-        newsletterTitle: 'ہمارے', newsletterGradient: 'نیوز لیٹر کو سبسکرائب',
-        newsletterSubtitle: 'خصوصی ڈیلز، نئی آمد، اور اندرونی اپ ڈی�س براہ راست اپنے ان باکس میں�',
-        newsletterPlaceholder: 'اپنا ای میل ایڈریس درج کریں',
-        newsletterBtn: 'سبسکرائب', readMore: 'مزید پڑھیں',
-        viewAll: 'سب دیکھیں', addToCart: 'کارٹ میں شامل', viewDetails: 'تفصیلات',
-        total: 'کل', checkout: 'چیک آؤٹ',
-        emptyCart: 'آپ کا کارٹ خالی ہے',
-        emptyCartDesc: 'شاپنگ شروع کریں اور کارٹ میں آئ�مز شامل کریں',
-        quickLinks: 'فوری لنکس', contactUs: 'ہم سے رابطہ',
-        followUs: 'ہمارا پیچھا کریں', newsletter: 'نیوز لیٹر',
-        copyright: '© 2026 Iqra Online Mart. جملہ حقوق محفوظ ہیں.',
-        privacy: 'رازداری کی پالیسی', terms: 'شرائط',
-        searchPlaceholder: 'مصنوعات، زمرے، برانڈز تلاش کریں...',
-        noResults: 'کوئی مصنوعات نہیں ملیں',
-        noResultsDesc: 'مختلف تلاش کا لفظ آزمائیں',
-        addedToCart: 'کارٹ میں شامل!',
-        outOfStock: 'اسٹاک میں نہی�', inStock: 'اسٹاک میں',
-        reviews: 'جائزے', allCategories: 'سب',
-        sortDefault: 'ڈیفالٹ', sortPriceLow: 'قیمت: کم سے زیادہ',
-        sortPriceHigh: 'قیمت: زیادہ سے کم', sortRating: 'بہترین', sortNewest: 'تازہ ترین'
-    },
-    ar: {
-        home: 'الرئيسية', products: 'المنتجات', categories: 'الأقسام', about: 'من نحن',
-        contact: 'اتصل بنا', cart: 'السلة', search: 'بحث', blog: 'المدونة', admin: 'المسؤول',
-        welcome: 'مرحبا بكم في مستقبل', welcomeHighlight: 'التسوق عبر الإنترنت',
-        subtitle: 'اكتشف آلاف المنتجات المتميزة في الإلكترونيات والأزياء والمنزل والمزيد.',
-        shopNow: 'تسوق الآن', explore: 'استكشف الأقسام',
-        heroBadge: 'مجموعة جديدة 2026',
-        stat1Value: '50K+', stat1Label: 'عملاء سعداء',
-        stat2Value: '10K+', stat2Label: 'منتجات',
-        stat3Value: '99%', stat3Label: 'رضا',
-        featuredProducts: 'منتجات', featuredGradient: 'مميزة',
-        featuredSubtitle: 'مفضلات مختارة من مجموعتنا',
-        categoriesTag: 'تصفح',
-        categoriesTitle: 'تسوق حسب', categoriesGradient: 'القسم',
-        categoriesSubtitle: 'اعثر بالضبط على ما تحتاجه',
-        whyChooseUs: 'لماذا', whyGradient: 'تختارنا',
-        whySubtitle: 'استمتع بأفضل تجربة تسوق',
-        feature1Title: 'شحن مجاني', feature1Desc: 'للطلبات فوق $100',
-        feature2Title: 'دفع آمن', feature2Desc: 'دفع محمي 100%',
-        feature3Title: 'دعم 24/7', feature3Desc: 'رعاية عملاء مخصصة',
-        feature4Title: 'إرجاع سهل', feature4Desc: 'سياسة إرجاع 30 يوم',
-        testimonialsTag: 'شهادات',
-        testimonialsTitle: 'ماذا يقول', testimonialsGradient: 'عملاؤنا',
-        testimonialsSubtitle: 'تعليقات حقيقية من مجتمعنا',
-        blogTag: 'آخر الأخبار',
-        blogTitle: 'من', blogGradient: 'مدونتنا',
-        blogSubtitle: 'ابق على اطلاع',
-        newsletterTitle: 'اشترك في', newsletterGradient: 'النشرة الإخبارية',
-        newsletterSubtitle: 'احصل على صفقات حصرية مباشرة في بريدك.',
-        newsletterPlaceholder: 'أدخل بريدك الإلكتروني',
-        newsletterBtn: 'اشترك', readMore: 'اقرأ المزيد',
-        viewAll: 'عرض الكل', addToCart: 'أضف للسلة', viewDetails: 'التفاصيل',
-        total: 'الإجمالي', checkout: 'الدفع',
-        emptyCart: 'سلة التسوق فارغة',
-        emptyCartDesc: 'ابدأ التسوق وأضف عناصر',
-        quickLinks: 'روابط سريعة', contactUs: 'اتصل بنا',
-        followUs: 'تابعنا', newsletter: 'النشرة',
-        copyright: '© 2026 Iqra Online Mart. جميع الحقوق محفوظة.',
-        privacy: 'سياسة الخصوصية', terms: 'الشروط',
-        searchPlaceholder: 'ابحث عن المنتجات...',
-        noResults: 'لا توجد نتائج',
-        noResultsDesc: 'جرب كلمة بحث مختلفة',
-        addedToCart: 'تمت الإضافة!',
-        outOfStock: 'غير متوفر', inStock: 'متوفر',
-        reviews: 'مراجعة', allCategories: 'الكل',
-        sortDefault: 'الافتراضي', sortPriceLow: 'السعر: الأقل',
-        sortPriceHigh: 'السعر: الأعلى', sortRating: 'الأعلى تقييما', sortNewest: 'الأحدث'
-    },
-    es: {
-        home: 'Inicio', products: 'Productos', categories: 'Categorías', about: 'Nosotros',
-        contact: 'Contacto', cart: 'Carrito', search: 'Buscar', blog: 'Blog', admin: 'Admin',
-        welcome: 'Bienvenido al futuro del', welcomeHighlight: 'Compras Online',
-        subtitle: 'Descubre miles de productos premium en electrónica, moda, hogar y más.',
-        shopNow: 'Comprar Ahora', explore: 'Explorar Categorías',
-        heroBadge: 'Nueva Colección 2026',
-        stat1Value: '50K+', stat1Label: 'Clientes Felices',
-        stat2Value: '10K+', stat2Label: 'Productos',
-        stat3Value: '99%', stat3Label: 'Satisfacción',
-        featuredProducts: 'Productos', featuredGradient: 'Destacados',
-        featuredSubtitle: 'Favoritos seleccionados de nuestra colección',
-        categoriesTag: 'Explorar',
-        categoriesTitle: 'Compra por', categoriesGradient: 'Categoría',
-        categoriesSubtitle: 'Encuentra exactamente lo que necesitas',
-        whyChooseUs: 'Por Qué', whyGradient: 'Elegirnos',
-        whySubtitle: 'Experimenta lo mejor en compras online',
-        feature1Title: 'Envío Gratis', feature1Desc: 'En pedidos sobre $100',
-        feature2Title: 'Pago Seguro', feature2Desc: 'Checkout 100% protegido',
-        feature3Title: 'Soporte 24/7', feature3Desc: 'Atención al cliente dedicada',
-        feature4Title: 'Devoluciones Fáciles', feature4Desc: 'Política de 30 días',
-        testimonialsTag: 'Testimonios',
-        testimonialsTitle: 'Qué Dicen', testimonialsGradient: 'Nuestros Clientes',
-        testimonialsSubtitle: 'Comentarios reales de nuestra comunidad',
-        blogTag: 'Últimas Noticias',
-        blogTitle: 'De Nuestro', blogGradient: 'Blog',
-        blogSubtitle: 'Mantente actualizado',
-        newsletterTitle: 'Suscríbete a Nuestro', newsletterGradient: 'Newsletter',
-        newsletterSubtitle: 'Recibe ofertas exclusivas en tu correo.',
-        newsletterPlaceholder: 'Ingresa tu correo',
-        newsletterBtn: 'Suscribirse', readMore: 'Leer Más',
-        viewAll: 'Ver Todo', addToCart: 'Añadir al Carrito', viewDetails: 'Ver Detalles',
-        total: 'Total', checkout: 'Pagar',
-        emptyCart: 'Tu carrito está vacío',
-        emptyCartDesc: 'Empieza a comprar',
-        quickLinks: 'Enlaces Rápidos', contactUs: 'Contáctanos',
-        followUs: 'Síguenos', newsletter: 'Newsletter',
-        copyright: '© 2026 Iqra Online Mart. Todos los derechos reservados.',
-        privacy: 'Privacidad', terms: 'Términos',
-        searchPlaceholder: 'Buscar productos...',
-        noResults: 'Sin resultados',
-        noResultsDesc: 'Prueba otro término',
-        addedToCart: '¡Añadido!',
-        outOfStock: 'Agotado', inStock: 'Disponible',
-        reviews: 'reseñas', allCategories: 'Todos',
-        sortDefault: 'Por defecto', sortPriceLow: 'Precio: Menor a Mayor',
-        sortPriceHigh: 'Precio: Mayor a Menor', sortRating: 'Mejor Valorados', sortNewest: 'Más Nuevos'
+        sortPriceHigh: 'Price: High to Low', sortRating: 'Top Rated', sortNewest: 'Newest',
+        motto: 'Quality Over Quantity',
+        productCount: 'products',
+        shopCollection: 'Shop the Collection',
+        learnMore: 'Learn More',
+        submitOrder: 'Place Order',
+        shipping: 'Shipping', subtotal: 'Subtotal', free: 'FREE',
+        sendMessage: 'Send Message', contactFormTitle: 'Get in Touch',
+        orderPlaced: 'Order placed successfully!', orderThanks: 'Thank you for shopping with us.',
+        paymentMethod: 'Payment Method', shippingInfo: 'Shipping Information',
+        firstName: 'First Name', lastName: 'Last Name', email: 'Email',
+        phone: 'Phone', address: 'Address', city: 'City', zipCode: 'Zip Code',
+        message: 'Message', subject: 'Subject',
+        recentOrders: 'Recent Orders', topProducts: 'Top Products',
+        viewSite: 'View Site', logout: 'Logout',
+        dashboard: 'Dashboard', orders: 'Orders', subscribers: 'Subscribers',
+        messages: 'Messages', settings: 'Settings', categories_admin: 'Categories',
+        posts: 'Posts', testimonials: 'Testimonials',
+        addProduct: 'Add Product', addCategory: 'Add Category',
+        newPost: 'New Post', addTestimonial: 'Add Testimonial',
+        welcomeBack: 'Welcome back!', signIn: 'Sign In',
+        signInTitle: 'Welcome back!',
+        signInPrompt: 'Sign in to view your orders, profile, and saved addresses.',
+        register: 'Register',
+        password: 'Password',
+        confirmPassword: 'Confirm Password',
+        loginFailed: 'Login Failed',
+        registerFailed: 'Registration Failed',
+        registered: 'Welcome!',
+        loggedOut: 'Logged out',
+        profileUpdated: 'Profile updated',
+        addressSaved: 'Address saved',
+        passwordUpdated: 'Password updated',
+        updateFailed: 'Update failed',
+        myAccount: 'My Account',
+        profile: 'Profile',
+        addresses: 'Addresses',
+        security: 'Security',
+        changePassword: 'Change Password',
+        defaultAddress: 'Default Address',
+        saveAddress: 'Save Address',
+        updatePassword: 'Update Password',
+        saveChanges: 'Save Changes',
+        currentPassword: 'Current Password',
+        newPassword: 'New Password',
+        noOrdersYet: 'You have no orders yet.',
+        startShopping: 'Start Shopping',
+        qty: 'Qty',
+        shippingNote: 'Free shipping over ৳1000',
+        signedInAs: 'Signed in as',
+        sendToNumber: 'Send payment to',
+        transactionId: 'Transaction ID',
+        trxIdPlaceholder: 'e.g., 8N7K6Q5R4T',
+        cardNumber: 'Card Number',
+        expiry: 'Expiry',
+        cvv: 'CVV',
+        orderSummary: 'Order Summary',
+        orContinueGuest: 'or continue as guest',
+
+        demoCredentials: 'Demo Credentials', backToSite: 'Back to site'
     },
     bn: {
         home: 'হোম', products: 'পণ্য', categories: 'বিভাগ', about: 'আমাদের সম্পর্কে',
-        contact: 'যোগাযোগ', cart: 'কার্ট', search: 'অনুসন্ধান', blog: 'ব্লগ', admin: '�্যাডমিন',
+        contact: 'যোগাযোগ', cart: 'কার্ট', search: 'অনুসন্ধান', blog: 'ব্লগ', admin: 'অ্যাডমিন',
         welcome: 'ভবিষ্যতে স্বাগতম', welcomeHighlight: 'অনলাইন শপিং',
-        subtitle: 'ইলেকট্রনিক্স, ফ্যাশন, ঘর এবং আরও অনেক কিছুতে হাজার হাজার প্রিমিয়াম পণ্য আবিষ্কার করুন।',
-        shopNow: 'এখনই কিনুন', explore: 'বিভাগ অন্বেষণ',
-        heroBadge: 'নতুন সংগ্রহ 2026',
-        stat1Value: '50K+', stat1Label: 'খুশি গ্রাহক',
-        stat2Value: '10K+', stat2Label: 'পণ্য',
-        stat3Value: '99%', stat3Label: 'সন্তুষ্�ি',
-        featuredProducts: 'বৈশিষ্ট্যযুক্ত', featuredGradient: 'পণ্য',
-        featuredSubtitle: 'আমাদের সংগ্রহ থেকে নির্বাচিত প্রিয়',
+        subtitle: 'মানসম্পন্ন পণ্য, দ্রুত ডেলিভারি, নিরাপদ পেমেন্ট — গুণগত মান আমাদের প্রথম পছন্দ।',
+        shopNow: 'এখনই কিনুন', explore: 'বিভাগ দেখুন',
+        heroBadge: 'নতুন সংগ্রহ ২০২৬',
+        stat1Value: '৫০ হা.+', stat1Label: 'খুশি গ্রাহক',
+        stat2Value: '১০ হা.+', stat2Label: 'পণ্য',
+        stat3Value: '৯৯%', stat3Label: 'সন্তুষ্টি',
+        featuredProducts: 'বিশেষ', featuredGradient: 'পণ্য',
+        featuredSubtitle: 'আমাদের সংগ্রহ থেকে নির্বাচিত প্রিয় পণ্য',
         categoriesTag: 'ব্রাউজ',
-        categoriesTitle: 'ক্যা�াগরি', categoriesGradient: 'দ্বারা কিনুন',
-        categoriesSubtitle: 'আপনার প্রয়োজনীয় জিনিস খুঁজুন',
-        whyChooseUs: 'কেন', whyGradient: 'আমাদের বেছে নিন',
-        whySubtitle: 'সেরা অনলা�ন শপিং অভিজ্ঞতা',
-        feature1Title: '�্রি শিপিং', feature1Desc: '$100 এর উপরে',
-        feature2Title: 'নিরাপদ পেমেন্ট', feature2Desc: '100% সুরক্ষিত',
-        feature3Title: '24/7 সাপোর্ট', feature3Desc: 'গ্রাহক সে�া',
-        feature4Title: 'সহজ রিটার্ন', feature4Desc: '30 দিনের নীতি',
+        categoriesTitle: 'ক্যাটাগরি', categoriesGradient: 'অনুযায়ী কিনুন',
+        categoriesSubtitle: 'আমাদের বিভিন্ন পণ্য বিভাগ থেকে আপনার প্রয়োজনীয় জিনিস খুঁজুন',
+        whyChooseUs: 'কেন', whyGradient: 'আমাদের বেছে নিবেন',
+        whySubtitle: 'আমাদের প্রিমিয়াম সেবার সাথে সেরা অনলাইন শপিং অভিজ্ঞতা',
+        feature1Title: 'ফ্রি শিপিং', feature1Desc: '৳১০০০ এর উপরে',
+        feature2Title: 'নিরাপদ পেমেন্ট', feature2Desc: 'বিকাশ, নগদ ও ক্যাশ অন ডেলিভারি',
+        feature3Title: '২৪/৭ সাপোর্ট', feature3Desc: 'ডেডিকেটেড গ্রাহক সেবা',
+        feature4Title: 'সহজ রিটার্ন', feature4Desc: '৩০ দিনের রিটার্ন নীতি',
         testimonialsTag: 'প্রশংসাপত্র',
-        testimonialsTitle: 'আমাদের', testimonialsGradient: 'গ্রাহকরা কী বলেন',
-        testimonialsSubtitle: 'আমাদের সম্প্রদায় থেকে প্রকৃত মতামত',
+        testimonialsTitle: 'আমাদের', testimonialsGradient: 'গ্রাহকরা যা বলেন',
+        testimonialsSubtitle: 'আমাদের মূল্যবান কমিউনিটি থেকে প্রকৃত মতামত',
         blogTag: 'সর্বশেষ সংবাদ',
         blogTitle: 'আমাদের', blogGradient: 'ব্লগ থেকে',
-        blogSubtitle: 'আপডেট থাকুন',
-        newsletterTitle: 'আমাদের', newsletterGradient: 'নিউজলেটার সাবস্ক্রাইব',
-        newsletterSubtitle: 'এক্সক্লুসিভ ডিল পান।',
-        newsletterPlaceholder: '�পনার ইমেল লিখুন',
-        newsletterBtn: 'সাবস্ক্রাইব', readMore: 'আরও প�়ুন',
-        viewAll: 'সব দেখুন', addToCart: 'কার্টে যোগ', viewDetails: 'বিস্তারিত',
-        total: 'মোট', checkout: 'চেকআ�ট',
+        blogSubtitle: 'শপিং টিপস, ট্রেন্ড এবং বিশেষ গল্প সম্পর্কে আপডেট থাকুন',
+        newsletterTitle: 'আমাদের', newsletterGradient: 'নিউজলেটার সাবস্ক্রাইব করুন',
+        newsletterSubtitle: 'এক্সক্লুসিভ ডিল, নতুন পণ্য এবং ইনসাইডার আপডেট সরাসরি আপনার ইনবক্সে পান।',
+        newsletterPlaceholder: 'আপনার ইমেইল ঠিকানা লিখুন',
+        newsletterBtn: 'সাবস্ক্রাইব',
+        readMore: 'আরও পড়ুন',
+        viewAll: 'সব দেখুন',
+        addToCart: 'কার্টে যোগ করুন',
+        viewDetails: 'বিস্তারিত দেখুন',
+        total: 'মোট', checkout: 'চেকআউট',
         emptyCart: 'আপনার কার্ট খালি',
-        emptyCartDesc: 'শপিং শুরু করুন',
-        quickLinks: 'দ্রুত লিঙ্ক', contactUs: '�োগাযোগ',
-        followUs: 'আমাদের অনুসরণ', newsletter: 'নিউজলেটার',
-        copyright: '© 2026 Iqra Online Mart. সর্বস্বত্ব সংরক্ষিত।',
-        privacy: 'গোপনীয়তা', terms: 'শর্তাবলী',
-        searchPlaceholder: 'পণ্য অনুসন্ধান...',
-        noResults: 'কোন ফলাফল নে�',
-        noResultsDesc: 'অন্য শব্দ চেষ্টা করুন',
-        addedToCart: 'কার্টে যোগ!',
-        outOfStock: 'স্টকে নেই', inStock: 'স্টকে আছে',
-        reviews: 'পর্যালোচনা', allCategories: 'সব',
-        sortDefault: 'ডিফল্�', sortPriceLow: 'মূল্য: কম থেকে বে�ি',
-        sortPriceHigh: 'মূল্য: বেশি থেকে কম', sortRating: 'সেরা রেটিং', sortNewest: 'নতুন'
+        emptyCartDesc: 'শপিং শুরু করুন এবং আপনার কার্টে আইটেম যোগ করুন',
+        quickLinks: 'দ্রুত লিঙ্ক', contactUs: 'যোগাযোগ করুন',
+        followUs: 'আমাদের অনুসরণ করুন', newsletter: 'নিউজলেটার',
+        copyright: '© ২০২৬ ইকরা অনলাইন মার্ট। গুণগত মান আমাদের প্রথম পছন্দ। সর্বস্বত্ব সংরক্ষিত।',
+        privacy: 'গোপনীয়তা নীতি', terms: 'সেবার শর্তাবলী',
+        searchPlaceholder: 'পণ্য, বিভাগ, ব্র্যান্ড খুঁজুন...',
+        noResults: 'কোন পণ্য পাওয়া যায়নি',
+        noResultsDesc: 'অন্য কিওয়ার্ড দিয়ে চেষ্টা করুন',
+        addedToCart: 'কার্টে যোগ হয়েছে!',
+        outOfStock: 'স্টকে নেই',
+        inStock: 'স্টকে আছে',
+        reviews: 'পর্যালোচনা',
+        allCategories: 'সব',
+        sortDefault: 'ডিফল্ট', sortPriceLow: 'মূল্য: কম থেকে বেশি',
+        sortPriceHigh: 'মূল্য: বেশি থেকে কম', sortRating: 'সেরা রেটিং', sortNewest: 'নতুন',
+        motto: 'গুণগত মান আমাদের প্রথম পছন্দ',
+        productCount: 'পণ্য',
+        shopCollection: 'সংগ্রহ দেখুন',
+        learnMore: 'আরও জানুন',
+        submitOrder: 'অর্ডার দিন',
+        shipping: 'ডেলিভারি', subtotal: 'সাবটোটাল', free: 'ফ্রি',
+        sendMessage: 'মেসেজ পাঠান', contactFormTitle: 'যোগাযোগ করুন',
+        orderPlaced: 'অর্ডার সফলভাবে দেওয়া হয়েছে!', orderThanks: 'আমাদের সাথে কেনাকাটা করার জন্য ধন্যবাদ।',
+        paymentMethod: 'পেমেন্ট পদ্ধতি', shippingInfo: 'ডেলিভারি তথ্য',
+        firstName: 'প্রথম নাম', lastName: 'শেষ নাম', email: 'ইমেইল',
+        phone: 'ফোন', address: 'ঠিকানা', city: 'শহর', zipCode: 'জিপ কোড',
+        message: 'বার্তা', subject: 'বিষয়',
+        recentOrders: 'সাম্প্রতিক অর্ডার', topProducts: 'শীর্ষ পণ্য',
+        viewSite: 'সাইট দেখুন', logout: 'লগআউট',
+        dashboard: 'ড্যাশবোর্ড', orders: 'অর্ডার', subscribers: 'সাবস্ক্রাইবার',
+        messages: 'মেসেজ', settings: 'সেটিংস', categories_admin: 'বিভাগ',
+        posts: 'পোস্ট', testimonials: 'প্রশংসাপত্র',
+        addProduct: 'পণ্য যোগ', addCategory: 'বিভাগ যোগ',
+        newPost: 'নতুন পোস্ট', addTestimonial: 'প্রশংসাপত্র যোগ',
+        welcomeBack: 'স্বাগতম!', signIn: 'সাইন ইন',
+        signInTitle: 'স্বাগতম!',
+        signInPrompt: 'আপনার অর্ডার, প্রোফাইল ও ঠিকানা দেখতে সাইন ইন করুন।',
+        register: 'রেজিস্টার',
+        password: 'পাসওয়ার্ড',
+        confirmPassword: 'পাসওয়ার্ড নিশ্চিত করুন',
+        loginFailed: 'লগইন ব্যর্থ',
+        registerFailed: 'রেজিস্ট্রেশন ব্যর্থ',
+        registered: 'স্বাগতম!',
+        loggedOut: 'লগআউট হয়েছে',
+        profileUpdated: 'প্রোফাইল আপডেট হয়েছে',
+        addressSaved: 'ঠিকানা সংরক্ষিত',
+        passwordUpdated: 'পাসওয়ার্ড আপডেট হয়েছে',
+        updateFailed: 'আপডেট ব্যর্থ',
+        myAccount: 'আমার অ্যাকাউন্ট',
+        profile: 'প্রোফাইল',
+        addresses: 'ঠিকানা',
+        security: 'নিরাপত্তা',
+        changePassword: 'পাসওয়ার্ড পরিবর্তন',
+        defaultAddress: 'ডিফল্ট ঠিকানা',
+        saveAddress: 'ঠিকানা সংরক্ষণ',
+        updatePassword: 'পাসওয়ার্ড আপডেট',
+        saveChanges: 'পরিবর্তন সংরক্ষণ',
+        currentPassword: 'বর্তমান পাসওয়ার্ড',
+        newPassword: 'নতুন পাসওয়ার্ড',
+        noOrdersYet: 'আপনার কোনো অর্ডার নেই।',
+        startShopping: 'শপিং শুরু করুন',
+        qty: 'সংখ্যা',
+        shippingNote: '৳১০০০ এর উপরে ফ্রি শিপিং',
+        signedInAs: 'সাইন ইন করা আছে',
+        sendToNumber: 'পেমেন্ট পাঠান এই নম্বরে',
+        transactionId: 'ট্রানজেকশন আইডি',
+        trxIdPlaceholder: 'যেমন: 8N7K6Q5R4T',
+        cardNumber: 'কার্ড নম্বর',
+        expiry: 'মেয়াদ',
+        cvv: 'সিভিভি',
+        orderSummary: 'অর্ডার সারাংশ',
+        orContinueGuest: 'অথবা গেস্ট হিসেবে চালিয়ে যান',
+
+        demoCredentials: 'ডেমো ক্রেডেনশিয়াল', backToSite: 'সাইটে ফিরে যান'
     }
 };
 
@@ -498,6 +499,226 @@ const Storage = {
     },
     set(key, val) {
         try { localStorage.setItem(`iqra_${key}`, JSON.stringify(val)); } catch {}
+    }
+};
+
+// ============================================
+// AUTH (Customer Authentication)
+// ============================================
+const Auth = {
+    // Password "hashing" — simple SHA-256 via Web Crypto; localStorage demo only
+    async hashPassword(pw) {
+        const buf = new TextEncoder().encode(pw);
+        const hash = await crypto.subtle.digest('SHA-256', buf);
+        return Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2, '0')).join('');
+    },
+
+    getUsers() {
+        return Storage.get('users', []);
+    },
+    saveUsers(users) {
+        Storage.set('users', users);
+    },
+
+    getSession() {
+        return Storage.get('session', null);
+    },
+    setSession(userId) {
+        Storage.set('session', { userId, loginAt: new Date().toISOString() });
+    },
+    clearSession() {
+        localStorage.removeItem('iqra_session');
+    },
+
+    currentUser() {
+        const sess = this.getSession();
+        if (!sess) return null;
+        const users = this.getUsers();
+        return users.find(u => u.id === sess.userId) || null;
+    },
+
+    async register(data) {
+        const users = this.getUsers();
+        if (users.find(u => u.email.toLowerCase() === data.email.toLowerCase())) {
+            return { ok: false, error: 'Email already registered' };
+        }
+        const user = {
+            id: 'u_' + Date.now() + '_' + Math.random().toString(36).slice(2, 7),
+            firstName: data.firstName.trim(),
+            lastName: data.lastName.trim(),
+            email: data.email.trim().toLowerCase(),
+            phone: (data.phone || '').trim(),
+            passwordHash: await this.hashPassword(data.password),
+            address: { address: '', city: '', zip: '' },
+            createdAt: new Date().toISOString()
+        };
+        users.push(user);
+        this.saveUsers(users);
+        this.setSession(user.id);
+        return { ok: true, user };
+    },
+
+    async login(email, password) {
+        const users = this.getUsers();
+        const ph = await this.hashPassword(password);
+        const user = users.find(u => u.email === email.trim().toLowerCase() && u.passwordHash === ph);
+        if (!user) return { ok: false, error: 'Invalid email or password' };
+        this.setSession(user.id);
+        return { ok: true, user };
+    },
+
+    logout() {
+        this.clearSession();
+    },
+
+    async updateProfile(data) {
+        const user = this.currentUser();
+        if (!user) return false;
+        const users = this.getUsers();
+        const idx = users.findIndex(u => u.id === user.id);
+        if (idx < 0) return false;
+        users[idx].firstName = data.firstName.trim();
+        users[idx].lastName = data.lastName.trim();
+        users[idx].email = data.email.trim().toLowerCase();
+        users[idx].phone = (data.phone || '').trim();
+        this.saveUsers(users);
+        return true;
+    },
+
+    async updatePassword(currentPassword, newPassword) {
+        const user = this.currentUser();
+        if (!user) return { ok: false, error: 'Not logged in' };
+        const ph = await this.hashPassword(currentPassword);
+        if (ph !== user.passwordHash) return { ok: false, error: 'Current password is incorrect' };
+        const users = this.getUsers();
+        const idx = users.findIndex(u => u.id === user.id);
+        if (idx < 0) return { ok: false, error: 'User not found' };
+        users[idx].passwordHash = await this.hashPassword(newPassword);
+        this.saveUsers(users);
+        return { ok: true };
+    },
+
+    updateAddress(address) {
+        const user = this.currentUser();
+        if (!user) return false;
+        const users = this.getUsers();
+        const idx = users.findIndex(u => u.id === user.id);
+        if (idx < 0) return false;
+        users[idx].address = address;
+        this.saveUsers(users);
+        return true;
+    },
+
+    getUserOrders() {
+        const user = this.currentUser();
+        if (!user) return [];
+        const allOrders = Storage.get('orders', []);
+        return allOrders.filter(o => o.userId === user.id).sort((a, b) => new Date(b.date) - new Date(a.date));
+    },
+
+    openAuthModal(tab) {
+        const modal = document.querySelector('#authModal');
+        if (!modal) return;
+        UI.switchAuthTab(tab || 'login');
+        modal.classList.add('active');
+        modal.setAttribute('aria-hidden', 'false');
+    },
+
+    closeAuthModal() {
+        const modal = document.querySelector('#authModal');
+        if (!modal) return;
+        modal.classList.remove('active');
+        modal.setAttribute('aria-hidden', 'true');
+    },
+
+    refreshAccountIcon() {
+        const btn = document.querySelector('#accountBtn');
+        if (!btn) return;
+        const user = this.currentUser();
+        if (user) {
+            btn.innerHTML = `<i class="fas fa-user-check"></i>`;
+            btn.title = `${user.firstName} ${user.lastName} — My Account`;
+            btn.onclick = () => { window.location.href = 'account.html'; };
+        } else {
+            btn.innerHTML = `<i class="fas fa-user"></i>`;
+            btn.title = 'Sign In / Register';
+            btn.onclick = () => Auth.openAuthModal('login');
+        }
+    },
+
+    renderAccountPage() {
+        const user = this.currentUser();
+        const loggedOut = document.querySelector('#accountLoggedOut');
+        const loggedIn = document.querySelector('#accountLoggedIn');
+        if (!loggedOut || !loggedIn) return;
+        if (!user) {
+            loggedOut.style.display = '';
+            loggedIn.style.display = 'none';
+            return;
+        }
+        loggedOut.style.display = 'none';
+        loggedIn.style.display = '';
+        const greeting = document.querySelector('#userGreeting');
+        if (greeting) greeting.textContent = `${user.firstName} ${user.lastName}`;
+        // Populate profile form
+        const profileForm = document.querySelector('#profileForm');
+        if (profileForm) {
+            profileForm.firstName.value = user.firstName || '';
+            profileForm.lastName.value = user.lastName || '';
+            profileForm.email.value = user.email || '';
+            profileForm.phone.value = user.phone || '';
+        }
+        // Populate address form
+        const addressForm = document.querySelector('#addressForm');
+        if (addressForm && user.address) {
+            addressForm.address.value = user.address.address || '';
+            addressForm.city.value = user.address.city || '';
+            addressForm.zip.value = user.address.zip || '';
+        }
+        // Render orders
+        Auth.renderUserOrders();
+    },
+
+    renderUserOrders() {
+        const wrap = document.querySelector('#userOrders');
+        if (!wrap) return;
+        const orders = this.getUserOrders();
+        if (!orders.length) {
+            wrap.innerHTML = `<div style="text-align:center;padding:3rem 1rem;color:var(--text-tertiary);">
+                <i class="fas fa-box-open" style="font-size:3rem;margin-bottom:1rem;display:block;opacity:0.5"></i>
+                <p>${UI.t('noOrdersYet')}</p>
+                <a href="index.html" class="btn" style="margin-top:1rem;"><i class="fas fa-shopping-bag"></i> ${UI.t('startShopping')}</a>
+            </div>`;
+            return;
+        }
+        const statusColors = { pending: 'warning', processing: 'accent', shipped: 'primary', delivered: 'success', cancelled: 'danger' };
+        wrap.innerHTML = orders.map(o => `
+            <div class="order-card">
+                <div class="order-card-head">
+                    <div>
+                        <strong>#${o.id}</strong>
+                        <span style="margin-left:0.75rem;color:var(--text-tertiary);font-size:0.9rem;">${new Date(o.date).toLocaleDateString()}</span>
+                    </div>
+                    <span class="status-pill status-${statusColors[o.status] || 'primary'}">${o.status}</span>
+                </div>
+                <div class="order-card-body">
+                    ${o.items.map(i => `
+                        <div class="order-item-row">
+                            <i class="fas ${i.icon || 'fa-box'}" style="font-size:1.3rem;color:var(--accent-light)"></i>
+                            <div style="flex:1">
+                                <div>${i.name}</div>
+                                <div style="color:var(--text-tertiary);font-size:0.85rem;">${UI.t('qty')}: ${i.qty}</div>
+                            </div>
+                            <div>${Store.state.settings.currency || '৳'}${i.price * i.qty}</div>
+                        </div>
+                    `).join('')}
+                </div>
+                <div class="order-card-foot">
+                    <span>${UI.t('total')}</span>
+                    <strong>${Store.state.settings.currency || '৳'}${o.total}</strong>
+                </div>
+            </div>
+        `).join('');
     }
 };
 
@@ -2036,6 +2257,18 @@ const Checkout = {
         UI.setupThemeToggle();
         UI.setupLanguage();
         UI.setupMobileMenu();
+        UI.setupCartUI();
+    },
+
+    getPaymentOptions() {
+        const gateways = Store.state.settings.paymentGateways || {};
+        const opts = [];
+        if (gateways.cod?.enabled !== false) opts.push({ value: 'cod', label: gateways.cod?.label || 'Cash on Delivery', icon: gateways.cod?.icon || 'fa-money-bill-wave', color: '#10b981' });
+        if (gateways.bkash?.enabled) opts.push({ value: 'bkash', label: gateways.bkash.label || 'bKash', icon: gateways.bkash.icon || 'fa-mobile-alt', color: gateways.bkash.color || '#E2136E', number: gateways.bkash.number });
+        if (gateways.nagad?.enabled) opts.push({ value: 'nagad', label: gateways.nagad.label || 'Nagad', icon: gateways.nagad.icon || 'fa-mobile-alt', color: gateways.nagad.color || '#F6921E', number: gateways.nagad.number });
+        if (gateways.rocket?.enabled) opts.push({ value: 'rocket', label: gateways.rocket.label || 'Rocket', icon: gateways.rocket.icon || 'fa-mobile-alt', color: gateways.rocket.color || '#8C3494', number: gateways.rocket.number });
+        if (gateways.card?.enabled) opts.push({ value: 'card', label: gateways.card.label || 'Credit/Debit Card', icon: gateways.card.icon || 'fa-credit-card', color: '#7c3aed' });
+        return opts;
     },
 
     render() {
@@ -2049,65 +2282,126 @@ const Checkout = {
                     <i class="fas fa-shopping-cart"></i>
                     <h3>${UI.t('emptyCart')}</h3>
                     <p>${UI.t('emptyCartDesc')}</p>
-                    <a href="index.html" class="btn" style="margin-top:1rem;"><i class="fas fa-shopping-bag"></i> Start Shopping</a>
+                    <a href="index.html" class="btn" style="margin-top:1rem;"><i class="fas fa-shopping-bag"></i> ${UI.t('startShopping')}</a>
                 </div>
             `;
             summary.innerHTML = '';
             return;
         }
 
+        const user = Auth.currentUser();
+        const paymentOptions = Checkout.getPaymentOptions();
+        const u = user || {};
+        const addr = u.address || {};
+
         formContainer.innerHTML = `
+            ${user ? `<div class="checkout-banner"><i class="fas fa-user-check"></i> ${UI.t('signedInAs')} <strong>${u.firstName} ${u.lastName}</strong></div>` : ''}
             <form class="checkout-form" id="checkoutForm">
-                <h2 style="margin-bottom:1.5rem;">Shipping Information</h2>
+                <h2 style="margin-bottom:1.5rem;">${UI.t('shippingInfo')}</h2>
                 <div class="form-row">
                     <div class="form-group">
-                        <label class="form-label">First Name</label>
-                        <input class="form-input" name="firstName" required>
+                        <label class="form-label">${UI.t('firstName')}</label>
+                        <input class="form-input" name="firstName" required value="${u.firstName || ''}">
                     </div>
                     <div class="form-group">
-                        <label class="form-label">Last Name</label>
-                        <input class="form-input" name="lastName" required>
+                        <label class="form-label">${UI.t('lastName')}</label>
+                        <input class="form-input" name="lastName" required value="${u.lastName || ''}">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="form-label">Email</label>
-                    <input class="form-input" name="email" type="email" required>
+                    <label class="form-label">${UI.t('email')}</label>
+                    <input class="form-input" name="email" type="email" required value="${u.email || ''}">
                 </div>
                 <div class="form-group">
-                    <label class="form-label">Phone</label>
-                    <input class="form-input" name="phone" required>
+                    <label class="form-label">${UI.t('phone')}</label>
+                    <input class="form-input" name="phone" required value="${u.phone || ''}">
                 </div>
                 <div class="form-group">
-                    <label class="form-label">Address</label>
-                    <input class="form-input" name="address" required>
+                    <label class="form-label">${UI.t('address')}</label>
+                    <input class="form-input" name="address" required value="${addr.address || ''}">
                 </div>
                 <div class="form-row">
                     <div class="form-group">
-                        <label class="form-label">City</label>
-                        <input class="form-input" name="city" required>
+                        <label class="form-label">${UI.t('city')}</label>
+                        <input class="form-input" name="city" required value="${addr.city || ''}">
                     </div>
                     <div class="form-group">
-                        <label class="form-label">Zip Code</label>
-                        <input class="form-input" name="zip" required>
+                        <label class="form-label">${UI.t('zipCode')}</label>
+                        <input class="form-input" name="zip" required value="${addr.zip || ''}">
                     </div>
                 </div>
-                <h2 style="margin:2rem 0 1.5rem;">Payment Method</h2>
-                <div class="form-group">
-                    <select class="form-select" name="payment">
-                        <option value="cod">Cash on Delivery</option>
-                        <option value="card">Credit/Debit Card</option>
-                        <option value="bkash">bKash</option>
-                        <option value="nagad">Nagad</option>
-                    </select>
+                <h2 style="margin:2rem 0 1.5rem;">${UI.t('paymentMethod')}</h2>
+                <div class="payment-options">
+                    ${paymentOptions.map((p, i) => `
+                        <label class="payment-option ${i === 0 ? 'selected' : ''}" style="--opt-color:${p.color}">
+                            <input type="radio" name="payment" value="${p.value}" ${i === 0 ? 'checked' : ''}>
+                            <div class="payment-option-icon" style="background:${p.color}22;color:${p.color}"><i class="fas ${p.icon}"></i></div>
+                            <div class="payment-option-label">
+                                <strong>${p.label}</strong>
+                                ${p.number ? `<small>${p.number}</small>` : ''}
+                            </div>
+                        </label>
+                    `).join('')}
                 </div>
-                <button type="submit" class="btn btn-lg" style="width:100%;margin-top:1rem;">
-                    <i class="fas fa-lock"></i> Place Order
+                <div id="paymentDetails"></div>
+                <button type="submit" class="btn btn-lg" style="width:100%;margin-top:1.5rem;">
+                    <i class="fas fa-lock"></i> ${UI.t('submitOrder')}
                 </button>
+                ${!user ? `<p style="text-align:center;margin-top:1rem;color:var(--text-tertiary);font-size:0.9rem;"><a href="account.html" style="color:var(--accent-light)">${UI.t('signIn')}</a> ${UI.t('orContinueGuest')}</p>` : ''}
             </form>
         `;
 
+        // Payment option selection
+        const paymentRadios = formContainer.querySelectorAll('input[name="payment"]');
+        const updatePaymentDetails = () => {
+            const selected = formContainer.querySelector('input[name="payment"]:checked')?.value;
+            const opt = paymentOptions.find(p => p.value === selected);
+            const details = formContainer.querySelector('#paymentDetails');
+            if (opt && opt.value !== 'cod' && opt.value !== 'card') {
+                details.innerHTML = `
+                    <div class="payment-instructions">
+                        <p><i class="fas fa-info-circle"></i> ${UI.t('sendToNumber')}: <strong style="color:${opt.color}">${opt.number || '—'}</strong></p>
+                        <div class="form-group">
+                            <label class="form-label">${UI.t('transactionId')}</label>
+                            <input class="form-input" name="transactionId" placeholder="${UI.t('trxIdPlaceholder')}">
+                        </div>
+                    </div>
+                `;
+            } else if (opt && opt.value === 'card') {
+                details.innerHTML = `
+                    <div class="payment-instructions">
+                        <div class="form-group">
+                            <label class="form-label">${UI.t('cardNumber')}</label>
+                            <input class="form-input" name="cardNumber" placeholder="•••• •••• •••• ••••">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">${UI.t('expiry')}</label>
+                                <input class="form-input" name="cardExpiry" placeholder="MM/YY">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">${UI.t('cvv')}</label>
+                                <input class="form-input" name="cardCvv" placeholder="•••">
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } else {
+                details.innerHTML = '';
+            }
+        };
+        paymentRadios.forEach(r => { r.onchange = () => {
+            formContainer.querySelectorAll('.payment-option').forEach(o => o.classList.remove('selected'));
+            r.closest('.payment-option').classList.add('selected');
+            updatePaymentDetails();
+        }; });
+        updatePaymentDetails();
+
+        const shippingCost = Store.cartTotal() >= (Store.state.settings.freeShippingThreshold || 1000) ? 0 : 60;
+        const grandTotal = Store.cartTotal() + shippingCost;
+
         summary.innerHTML = `
-            <h3 style="margin-bottom:1.5rem;">Order Summary</h3>
+            <h3 style="margin-bottom:1.5rem;">${UI.t('orderSummary')}</h3>
             ${Store.state.cart.map(item => `
                 <div class="summary-row">
                     <span>${item.name} × ${item.quantity}</span>
@@ -2115,16 +2409,16 @@ const Checkout = {
                 </div>
             `).join('')}
             <div class="summary-row">
-                <span>Subtotal</span>
+                <span>${UI.t('subtotal')}</span>
                 <span>${UI.formatPrice(Store.cartTotal())}</span>
             </div>
             <div class="summary-row">
-                <span>Shipping</span>
-                <span>${Store.cartTotal() >= (Store.state.settings.freeShippingThreshold || 100) ? 'Free' : UI.formatPrice(10)}</span>
+                <span>${UI.t('shipping')}</span>
+                <span>${shippingCost === 0 ? UI.t('free') : UI.formatPrice(shippingCost)}</span>
             </div>
             <div class="summary-row total">
-                <span>Total</span>
-                <span class="total-value">${UI.formatPrice(Store.cartTotal() + (Store.cartTotal() >= (Store.state.settings.freeShippingThreshold || 100) ? 0 : 10))}</span>
+                <span>${UI.t('total')}</span>
+                <span class="total-value">${UI.formatPrice(grandTotal)}</span>
             </div>
         `;
 
@@ -2133,19 +2427,181 @@ const Checkout = {
             const data = Object.fromEntries(new FormData(e.target));
             const order = {
                 id: 'ORD-' + Date.now(),
+                userId: user ? user.id : null,
                 ...data,
                 items: Store.state.cart,
-                total: Store.cartTotal() + (Store.cartTotal() >= (Store.state.settings.freeShippingThreshold || 100) ? 0 : 10),
+                subtotal: Store.cartTotal(),
+                shipping: shippingCost,
+                total: grandTotal,
                 date: new Date().toISOString(),
                 status: 'pending'
             };
             const orders = Storage.get('orders', []);
             orders.push(order);
             Storage.set('orders', orders);
+            // If logged in, save the address used
+            if (user) {
+                Auth.updateAddress({ address: data.address, city: data.city, zip: data.zip });
+            }
             Store.clearCart();
             UI.updateCartBadge();
-            UI.showNotification('Order placed successfully!', 'success', 'Thank you!');
-            setTimeout(() => window.location.href = 'index.html', 1500);
+            UI.showNotification(UI.t('orderPlaced'), 'success', UI.t('orderThanks'));
+            setTimeout(() => window.location.href = 'index.html', 1800);
+        };
+    }
+};
+
+// ============================================
+// UI: AUTH (Login/Register/Account modal helpers)
+// ============================================
+UI.switchAuthTab = function(tab) {
+    const tabs = document.querySelectorAll('.auth-tab');
+    const panes = document.querySelectorAll('.auth-form[data-pane]');
+    tabs.forEach(t => t.classList.toggle('active', t.dataset.tab === tab));
+    panes.forEach(p => p.style.display = (p.dataset.pane === tab) ? '' : 'none');
+};
+
+UI.bindAuth = function() {
+    // Tab buttons
+    document.querySelectorAll('.auth-tab').forEach(btn => {
+        btn.onclick = e => {
+            e.preventDefault();
+            UI.switchAuthTab(btn.dataset.tab);
+        };
+    });
+    // Switch links
+    document.querySelectorAll('.auth-switch a[data-switch]').forEach(a => {
+        a.onclick = e => {
+            e.preventDefault();
+            UI.switchAuthTab(a.dataset.switch);
+        };
+    });
+    // Close button
+    const closeBtn = document.querySelector('#authClose');
+    if (closeBtn) closeBtn.onclick = () => Auth.closeAuthModal();
+    const modal = document.querySelector('#authModal');
+    if (modal) {
+        modal.onclick = e => {
+            if (e.target === modal) Auth.closeAuthModal();
+        };
+    }
+    // Login form
+    const loginForm = document.querySelector('#loginForm');
+    if (loginForm) {
+        loginForm.onsubmit = async e => {
+            e.preventDefault();
+            const data = Object.fromEntries(new FormData(loginForm));
+            const result = await Auth.login(data.email, data.password);
+            if (result.ok) {
+                UI.showNotification(`${UI.t('welcomeBack')} ${result.user.firstName}!`, 'success');
+                Auth.closeAuthModal();
+                Auth.refreshAccountIcon();
+                if (typeof Auth.renderAccountPage === 'function') Auth.renderAccountPage();
+                loginForm.reset();
+            } else {
+                UI.showNotification(result.error, 'error', UI.t('loginFailed'));
+            }
+        };
+    }
+    // Register form
+    const registerForm = document.querySelector('#registerForm');
+    if (registerForm) {
+        registerForm.onsubmit = async e => {
+            e.preventDefault();
+            const data = Object.fromEntries(new FormData(registerForm));
+            if (data.password !== data.confirmPassword) {
+                UI.showNotification('Passwords do not match', 'error', UI.t('registerFailed'));
+                return;
+            }
+            const result = await Auth.register(data);
+            if (result.ok) {
+                UI.showNotification(`Welcome, ${result.user.firstName}!`, 'success', UI.t('registered'));
+                Auth.closeAuthModal();
+                Auth.refreshAccountIcon();
+                if (typeof Auth.renderAccountPage === 'function') Auth.renderAccountPage();
+                registerForm.reset();
+            } else {
+                UI.showNotification(result.error, 'error', UI.t('registerFailed'));
+            }
+        };
+    }
+    // Account page specific bindings
+    const gotoRegister = document.querySelector('#gotoRegister');
+    if (gotoRegister) {
+        gotoRegister.onclick = e => {
+            e.preventDefault();
+            Auth.openAuthModal('register');
+        };
+    }
+    const loginFormPage = document.querySelector('#loginFormPage');
+    if (loginFormPage) {
+        loginFormPage.onsubmit = async e => {
+            e.preventDefault();
+            const data = Object.fromEntries(new FormData(loginFormPage));
+            const result = await Auth.login(data.email, data.password);
+            if (result.ok) {
+                UI.showNotification(`${UI.t('welcomeBack')} ${result.user.firstName}!`, 'success');
+                Auth.renderAccountPage();
+            } else {
+                UI.showNotification(result.error, 'error', UI.t('loginFailed'));
+            }
+        };
+    }
+    // Account tabs
+    document.querySelectorAll('.account-tab').forEach(tab => {
+        tab.onclick = () => {
+            const pane = tab.dataset.pane;
+            document.querySelectorAll('.account-tab').forEach(t => t.classList.toggle('active', t === tab));
+            document.querySelectorAll('.account-pane').forEach(p => p.classList.toggle('active', p.dataset.pane === pane));
+        };
+    });
+    // Profile form
+    const profileForm = document.querySelector('#profileForm');
+    if (profileForm) {
+        profileForm.onsubmit = async e => {
+            e.preventDefault();
+            const data = Object.fromEntries(new FormData(profileForm));
+            const ok = await Auth.updateProfile(data);
+            UI.showNotification(ok ? UI.t('profileUpdated') : UI.t('updateFailed'), ok ? 'success' : 'error');
+        };
+    }
+    // Address form
+    const addressForm = document.querySelector('#addressForm');
+    if (addressForm) {
+        addressForm.onsubmit = e => {
+            e.preventDefault();
+            const data = Object.fromEntries(new FormData(addressForm));
+            const ok = Auth.updateAddress({ address: data.address, city: data.city, zip: data.zip });
+            UI.showNotification(ok ? UI.t('addressSaved') : UI.t('updateFailed'), ok ? 'success' : 'error');
+        };
+    }
+    // Password form
+    const passwordForm = document.querySelector('#passwordForm');
+    if (passwordForm) {
+        passwordForm.onsubmit = async e => {
+            e.preventDefault();
+            const data = Object.fromEntries(new FormData(passwordForm));
+            if (data.newPassword !== data.confirmPassword) {
+                UI.showNotification('Passwords do not match', 'error');
+                return;
+            }
+            const result = await Auth.updatePassword(data.currentPassword, data.newPassword);
+            if (result.ok) {
+                UI.showNotification(UI.t('passwordUpdated'), 'success');
+                passwordForm.reset();
+            } else {
+                UI.showNotification(result.error, 'error');
+            }
+        };
+    }
+    // Logout button
+    const logoutBtn = document.querySelector('#logoutBtn');
+    if (logoutBtn) {
+        logoutBtn.onclick = () => {
+            Auth.logout();
+            Auth.refreshAccountIcon();
+            Auth.renderAccountPage();
+            UI.showNotification(UI.t('loggedOut'), 'info');
         };
     }
 };
@@ -2165,4 +2621,11 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
         UI.initHomepage();
     }
+    // Auth bindings (after a short delay so DOM is fully wired)
+    setTimeout(() => {
+        if (window.UI && window.Auth) {
+            UI.bindAuth();
+            Auth.refreshAccountIcon();
+        }
+    }, 250);
 });
