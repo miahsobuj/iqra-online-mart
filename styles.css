@@ -530,48 +530,37 @@ header.scrolled {
     position: relative;
 }
 
-/* Transparent big typography — random product name behind hero text */
+/* NTB-style massive stroked typography behind hero */
 .hero-typo {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: clamp(4rem, 14vw, 12rem);
-    font-weight: 800;
-    letter-spacing: -0.04em;
-    line-height: 0.9;
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(5rem, 18vw, 16rem);
+    font-weight: 900;
+    letter-spacing: -0.05em;
+    line-height: 0.85;
     text-transform: uppercase;
     white-space: nowrap;
     pointer-events: none;
     user-select: none;
     z-index: 0;
     color: transparent;
-    -webkit-text-stroke: 2px rgba(124, 58, 237, 0.18);
-    background: linear-gradient(90deg,
-        rgba(124, 58, 237, 0.10) 0%,
-        rgba(236, 72, 153, 0.14) 35%,
-        rgba(6, 182, 212, 0.12) 70%,
-        rgba(124, 58, 237, 0.10) 100%);
-    background-size: 200% 100%;
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    -webkit-text-stroke: 0;
-    animation: heroTypoFloat 14s ease-in-out infinite, heroTypoShift 8s linear infinite;
-    opacity: 0.85;
-    max-width: 95vw;
+    -webkit-text-stroke: 2.5px rgba(124, 58, 237, 0.55);
+    text-stroke: 2.5px rgba(124, 58, 237, 0.55);
+    text-shadow:
+        0 0 40px rgba(124, 58, 237, 0.25),
+        0 0 80px rgba(236, 72, 153, 0.15);
+    max-width: 100vw;
+    width: max-content;
     text-align: center;
-    filter: blur(0.3px);
+    animation: heroTypoFloat 16s ease-in-out infinite;
 }
 
 @keyframes heroTypoFloat {
-    0%, 100% { transform: translate(-50%, -50%) scale(1) rotate(-2deg); }
-    50% { transform: translate(-50%, -52%) scale(1.04) rotate(2deg); }
-}
-
-@keyframes heroTypoShift {
-    0% { background-position: 0% 50%; }
-    100% { background-position: 200% 50%; }
+    0%, 100% { transform: translate(-50%, -50%) scale(1) rotate(-1deg); }
+    50% { transform: translate(-50%, -52%) scale(1.03) rotate(1deg); }
 }
 
 .hero-content, .hero-visual {
@@ -581,8 +570,8 @@ header.scrolled {
 
 @media (max-width: 768px) {
     .hero-typo {
-        font-size: clamp(2.5rem, 13vw, 5rem);
-        -webkit-text-stroke: 1px rgba(124, 58, 237, 0.14);
+        font-size: clamp(3rem, 16vw, 6rem);
+        -webkit-text-stroke: 1.5px rgba(124, 58, 237, 0.45);
     }
 }
 
@@ -1750,21 +1739,23 @@ footer::before {
 .cart-drawer {
     position: fixed;
     top: 0;
-    right: -450px;
+    right: 0;
     width: 100%;
     max-width: 420px;
     height: 100vh;
     background: var(--bg-elevated);
     border-left: 1px solid var(--border-strong);
     z-index: 250;
-    transition: var(--t-slow) var(--ease);
+    transform: translateX(100%);
+    transition: transform 0.35s var(--ease);
     display: flex;
     flex-direction: column;
     box-shadow: var(--shadow-lg);
+    overflow: hidden;
 }
 
 .cart-drawer.active {
-    right: 0;
+    transform: translateX(0);
 }
 
 .cart-drawer-overlay {

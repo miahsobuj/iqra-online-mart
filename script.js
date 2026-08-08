@@ -8,20 +8,20 @@
 // ============================================
 
 const DEFAULT_PRODUCTS = [
-    { id: 1, name: 'Wireless Bluetooth Headphones', nameBn: '�য়্যারলেস ব্লুটুথ হেডফোন', price: 2499, oldPrice: 3499, category: 'Electronics', rating: 4.5, reviews: 128, badge: 'hot', icon: 'fa-headphones', description: 'High-quality wireless headphones with active noise cancellation and 30-hour battery life.', descriptionBn: 'উচ্চমানের ওয়্যারলেস হেডফোন, অ্যাক্টিভ নয়েজ ক্যান্সেলেশন এবং ৩০ ঘন্টা ব্যাটারি লাইফ।', stock: 45, featured: true, status: 'active', createdAt: '2026-01-15' },
-    { id: 2, name: 'Smart Watch Series 5', nameBn: 'স্�ার্ট ওয়াচ সিরিজ ৫', price: 4999, oldPrice: 6999, category: 'Electronics', rating: 4.7, reviews: 89, badge: 'new', icon: 'fa-watch', description: 'Advanced smartwatch with health tracking, GPS, and water resistance.', descriptionBn: 'উন্নত স্মার্টওয়াচ, হেলথ ট্র্যাকিং, জিপিএস এবং ওয়াটার রেজিস্ট্যান্ট।', stock: 32, featured: true, status: 'active', createdAt: '2026-02-01' },
-    { id: 3, name: 'Designer Cotton T-Shirt', nameBn: 'ডিজাইনার কটন টি-শার্ট', price: 599, oldPrice: null, category: 'Fashion', rating: 4.3, reviews: 234, badge: null, icon: 'fa-tshirt', description: 'Premium quality cotton t-shirt with modern design and comfortable fit.', descriptionBn: 'উচ্চমানের কটন �ি-শার্ট, আধুনিক ডিজাইন এবং আরামদায়ক।', stock: 120, featured: true, status: 'active', createdAt: '2026-02-10' },
-    { id: 4, name: 'Leather Handbag Collection', nameBn: 'লেদার হ্যান্ডব্যাগ কালেকশন', price: 1899, oldPrice: 2999, category: 'Fashion', rating: 4.6, reviews: 156, badge: 'sale', icon: 'fa-handbag', description: 'Elegant leather handbags in various colors and styles.', descriptionBn: 'বিভিন্ন রঙ ও স্টাইলের মার্জিত চাম�়ার হাতব্যাগ।', stock: 67, featured: true, status: 'active', createdAt: '2026-01-20' },
-    { id: 5, name: 'Modern Coffee Table', nameBn: 'মডার্ন ক�ি টেবিল', price: 3999, oldPrice: null, category: 'Home & Living', rating: 4.4, reviews: 45, badge: null, icon: 'fa-table', description: 'Contemporary design coffee table with tempered glass and wooden legs.', descriptionBn: 'টেম্পার্ড গ্লাস ও কাঠের পায়ার সাথে সমকালীন ডিজাইনের কফি টেবিল।', stock: 18, featured: true, status: 'active', createdAt: '2026-02-15' },
+    { id: 1, name: 'Wireless Bluetooth Headphones', nameBn: 'ওয়্যারলেস ব্লুটুথ হেডফোন', price: 2499, oldPrice: 3499, category: 'Electronics', rating: 4.5, reviews: 128, badge: 'hot', icon: 'fa-headphones', description: 'High-quality wireless headphones with active noise cancellation and 30-hour battery life.', descriptionBn: 'উচ্চমানের ওয়্যারলেস হেডফোন, অ্যাক্টিভ নয়েজ ক্যান্সেলেশন এবং ৩০ ঘন্টা ব্যাটারি লাইফ।', stock: 45, featured: true, status: 'active', createdAt: '2026-01-15' },
+    { id: 2, name: 'Smart Watch Series 5', nameBn: 'স্মার্ট ওয়াচ সিরিজ ৫', price: 4999, oldPrice: 6999, category: 'Electronics', rating: 4.7, reviews: 89, badge: 'new', icon: 'fa-watch', description: 'Advanced smartwatch with health tracking, GPS, and water resistance.', descriptionBn: 'উন্নত স্মার্টওয়াচ, হেলথ ট্র্যাকিং, জিপিএস এবং ওয়াটার রেজিস্ট্যান্ট।', stock: 32, featured: true, status: 'active', createdAt: '2026-02-01' },
+    { id: 3, name: 'Designer Cotton T-Shirt', nameBn: 'ডিজাইনার কটন টি-শার্ট', price: 599, oldPrice: null, category: 'Fashion', rating: 4.3, reviews: 234, badge: null, icon: 'fa-tshirt', description: 'Premium quality cotton t-shirt with modern design and comfortable fit.', descriptionBn: 'উচ্চমানের কটন টি-শার্ট, আধুনিক ডিজাইন এবং আরামদায়ক।', stock: 120, featured: true, status: 'active', createdAt: '2026-02-10' },
+    { id: 4, name: 'Leather Handbag Collection', nameBn: 'লেদার হ্যান্ডব্যাগ কালেকশন', price: 1899, oldPrice: 2999, category: 'Fashion', rating: 4.6, reviews: 156, badge: 'sale', icon: 'fa-handbag', description: 'Elegant leather handbags in various colors and styles.', descriptionBn: 'বিভিন্ন রঙ ও স্টাইলের মার্জিত চামড়ার হাতব্যাগ।', stock: 67, featured: true, status: 'active', createdAt: '2026-01-20' },
+    { id: 5, name: 'Modern Coffee Table', nameBn: 'মডার্ন কফি টেবিল', price: 3999, oldPrice: null, category: 'Home & Living', rating: 4.4, reviews: 45, badge: null, icon: 'fa-table', description: 'Contemporary design coffee table with tempered glass and wooden legs.', descriptionBn: 'টেম্পার্ড গ্লাস ও কাঠের পায়ার সাথে সমকালীন ডিজাইনের কফি টেবিল।', stock: 18, featured: true, status: 'active', createdAt: '2026-02-15' },
     { id: 6, name: 'Organic Bedding Set', nameBn: 'অর্গানিক বেডিং সেট', price: 2299, oldPrice: 3199, category: 'Home & Living', rating: 4.2, reviews: 78, badge: 'sale', icon: 'fa-bed', description: 'Luxury organic cotton bedding set for ultimate comfort.', descriptionBn: 'সর্বোচ্চ আরামের জন্য বিলাসবহুল অর্গানিক কটন বেডিং সেট।', stock: 54, featured: false, status: 'active', createdAt: '2026-01-25' },
-    { id: 7, name: 'Python Programming Guide', nameBn: 'পাইথন প্রোগ্রামিং গাইড', price: 899, oldPrice: null, category: 'Books & Education', rating: 4.8, reviews: 312, badge: 'hot', icon: 'fa-book', description: 'Complete guide to Python programming from beginner to advanced levels.', descriptionBn: 'প্রাথমিক থেকে �ন্নত স্তর পর্যন্ত পাইথন প্রোগ্রামিংয়ের সম্পূর্ণ গাইড।', stock: 200, featured: true, status: 'active', createdAt: '2026-02-05' },
-    { id: 8, name: 'Yoga Mat Premium', nameBn: 'যোগ ম্যাট প্রিমিয়াম', price: 799, oldPrice: 1199, category: 'Sports & Fitness', rating: 4.5, reviews: 167, badge: 'sale', icon: 'fa-person-praying', description: 'Non-slip yoga mat with alignment guides and carrying strap.', descriptionBn: 'নন-স্�িপ যোগ ম্যাট, অ্যালাইনমেন্� গাইড এবং ক্যারি স্ট্র্যাপ সহ।', stock: 89, featured: false, status: 'active', createdAt: '2026-02-12' },
+    { id: 7, name: 'Python Programming Guide', nameBn: 'পাইথন প্রোগ্রামিং গাইড', price: 899, oldPrice: null, category: 'Books & Education', rating: 4.8, reviews: 312, badge: 'hot', icon: 'fa-book', description: 'Complete guide to Python programming from beginner to advanced levels.', descriptionBn: 'প্রাথমিক থেকে উন্নত স্তর পর্যন্ত পাইথন প্রোগ্রামিংয়ের সম্পূর্ণ গাইড।', stock: 200, featured: true, status: 'active', createdAt: '2026-02-05' },
+    { id: 8, name: 'Yoga Mat Premium', nameBn: 'যোগ ম্যাট প্রিমিয়াম', price: 799, oldPrice: 1199, category: 'Sports & Fitness', rating: 4.5, reviews: 167, badge: 'sale', icon: 'fa-person-praying', description: 'Non-slip yoga mat with alignment guides and carrying strap.', descriptionBn: 'নন-স্লিপ যোগ ম্যাট, অ্যালাইনমেন্ট গাইড এবং ক্যারি স্ট্র্যাপ সহ।', stock: 89, featured: false, status: 'active', createdAt: '2026-02-12' },
     { id: 9, name: 'Premium Basmati Rice 5kg', nameBn: 'প্রিমিয়াম বাসমতি চাল ৫ কেজি', price: 650, oldPrice: 750, category: 'Groceries', rating: 4.7, reviews: 89, badge: 'hot', icon: 'fa-shopping-basket', description: 'Premium quality aged basmati rice, perfect for biryani and pulao.', descriptionBn: 'প্রিমিয়াম মানের পুরনো বাসমতি চাল, বিরিয়ানি ও পোলাওয়ের জন্য নিখুঁত।', stock: 200, featured: true, status: 'active', createdAt: '2026-03-10' },
     { id: 10, name: 'Organic Honey 500g', nameBn: 'অর্গানিক মধু ৫০০ গ্রাম', price: 450, oldPrice: null, category: 'Groceries', rating: 4.8, reviews: 145, badge: null, icon: 'fa-jar', description: 'Pure organic honey from Sundarbans. No added sugar.', descriptionBn: 'সুন্দরবনের খাঁটি অর্গানিক মধু। কোনো চিনি যোগ করা হয়নি।', stock: 150, featured: true, status: 'active', createdAt: '2026-03-12' },
     { id: 11, name: 'Vitamin C Serum', nameBn: 'ভিটামিন সি সিরাম', price: 599, oldPrice: 899, category: 'Beauty & Care', rating: 4.6, reviews: 234, badge: 'sale', icon: 'fa-spa', description: 'Brightening vitamin C serum for radiant and youthful skin.', descriptionBn: 'উজ্জ্বল ত্বকের জন্য ভিটামিন সি ব্রাইটেনিং সিরাম।', stock: 78, featured: true, status: 'active', createdAt: '2026-03-15' },
-    { id: 12, name: 'Multivitamin Supplement', nameBn: 'মাল্টিভিটামিন সা�্লিমেন্ট', price: 350, oldPrice: 450, category: 'Pharmacy & Health', rating: 4.5, reviews: 178, badge: null, icon: 'fa-heartbeat', description: 'Daily multivitamin supplement with essential vitamins and minerals.', descriptionBn: 'প্রয়োজনীয় ভিটামিন ও মিনারেল সহ দৈনিক মাল্টিভিটামিন সা�্লিমেন্ট।', stock: 250, featured: false, status: 'active', createdAt: '2026-03-08' },
+    { id: 12, name: 'Multivitamin Supplement', nameBn: 'মাল্টিভিটামিন সাপ্লিমেন্ট', price: 350, oldPrice: 450, category: 'Pharmacy & Health', rating: 4.5, reviews: 178, badge: null, icon: 'fa-heartbeat', description: 'Daily multivitamin supplement with essential vitamins and minerals.', descriptionBn: 'প্রয়োজনীয় ভিটামিন ও মিনারেল সহ দৈনিক মাল্টিভিটামিন সাপ্লিমেন্ট।', stock: 250, featured: false, status: 'active', createdAt: '2026-03-08' },
     { id: 13, name: 'Educational Toy Set', nameBn: 'শিক্ষামূলক খেলনা সেট', price: 1299, oldPrice: null, category: 'Kids & Baby', rating: 4.7, reviews: 92, badge: 'new', icon: 'fa-baby', description: 'Educational toy set for kids aged 3-8. Safe and non-toxic materials.', descriptionBn: '৩-৮ বছর বয়সী শিশুদের জন্য শিক্ষামূলক খেলনা সেট। নিরাপদ ও নন-টক্সিক।', stock: 60, featured: true, status: 'active', createdAt: '2026-03-18' },
-    { id: 14, name: 'Mechanical Gaming Keyboard', nameBn: 'মেকানিক্যাল গেমিং কীবোর্ড', price: 3299, oldPrice: 4499, category: 'Electronics', rating: 4.8, reviews: 245, badge: 'new', icon: 'fa-keyboard', description: 'RGB mechanical gaming keyboard with hot-swappable switches.', descriptionBn: 'RGB মেকানিক্যাল গেমিং কীবোর্ড, হট-সোয়াপেবল সুইচ সহ।', stock: 41, featured: true, status: 'active', createdAt: '2026-03-01' },
+    { id: 14, name: 'Mechanical Gaming Keyboard', nameBn: 'মেকানিক্যাল গেমিং কীবোর্ড', price: 3299, oldPrice: 4499, category: 'Electronics', rating: 4.8, reviews: 245, badge: 'new', icon: 'fa-keyboard', description: 'RGB mechanical gaming keyboard with hot-swappable switches.', descriptionBn: 'আরজিবি মেকানিক্যাল গেমিং কীবোর্ড, হট-সোয়াপেবল সুইচ সহ।', stock: 41, featured: true, status: 'active', createdAt: '2026-03-01' },
     { id: 15, name: 'Running Shoes Pro', nameBn: 'রানিং শু প্রো', price: 2499, oldPrice: null, category: 'Sports & Fitness', rating: 4.6, reviews: 189, badge: 'hot', icon: 'fa-shoe-prints', description: 'Lightweight running shoes with responsive cushioning.', descriptionBn: 'হালকা ওজনের রানিং শু, প্রতিক্রিয়াশীল কুশনিং সহ।', stock: 95, featured: true, status: 'active', createdAt: '2026-02-20' },
     { id: 16, name: 'Premium Dog Food', nameBn: 'প্রিমিয়াম কুকুরের খাবার', price: 1199, oldPrice: null, category: 'Pet Supplies', rating: 4.6, reviews: 92, badge: null, icon: 'fa-dog', description: 'Nutritious dog food for all breeds and life stages.', descriptionBn: 'সব জাতের কুকুরের জন্য পুষ্টিকর খাবার।', stock: 76, featured: false, status: 'active', createdAt: '2026-01-30' }
 ];
@@ -29,11 +29,11 @@ const DEFAULT_PRODUCTS = [
 const DEFAULT_CATEGORIES = [
     { id: 'electronics', name: 'Electronics', nameBn: 'ইলেকট্রনিক্স', icon: 'fa-laptop', description: 'Latest gadgets and tech accessories', descriptionBn: 'সর্বশেষ গ্যাজেট ও প্রযুক্তি পণ্য' },
     { id: 'fashion', name: 'Fashion', nameBn: 'ফ্যাশন', icon: 'fa-tshirt', description: 'Trendy clothing and accessories', descriptionBn: 'আধুনিক পোশাক ও এক্সেসরিজ' },
-    { id: 'home', name: 'Home & Living', nameBn: 'ঘর � বসবাস', icon: 'fa-home', description: 'Furniture, decor & essentials', descriptionBn: 'আসবাবপত্র, সাজসজ্জা ও প্রয়োজনীয় জিনিস' },
-    { id: 'groceries', name: 'Groceries', nameBn: 'মুদি�ানা', icon: 'fa-shopping-basket', description: 'Fresh food and daily essentials', descriptionBn: 'তাজা খাবার ও দৈনন্দিন প্রয়োজনীয় জিনিস' },
-    { id: 'beauty', name: 'Beauty & Care', nameBn: 'সৌন্দর্য ও যত্ন', icon: 'fa-spa', description: 'Cosmetics, skincare and wellness', descriptionBn: 'প্রসাধনী, ত্বকের �ত্ন ও সুস্থতা' },
-    { id: 'books', name: 'Books & Education', nameBn: 'বই ও শিক্�া', icon: 'fa-book', description: 'Knowledge and learning resources', descriptionBn: 'জ্�ান ও শিক্ষা সম্পদ' },
-    { id: 'sports', name: 'Sports & Fitness', nameBn: 'খেলা ও ফিটনেস', icon: 'fa-dumbbell', description: 'Equipment for active lifestyles', descriptionBn: 'সক্রিয় জীবনযাপনের সর�্জাম' },
+    { id: 'home', name: 'Home & Living', nameBn: 'ঘর ও বসবাস', icon: 'fa-home', description: 'Furniture, decor & essentials', descriptionBn: 'আসবাবপত্র, সাজসজ্জা ও প্রয়োজনীয় জিনিস' },
+    { id: 'groceries', name: 'Groceries', nameBn: 'মুদিখানা', icon: 'fa-shopping-basket', description: 'Fresh food and daily essentials', descriptionBn: 'তাজা খাবার ও দৈনন্দিন প্রয়োজনীয় জিনিস' },
+    { id: 'beauty', name: 'Beauty & Care', nameBn: 'সৌন্দর্য ও যত্ন', icon: 'fa-spa', description: 'Cosmetics, skincare and wellness', descriptionBn: 'প্রসাধনী, ত্বকের যত্ন ও সুস্থতা' },
+    { id: 'books', name: 'Books & Education', nameBn: 'বই ও শিক্ষা', icon: 'fa-book', description: 'Knowledge and learning resources', descriptionBn: 'জ্ঞান ও শিক্ষা সম্পদ' },
+    { id: 'sports', name: 'Sports & Fitness', nameBn: 'খেলা ও ফিটনেস', icon: 'fa-dumbbell', description: 'Equipment for active lifestyles', descriptionBn: 'সক্রিয় জীবনযাপনের সরঞ্জাম' },
     { id: 'kids', name: 'Kids & Baby', nameBn: 'শিশু ও শিশু', icon: 'fa-baby', description: 'Toys, clothing and baby essentials', descriptionBn: 'খেলনা, পোশাক ও শিশু প্রয়োজনীয় জিনিস' },
     { id: 'pharmacy', name: 'Pharmacy & Health', nameBn: 'ফার্মেসি ও স্বাস্থ্য', icon: 'fa-heartbeat', description: 'Medicines and health products', descriptionBn: 'ওষুধ ও স্বাস্থ্য পণ্য' },
     { id: 'pets', name: 'Pet Supplies', nameBn: 'পোষা প্রাণী', icon: 'fa-paw', description: 'Everything for your furry friends', descriptionBn: 'আপনার পোষা প্রাণীদের জন্য সবকিছু' }
@@ -102,11 +102,7 @@ const DEFAULT_SETTINGS = {
     enableSound: true,
     enableTrail: true,
     paymentGateways: {
-        cod: { enabled: true, label: 'Cash on Delivery', labelBn: 'ক্যাশ অন ডেলিভারি', icon: 'fa-money-bill-wave' },
-        bkash: { enabled: true, label: 'bKash', number: '01617040846', type: 'personal', icon: 'fa-mobile-alt', color: '#E2136E', labelBn: 'বিকাশ' },
-        nagad: { enabled: true, label: 'Nagad', number: '01617040846', type: 'personal', icon: 'fa-mobile-alt', color: '#F6921E', labelBn: 'নগদ' },
-        rocket: { enabled: true, label: 'Rocket', number: '01617040846', type: 'personal', icon: 'fa-mobile-alt', color: '#8C3494', labelBn: 'রকেট' },
-        card: { enabled: false, label: 'Credit/Debit Card', provider: 'stripe', icon: 'fa-credit-card', labelBn: 'কার্ড' }
+        cod: { enabled: true, label: 'Cash on Delivery', labelBn: 'ক্যাশ অন ডেলিভারি', icon: 'fa-money-bill-wave' }
     },
     adminCredentials: { username: 'admin', password: 'admin123' }
 };
@@ -227,32 +223,33 @@ const TRANSLATIONS = {
         demoCredentials: 'Demo Credentials', backToSite: 'Back to site'
     },
     bn: {
-        home: 'হোম', products: 'পণ্য', categories: 'বিভাগ', about: 'আমাদের সম্পর্কে',
-        contact: 'যোগাযোগ', cart: 'কার্ট', search: 'অনুসন্ধান', blog: 'ব্লগ', admin: 'অ্যাডমিন',
-        welcome: 'ভবিষ্যতে স্বাগতম', welcomeHighlight: 'অনলাইন শপিং',
+        home: 'হোম', products: 'পণ্যসমূহ', categories: 'বিভাগসমূহ', about: 'আমাদের সম্পর্কে',
+        contact: 'যোগাযোগ', cart: 'কার্ট', search: 'অনুসন্ধান', blog: 'ব্লগ', admin: 'প্রশাসন',
+        welcome: 'ভবিষ্যতের ই-কমার্সে স্বাগতম',
+        welcomeHighlight: 'অনলাইন কেনাকাটা',
         subtitle: 'মানসম্পন্ন পণ্য, দ্রুত ডেলিভারি, নিরাপদ পেমেন্ট — গুণগত মান আমাদের প্রথম পছন্দ।',
         shopNow: 'এখনই কিনুন', explore: 'বিভাগ দেখুন',
         heroBadge: 'নতুন সংগ্রহ ২০২৬',
-        stat1Value: '৫০ হা.+', stat1Label: 'খুশি গ্রাহক',
-        stat2Value: '১০ হা.+', stat2Label: 'পণ্য',
+        stat1Value: '৫০ হাজার+', stat1Label: 'খুশি গ্রাহক',
+        stat2Value: '১০ হাজার+', stat2Label: 'পণ্য',
         stat3Value: '৯৯%', stat3Label: 'সন্তুষ্টি',
-        featuredProducts: 'বিশেষ', featuredGradient: 'পণ্য',
-        featuredSubtitle: 'আমাদের সংগ্রহ থেকে নির্বাচিত প্রিয় পণ্য',
-        categoriesTag: 'ব্রাউজ',
-        categoriesTitle: 'ক্যাটাগরি', categoriesGradient: 'অনুযায়ী কিনুন',
+        featuredProducts: 'বিশেষ', featuredGradient: 'পণ্যসমূহ',
+        featuredSubtitle: 'আমাদের সংগ্রহ থেকে নির্বাচিত প্রিয় পণ্যগুলো',
+        categoriesTag: 'ব্রাউজ করুন',
+        categoriesTitle: 'বিভাগ', categoriesGradient: 'অনুযায়ী কিনুন',
         categoriesSubtitle: 'আমাদের বিভিন্ন পণ্য বিভাগ থেকে আপনার প্রয়োজনীয় জিনিস খুঁজুন',
-        whyChooseUs: 'কেন', whyGradient: 'আমাদের বেছে নিবেন',
-        whySubtitle: 'আমাদের প্রিমিয়াম সেবার সাথে সেরা অনলাইন শপিং অভিজ্ঞতা',
-        feature1Title: 'ফ্রি শিপিং', feature1Desc: '৳১০০০ এর উপরে',
-        feature2Title: 'নিরাপদ পেমেন্ট', feature2Desc: 'বিকাশ, নগদ ও ক্যাশ অন ডেলিভারি',
-        feature3Title: '২৪/৭ সাপোর্ট', feature3Desc: 'ডেডিকেটেড গ্রাহক সেবা',
+        whyChooseUs: 'কেন', whyGradient: 'আমাদের বেছে নেবেন',
+        whySubtitle: 'আমাদের প্রিমিয়াম সেবার সাথে সেরা অনলাইন কেনাকাটার অভিজ্ঞতা',
+        feature1Title: 'ফ্রি শিপিং', feature1Desc: '১০০০ টাকার উপরে ফ্রি',
+        feature2Title: 'নিরাপদ পেমেন্ট', feature2Desc: 'ক্যাশ অন ডেলিভারি সুবিধা',
+        feature3Title: '২৪/৭ সাপোর্ট', feature3Desc: 'সার্বক্ষণিক গ্রাহক সেবা',
         feature4Title: 'সহজ রিটার্ন', feature4Desc: '৩০ দিনের রিটার্ন নীতি',
         testimonialsTag: 'প্রশংসাপত্র',
-        testimonialsTitle: 'আমাদের', testimonialsGradient: 'গ্রাহকরা যা বলেন',
+        testimonialsTitle: 'আমাদের', testimonialsGradient: 'গ্রাহকদের মতামত',
         testimonialsSubtitle: 'আমাদের মূল্যবান কমিউনিটি থেকে প্রকৃত মতামত',
         blogTag: 'সর্বশেষ সংবাদ',
         blogTitle: 'আমাদের', blogGradient: 'ব্লগ থেকে',
-        blogSubtitle: 'শপিং টিপস, ট্রেন্ড এবং বিশেষ গল্প সম্পর্কে আপডেট থাকুন',
+        blogSubtitle: 'কেনাকাটার টিপস, ট্রেন্ড এবং বিশেষ গল্প সম্পর্কে আপডেট থাকুন',
         newsletterTitle: 'আমাদের', newsletterGradient: 'নিউজলেটার সাবস্ক্রাইব করুন',
         newsletterSubtitle: 'এক্সক্লুসিভ ডিল, নতুন পণ্য এবং ইনসাইডার আপডেট সরাসরি আপনার ইনবক্সে পান।',
         newsletterPlaceholder: 'আপনার ইমেইল ঠিকানা লিখুন',
@@ -263,7 +260,7 @@ const TRANSLATIONS = {
         viewDetails: 'বিস্তারিত দেখুন',
         total: 'মোট', checkout: 'চেকআউট',
         emptyCart: 'আপনার কার্ট খালি',
-        emptyCartDesc: 'শপিং শুরু করুন এবং আপনার কার্টে আইটেম যোগ করুন',
+        emptyCartDesc: 'কেনাকাটা শুরু করুন এবং আপনার কার্টে আইটেম যোগ করুন',
         quickLinks: 'দ্রুত লিঙ্ক', contactUs: 'যোগাযোগ করুন',
         followUs: 'আমাদের অনুসরণ করুন', newsletter: 'নিউজলেটার',
         copyright: '© ২০২৬ ইকরা অনলাইন মার্ট। গুণগত মান আমাদের প্রথম পছন্দ। সর্বস্বত্ব সংরক্ষিত।',
@@ -297,9 +294,9 @@ const TRANSLATIONS = {
         posts: 'পোস্ট', testimonials: 'প্রশংসাপত্র',
         addProduct: 'পণ্য যোগ', addCategory: 'বিভাগ যোগ',
         newPost: 'নতুন পোস্ট', addTestimonial: 'প্রশংসাপত্র যোগ',
-        welcomeBack: 'স্বাগতম!', signIn: 'সাইন ইন',
+        welcomeBack: 'স্বাগতম!', signIn: 'লগইন',
         signInTitle: 'স্বাগতম!',
-        signInPrompt: 'আপনার অর্ডার, প্রোফাইল ও ঠিকানা দেখতে সাইন ইন করুন।',
+        signInPrompt: 'আপনার অর্ডার, প্রোফাইল ও ঠিকানা দেখতে লগইন করুন।',
         register: 'রেজিস্টার',
         password: 'পাসওয়ার্ড',
         confirmPassword: 'পাসওয়ার্ড নিশ্চিত করুন',
@@ -323,14 +320,14 @@ const TRANSLATIONS = {
         currentPassword: 'বর্তমান পাসওয়ার্ড',
         newPassword: 'নতুন পাসওয়ার্ড',
         noOrdersYet: 'আপনার কোনো অর্ডার নেই।',
-        startShopping: 'শপিং শুরু করুন',
+        startShopping: 'কেনাকাটা শুরু করুন',
         qty: 'সংখ্যা',
         source: 'সোর্স',
-        shippingNote: '৳১০০০ এর উপরে ফ্রি শিপিং',
-        signedInAs: 'সাইন ইন করা আছে',
+        shippingNote: '১০০০ টাকার উপরে ফ্রি শিপিং',
+        signedInAs: 'লগইন করা আছে',
         sendToNumber: 'পেমেন্ট পাঠান এই নম্বরে',
         transactionId: 'ট্রানজেকশন আইডি',
-        trxIdPlaceholder: 'যেমন: 8N7K6Q5R4T',
+        trxIdPlaceholder: 'যেমন: ৮এন৭কে৬কিউ৫আর৪টি',
         cardNumber: 'কার্ড নম্বর',
         expiry: 'মেয়াদ',
         cvv: 'সিভিভি',
@@ -1480,21 +1477,53 @@ const Admin = {
             tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:2rem;color:var(--text-tertiary)">No orders yet</td></tr>';
             return;
         }
-        tbody.innerHTML = orders.slice().reverse().map(o => `
+        tbody.innerHTML = orders.slice().reverse().map(o => {
+            const status = o.status || 'pending';
+            const statusClass = {
+                pending: 'pending',
+                accepted: 'processing',
+                delivered: 'completed',
+                cancelled: 'cancelled'
+            }[status] || 'pending';
+            const buttons = [];
+            buttons.push(`<button class="btn btn-sm btn-ghost" onclick="Admin.viewOrder('${o.id}')" title="View"><i class="fas fa-eye"></i></button>`);
+            if (status === 'pending') {
+                buttons.push(`<button class="btn btn-sm" style="background:#10b981;color:white;" onclick="Admin.setOrderStatus('${o.id}','accepted')" title="Accept"><i class="fas fa-check"></i> Accept</button>`);
+                buttons.push(`<button class="btn btn-sm" style="background:#ef4444;color:white;" onclick="Admin.setOrderStatus('${o.id}','cancelled')" title="Cancel"><i class="fas fa-times"></i> Cancel</button>`);
+            } else if (status === 'accepted') {
+                buttons.push(`<button class="btn btn-sm" style="background:#06b6d4;color:white;" onclick="Admin.setOrderStatus('${o.id}','delivered')" title="Mark Delivered"><i class="fas fa-truck"></i> Deliver</button>`);
+                buttons.push(`<button class="btn btn-sm" style="background:#ef4444;color:white;" onclick="Admin.setOrderStatus('${o.id}','cancelled')" title="Cancel"><i class="fas fa-times"></i> Cancel</button>`);
+            } else if (status === 'delivered' || status === 'cancelled') {
+                buttons.push(`<button class="btn btn-sm btn-ghost" onclick="Admin.setOrderStatus('${o.id}','pending')" title="Reactivate"><i class="fas fa-undo"></i></button>`);
+            }
+            buttons.push(`<button class="btn btn-sm btn-ghost" onclick="Admin.deleteOrder('${o.id}')" title="Delete"><i class="fas fa-trash"></i></button>`);
+            return `
             <tr>
                 <td><strong>${o.id}</strong></td>
                 <td>${o.firstName} ${o.lastName}<br><small style="color:var(--text-tertiary)">${o.email}</small></td>
                 <td>${new Date(o.date).toLocaleDateString()}</td>
                 <td>${o.items.length} items</td>
                 <td><strong>${UI.formatPrice(o.total)}</strong></td>
-                <td><span class="status-badge ${o.status === 'completed' ? 'active' : 'draft'}">${o.status}</span></td>
-                <td class="actions">
-                    <button class="btn btn-sm btn-ghost" onclick="Admin.viewOrder('${o.id}')"><i class="fas fa-eye"></i></button>
-                    <button class="btn btn-sm btn-ghost" onclick="Admin.updateOrderStatus('${o.id}')"><i class="fas fa-edit"></i></button>
-                    <button class="btn btn-sm btn-ghost" onclick="Admin.deleteOrder('${o.id}')"><i class="fas fa-trash"></i></button>
+                <td><span class="status-badge ${statusClass}">${status}</span></td>
+                <td class="actions" style="display:flex;gap:0.4rem;flex-wrap:wrap;">
+                    ${buttons.join('')}
                 </td>
             </tr>
-        `).join('');
+        `}).join('');
+    },
+
+    setOrderStatus(id, status) {
+        const orders = Storage.get('orders', []);
+        const order = orders.find(o => o.id === id);
+        if (!order) return;
+        order.status = status;
+        if (status === 'accepted') order.acceptedAt = new Date().toISOString();
+        if (status === 'delivered') order.deliveredAt = new Date().toISOString();
+        if (status === 'cancelled') order.cancelledAt = new Date().toISOString();
+        Storage.set('orders', orders);
+        Admin.renderOrdersTable();
+        Admin.renderRecentOrders();
+        UI.showNotification(`Order ${id} → ${status}`, 'success');
     },
 
     viewOrder(id) {
@@ -1530,19 +1559,6 @@ const Admin = {
             <p style="color:var(--text-secondary);">${order.payment === 'cod' ? 'Cash on Delivery' : order.payment.toUpperCase()}</p>
         `;
         document.querySelector('#orderModal').classList.add('active');
-    },
-
-    updateOrderStatus(id) {
-        const orders = Storage.get('orders', []);
-        const order = orders.find(o => o.id === id);
-        if (!order) return;
-        const newStatus = prompt(`Update status for ${id}\nOptions: pending, processing, completed, cancelled`, order.status);
-        if (!newStatus) return;
-        order.status = newStatus;
-        Storage.set('orders', orders);
-        Admin.renderOrdersTable();
-        Admin.renderRecentOrders();
-        UI.showNotification('Order status updated', 'success');
     },
 
     deleteOrder(id) {
@@ -1705,11 +1721,7 @@ const Admin = {
         if (!wrap) return;
         const gateways = Store.state.settings.paymentGateways || {};
         const defs = [
-            { key: 'cod', label: 'Cash on Delivery', defaultLabelBn: 'ক্যাশ অন ডেলিভারি', hasNumber: false, icon: 'fa-money-bill-wave' },
-            { key: 'bkash', label: 'bKash', defaultLabelBn: 'বিকাশ', hasNumber: true, icon: 'fa-mobile-alt', color: '#E2136E' },
-            { key: 'nagad', label: 'Nagad', defaultLabelBn: 'নগদ', hasNumber: true, icon: 'fa-mobile-alt', color: '#F6921E' },
-            { key: 'rocket', label: 'Rocket', defaultLabelBn: 'রকেট', hasNumber: true, icon: 'fa-mobile-alt', color: '#8C3494' },
-            { key: 'card', label: 'Credit/Debit Card', defaultLabelBn: 'কার্ড', hasNumber: false, icon: 'fa-credit-card', color: '#7c3aed' }
+            { key: 'cod', label: 'Cash on Delivery', defaultLabelBn: 'ক্যাশ অন ডেলিভারি', hasNumber: false, icon: 'fa-money-bill-wave' }
         ];
         wrap.innerHTML = defs.map(d => {
             const g = gateways[d.key] || {};
@@ -1750,8 +1762,8 @@ const Admin = {
         form.onsubmit = e => {
             e.preventDefault();
             const data = Object.fromEntries(new FormData(form));
-            // Payment gateways
-            const pgKeys = ['cod','bkash','nagad','rocket','card'];
+            // Payment gateways — COD only
+            const pgKeys = ['cod'];
             const paymentGateways = { ...(Store.state.settings.paymentGateways || {}) };
             pgKeys.forEach(k => {
                 paymentGateways[k] = {
@@ -2403,10 +2415,6 @@ const Checkout = {
         const gateways = Store.state.settings.paymentGateways || {};
         const opts = [];
         if (gateways.cod?.enabled !== false) opts.push({ value: 'cod', label: gateways.cod?.label || 'Cash on Delivery', icon: gateways.cod?.icon || 'fa-money-bill-wave', color: '#10b981' });
-        if (gateways.bkash?.enabled) opts.push({ value: 'bkash', label: gateways.bkash.label || 'bKash', icon: gateways.bkash.icon || 'fa-mobile-alt', color: gateways.bkash.color || '#E2136E', number: gateways.bkash.number });
-        if (gateways.nagad?.enabled) opts.push({ value: 'nagad', label: gateways.nagad.label || 'Nagad', icon: gateways.nagad.icon || 'fa-mobile-alt', color: gateways.nagad.color || '#F6921E', number: gateways.nagad.number });
-        if (gateways.rocket?.enabled) opts.push({ value: 'rocket', label: gateways.rocket.label || 'Rocket', icon: gateways.rocket.icon || 'fa-mobile-alt', color: gateways.rocket.color || '#8C3494', number: gateways.rocket.number });
-        if (gateways.card?.enabled) opts.push({ value: 'card', label: gateways.card.label || 'Credit/Debit Card', icon: gateways.card.icon || 'fa-credit-card', color: '#7c3aed' });
         return opts;
     },
 
@@ -2496,33 +2504,10 @@ const Checkout = {
             const selected = formContainer.querySelector('input[name="payment"]:checked')?.value;
             const opt = paymentOptions.find(p => p.value === selected);
             const details = formContainer.querySelector('#paymentDetails');
-            if (opt && opt.value !== 'cod' && opt.value !== 'card') {
+            if (opt && opt.value === 'cod') {
                 details.innerHTML = `
-                    <div class="payment-instructions">
-                        <p><i class="fas fa-info-circle"></i> ${UI.t('sendToNumber')}: <strong style="color:${opt.color}">${opt.number || '—'}</strong></p>
-                        <div class="form-group">
-                            <label class="form-label">${UI.t('transactionId')}</label>
-                            <input class="form-input" name="transactionId" placeholder="${UI.t('trxIdPlaceholder')}">
-                        </div>
-                    </div>
-                `;
-            } else if (opt && opt.value === 'card') {
-                details.innerHTML = `
-                    <div class="payment-instructions">
-                        <div class="form-group">
-                            <label class="form-label">${UI.t('cardNumber')}</label>
-                            <input class="form-input" name="cardNumber" placeholder="•••• •••• •••• ••••">
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label class="form-label">${UI.t('expiry')}</label>
-                                <input class="form-input" name="cardExpiry" placeholder="MM/YY">
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">${UI.t('cvv')}</label>
-                                <input class="form-input" name="cardCvv" placeholder="•••">
-                            </div>
-                        </div>
+                    <div class="payment-instructions" style="padding:1rem;background:var(--bg-card);border-radius:var(--radius-md);border:1px solid var(--border);">
+                        <p style="margin:0;color:var(--text-secondary);"><i class="fas fa-info-circle" style="color:var(--primary-light);"></i> Pay with cash when your order is delivered.</p>
                     </div>
                 `;
             } else {
