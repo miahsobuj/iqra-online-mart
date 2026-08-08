@@ -1277,10 +1277,10 @@ const UI = {
         if (s.footerTagline) {
             document.querySelectorAll('[data-cms="footer-tagline"]').forEach(el => el.textContent = s.footerTagline);
         }
-        // Title tag
-        if (s.siteName) {
-            const titleSuffix = ' — ' + s.siteName;
-            if (!document.title.includes(titleSuffix)) document.title = document.title.split(' — ')[0] + titleSuffix;
+        // Title tag — only set if not already correct (avoids duplicates)
+        if (s.siteName && !document.title.startsWith(s.siteName) && !document.title.includes(' - ' + s.siteName)) {
+            const pageName = document.title.replace(/ — .*/, '').replace(/ - .*/, '');
+            document.title = pageName ? `${pageName} — ${s.siteName}` : s.siteName;
         }
         // Social links
         document.querySelectorAll('[data-cms-link]').forEach(el => {
