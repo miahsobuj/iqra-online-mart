@@ -3,48 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iqra Online Mart</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Noto+Sans+Bengali:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=2">
+    <meta name="description" content="Iqra Online Mart - Your premium online shopping destination with thousands of quality products">
+    <meta name="theme-color" content="#7c3aed">
+    <title>Iqra Online Mart - Premium Online Shopping</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%237c3aed'/><text x='50' y='65' text-anchor='middle' font-size='55' fill='white' font-family='Poppins' font-weight='700'>I</text></svg>">
 </head>
 <body>
-    <!-- Language Selector and Theme Toggle -->
-    <div class="header-controls">
-        <div class="language-selector">
-            <button id="langBtn" class="lang-btn"><i class="fas fa-globe"></i> English</button>
-            <div id="langDropdown" class="lang-dropdown">
-                <button data-lang="en" class="lang-option active">English</button>
-                <button data-lang="ur" class="lang-option">اردو</button>
-                <button data-lang="ar" class="lang-option">العربية</button>
-                <button data-lang="es" class="lang-option">Español</button>
-                <button data-lang="bn" class="lang-option">বাংলা</button>
+    <!-- Top Bar -->
+    <div class="topbar">
+        <div class="container topbar-inner">
+            <div class="topbar-info">
+                <span><i class="fas fa-phone"></i> <span data-cms="phone">+880 1234 567890</span></span>
+                <span><i class="fas fa-envelope"></i> <span data-cms="email">support@iqramart.com</span></span>
+                <span><i class="fas fa-truck"></i> Free shipping over $100</span>
             </div>
-        </div>
-
-        <div class="theme-toggle">
-            <button id="themeBtn" class="theme-btn" title="Toggle Day/Night Mode"><i class="fas fa-moon"></i></button>
+            <div class="topbar-actions">
+                <div class="lang-selector">
+                    <button id="langBtn" class="lang-btn">
+                        <i class="fas fa-globe"></i> <span id="currentLangLabel">English</span>
+                        <i class="fas fa-chevron-down" style="font-size:0.7rem"></i>
+                    </button>
+                    <div id="langDropdown" class="lang-dropdown">
+                        <button data-lang="en" class="lang-option active">🇬🇧 English</button>
+                        <button data-lang="ur" class="lang-option">🇵🇰 اردو</button>
+                        <button data-lang="ar" class="lang-option">🇸🇦 العربية</button>
+                        <button data-lang="es" class="lang-option">🇪🇸 Español</button>
+                        <button data-lang="bn" class="lang-option">🇧🇩 বা�লা</button>
+                    </div>
+                </div>
+                <button id="themeToggle" class="theme-toggle" title="Toggle theme"><i class="fas fa-moon"></i></button>
+            </div>
         </div>
     </div>
 
     <!-- Header -->
     <header>
-        <div class="container">
-            <div class="logo">
-                Iqra <span>Mart</span>
-            </div>
+        <div class="container header-inner">
+            <a href="index.html" class="logo">
+                <div class="logo-mark">I</div>
+                <div>
+                    <div class="logo-text">Iqra Mart</div>
+                    <div class="logo-sub">Online Shopping</div>
+                </div>
+            </a>
             <nav>
                 <ul class="nav-links">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#products">Products</a></li>
-                    <li><a href="#categories">Categories</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="index.html" class="active" data-i18n="home">Home</a></li>
+                    <li><a href="#products" data-i18n="products">Products</a></li>
+                    <li><a href="#categories" data-i18n="categories">Categories</a></li>
+                    <li><a href="blog.html" data-i18n="blog">Blog</a></li>
+                    <li><a href="#about" data-i18n="about">About</a></li>
+                    <li><a href="contact.html" data-i18n="contact">Contact</a></li>
+                    <li><a href="admin-login.html" data-i18n="admin">Admin</a></li>
                 </ul>
             </nav>
             <div class="header-actions">
-                <button class="cart-btn" title="Cart"><i class="fas fa-shopping-cart"></i> Cart (0)</button>
-                <button class="search-btn" title="Search"><i class="fas fa-search"></i></button>
+                <button id="searchBtn" class="icon-btn" title="Search"><i class="fas fa-search"></i></button>
+                <button id="cartBtn" class="icon-btn" title="Cart">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-badge badge" style="display:none">0</span>
+                </button>
+                <button id="mobileMenuBtn" class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
             </div>
         </div>
     </header>
@@ -52,81 +76,237 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="container">
-            <div class="hero-content">
-                <h2>Welcome to Iqra Online Mart</h2>
-                <p>Your one-stop shop for quality products at affordable prices</p>
-                <button class="btn-primary">Shop Now</button>
-            </div>
-            <div class="hero-animation">
-                <div class="floating-icons">
-                    <i class="fas fa-shopping-bag"></i>
-                    <i class="fas fa-shipping-fast"></i>
-                    <i class="fas fa-box-open"></i>
-                    <i class="fas fa-cart-arrow-down"></i>
+            <div class="hero-inner">
+                <div class="hero-content">
+                    <div class="hero-badge">
+                        <i class="fas fa-sparkles"></i>
+                        <span data-cms="hero-badge" data-i18n="heroBadge">New Collection 2026</span>
+                    </div>
+                    <h1>
+                        <span data-cms="hero-title" data-i18n="welcome">Welcome to the Future of</span>
+                        <span class="gradient-text" data-cms="hero-highlight" data-i18n="welcomeHighlight">Online Shopping</span>
+                    </h1>
+                    <p data-cms="hero-subtitle" data-i18n="subtitle">Discover thousands of premium products across electronics, fashion, home, and more — all with fast delivery and secure checkout.</p>
+                    <div class="hero-actions">
+                        <a href="#products" class="btn btn-lg">
+                            <i class="fas fa-shopping-bag"></i>
+                            <span data-i18n="shopNow">Shop Now</span>
+                        </a>
+                        <a href="#categories" class="btn btn-lg btn-outline">
+                            <i class="fas fa-compass"></i>
+                            <span data-i18n="explore">Explore Categories</span>
+                        </a>
+                    </div>
+                    <div class="hero-stats">
+                        <div class="hero-stat">
+                            <div class="hero-stat-value" data-i18n="stat1Value">50K+</div>
+                            <div class="hero-stat-label" data-i18n="stat1Label">Happy Customers</div>
+                        </div>
+                        <div class="hero-stat">
+                            <div class="hero-stat-value" data-i18n="stat2Value">10K+</div>
+                            <div class="hero-stat-label" data-i18n="stat2Label">Products</div>
+                        </div>
+                        <div class="hero-stat">
+                            <div class="hero-stat-value" data-i18n="stat3Value">99%</div>
+                            <div class="hero-stat-label" data-i18n="stat3Label">Satisfaction</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="hero-orb"></div>
+                    <div class="floating-shape shape-1"></div>
+                    <div class="floating-shape shape-2"></div>
+                    <div class="floating-shape shape-3"></div>
+                    <div class="floating-shape shape-4"></div>
+
+                    <div class="hero-card hero-card-1">
+                        <div class="hero-card-icon"><i class="fas fa-fire"></i></div>
+                        <div class="hero-card-text">
+                            <strong>Hot Deals</strong>
+                            <small>Up to 50% off</small>
+                        </div>
+                    </div>
+                    <div class="hero-card hero-card-2">
+                        <div class="hero-card-icon green"><i class="fas fa-shipping-fast"></i></div>
+                        <div class="hero-card-text">
+                            <strong>Fast Delivery</strong>
+                            <small>24-hour shipping</small>
+                        </div>
+                    </div>
+                    <div class="hero-card hero-card-3">
+                        <div class="hero-card-icon warm"><i class="fas fa-star"></i></div>
+                        <div class="hero-card-text">
+                            <strong>Top Rated</strong>
+                            <small>4.9/5 reviews</small>
+                        </div>
+                    </div>
+                    <div class="hero-card hero-card-4">
+                        <div class="hero-card-icon accent"><i class="fas fa-shield-alt"></i></div>
+                        <div class="hero-card-text">
+                            <strong>Secure Pay</strong>
+                            <small>100% protected</small>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Categories Section -->
-    <section class="categories" id="categories">
+    <section class="section" id="categories">
         <div class="container">
-            <h2 class="section-title">Categories</h2>
-            <div class="categories-grid">
-                <div class="category-card">
-                    <i class="fas fa-laptop category-icon"></i>
-                    <h3>Electronics</h3>
-                    <p>Latest gadgets and tech accessories</p>
+            <div class="section-header">
+                <div class="section-tag" data-i18n="categoriesTag">Browse</div>
+                <h2 class="section-title"><span data-i18n="categoriesTitle">Shop by</span> <span class="gradient-text" data-i18n="categoriesGradient">Category</span></h2>
+                <p class="section-subtitle" data-i18n="categoriesSubtitle">Find exactly what you need from our diverse range of product categories</p>
+            </div>
+            <div class="categories-grid" id="categoriesGrid"></div>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="section" id="featured">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-tag">⭐ Premium Picks</div>
+                <h2 class="section-title"><span data-i18n="featuredProducts">Featured</span> <span class="gradient-text" data-i18n="featuredGradient">Products</span></h2>
+                <p class="section-subtitle" data-i18n="featuredSubtitle">Hand-picked favorites from our curated collection</p>
+            </div>
+            <div class="products-grid" id="featuredGrid"></div>
+        </div>
+    </section>
+
+    <!-- All Products -->
+    <section class="section" id="products">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-tag">🛍️ Collection</div>
+                <h2 class="section-title">All <span class="gradient-text">Products</span></h2>
+                <p class="section-subtitle">Browse our complete catalog with smart filters and sorting</p>
+            </div>
+            <div class="products-toolbar">
+                <div class="filter-tabs" id="filterTabs">
+                    <button class="filter-tab active" data-category="all" data-i18n="allCategories">All</button>
                 </div>
-                <div class="category-card">
-                    <i class="fas fa-tshirt category-icon"></i>
-                    <h3>Fashion</h3>
-                    <p>Trendy clothing and accessories</p>
+                <select class="sort-select">
+                    <option value="default" data-i18n="sortDefault">Default</option>
+                    <option value="priceLow" data-i18n="sortPriceLow">Price: Low to High</option>
+                    <option value="priceHigh" data-i18n="sortPriceHigh">Price: High to Low</option>
+                    <option value="rating" data-i18n="sortRating">Top Rated</option>
+                    <option value="newest" data-i18n="sortNewest">Newest</option>
+                </select>
+            </div>
+            <div class="products-grid" id="productsGrid"></div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="section" id="features">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-tag" data-i18n="whyChooseUs">Why Choose Us</div>
+                <h2 class="section-title"><span data-i18n="whyChooseUs">Why Choose</span> <span class="gradient-text" data-i18n="whyGradient">Us</span></h2>
+                <p class="section-subtitle" data-i18n="whySubtitle">Experience the best in online shopping with our premium services</p>
+            </div>
+            <div class="features-grid" id="featuresGrid">
+                <div class="feature-card scroll-reveal">
+                    <div class="feature-icon"><i class="fas fa-shipping-fast"></i></div>
+                    <h3 data-i18n="feature1Title">Free Shipping</h3>
+                    <p data-i18n="feature1Desc">On orders over $100</p>
                 </div>
-                <div class="category-card">
-                    <i class="fas fa-home category-icon"></i>
-                    <h3>Home & Living</h3>
-                    <p>Furniture, decor & essentials</p>
+                <div class="feature-card scroll-reveal">
+                    <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
+                    <h3 data-i18n="feature2Title">Secure Payment</h3>
+                    <p data-i18n="feature2Desc">100% protected checkout</p>
                 </div>
-                <div class="category-card">
-                    <i class="fas fa-book category-icon"></i>
-                    <h3>Books & Education</h3>
-                    <p>Knowledge and learning resources</p>
+                <div class="feature-card scroll-reveal">
+                    <div class="feature-icon"><i class="fas fa-headset"></i></div>
+                    <h3 data-i18n="feature3Title">24/7 Support</h3>
+                    <p data-i18n="feature3Desc">Dedicated customer care</p>
                 </div>
-                <div class="category-card">
-                    <i class="fas fa-dumbbell category-icon"></i>
-                    <h3>Sports & Fitness</h3>
-                    <p>Equipment for active lifestyles</p>
-                </div>
-                <div class="category-card">
-                    <i class="fas fa-paw category-icon"></i>
-                    <h3>Pet Supplies</h3>
-                    <p>Everything for your furry friends</p>
+                <div class="feature-card scroll-reveal">
+                    <div class="feature-icon"><i class="fas fa-undo"></i></div>
+                    <h3 data-i18n="feature4Title">Easy Returns</h3>
+                    <p data-i18n="feature4Desc">30-day return policy</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Products Section -->
-    <section class="products" id="products">
+    <!-- Testimonials -->
+    <section class="section" id="testimonials">
         <div class="container">
-            <h2 class="section-title">Featured Products</h2>
-            <div class="products-grid">
-                <!-- Products will be injected here by JavaScript -->
+            <div class="section-header">
+                <div class="section-tag" data-i18n="testimonialsTag">Testimonials</div>
+                <h2 class="section-title"><span data-i18n="testimonialsTitle">What Our</span> <span class="gradient-text" data-i18n="testimonialsGradient">Customers Say</span></h2>
+                <p class="section-subtitle" data-i18n="testimonialsSubtitle">Real feedback from our valued community</p>
+            </div>
+            <div class="testimonials-grid" id="testimonialsGrid"></div>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section class="section" id="about">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-tag">About Us</div>
+                <h2 class="section-title"><span data-cms="about-title">Crafting</span> <span class="gradient-text" data-cms="about-highlight">Shopping Excellence</span></h2>
+                <p class="section-subtitle" data-cms="about-subtitle">We're on a mission to make online shopping delightful, secure, and accessible to everyone.</p>
+            </div>
+            <div class="stats-row">
+                <div class="stat-block scroll-reveal">
+                    <div class="stat-block-value">50K+</div>
+                    <div class="stat-block-label">Active Customers</div>
+                </div>
+                <div class="stat-block scroll-reveal">
+                    <div class="stat-block-value">12K+</div>
+                    <div class="stat-block-label">Products Available</div>
+                </div>
+                <div class="stat-block scroll-reveal">
+                    <div class="stat-block-value">150+</div>
+                    <div class="stat-block-label">Countries Served</div>
+                </div>
+                <div class="stat-block scroll-reveal">
+                    <div class="stat-block-value">4.9★</div>
+                    <div class="stat-block-label">Customer Rating</div>
+                </div>
+            </div>
+            <div style="max-width:800px;margin:3rem auto 0;text-align:center;color:var(--text-secondary);line-height:1.8;">
+                <p style="font-size:1.1rem;margin-bottom:1.5rem;" data-cms="about-p1">At Iqra Online Mart, we're committed to providing you with the best online shopping experience. Our mission is to bring quality products from around the world right to your doorstep, all while ensuring competitive prices and exceptional customer service.</p>
+                <p data-cms="about-p2">We believe that shopping should be enjoyable, convenient, and accessible to everyone. That's why we've built a platform that's easy to use, secure, and filled with amazing products across various categories. Every product is carefully curated, every order is handled with care, and every customer is treated like family.</p>
             </div>
         </div>
     </section>
 
-    <!-- About Section -->
-    <section class="about" id="about">
+    <!-- Blog Section -->
+    <section class="section" id="blog">
         <div class="container">
-            <div class="about-content">
-                <h2>About Iqra Online Mart</h2>
-                <p>At Iqra Online Mart, we're committed to providing you with the best online shopping experience. Our mission is to bring quality products from around the world right to your doorstep, all while ensuring competitive prices and exceptional customer service.</p>
-                <p>We believe that shopping should be enjoyable, convenient, and accessible to everyone. That's why we've built a platform that's easy to use, secure, and filled with amazing products across various categories.</p>
+            <div class="section-header">
+                <div class="section-tag" data-i18n="blogTag">Latest News</div>
+                <h2 class="section-title"><span data-i18n="blogTitle">From Our</span> <span class="gradient-text" data-i18n="blogGradient">Blog</span></h2>
+                <p class="section-subtitle" data-i18n="blogSubtitle">Stay updated with shopping tips, trends, and exclusive stories</p>
             </div>
-            <div class="about-image">
-                <div class="animated-shape"></div>
+            <div class="blog-grid" id="blogGrid"></div>
+            <div class="text-center" style="margin-top:2.5rem;">
+                <a href="blog.html" class="btn btn-outline btn-lg"><i class="fas fa-book-open"></i> <span data-i18n="viewAll">View All</span></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="section">
+        <div class="container">
+            <div class="newsletter">
+                <div class="section-tag" style="margin-bottom:1rem;" data-i18n="newsletter">Newsletter</div>
+                <h2><span data-i18n="newsletterTitle">Subscribe to Our</span> <span class="gradient-text" data-i18n="newsletterGradient">Newsletter</span></h2>
+                <p data-i18n="newsletterSubtitle">Get exclusive deals, new arrivals, and insider updates directly in your inbox.</p>
+                <form class="newsletter-form" id="newsletterForm">
+                    <input type="email" class="newsletter-input" placeholder="Enter your email address" data-i18n-placeholder="newsletterPlaceholder" required>
+                    <button type="submit" class="btn btn-lg">
+                        <i class="fas fa-paper-plane"></i>
+                        <span data-i18n="newsletterBtn">Subscribe</span>
+                    </button>
+                </form>
             </div>
         </div>
     </section>
@@ -134,64 +314,102 @@
     <!-- Footer -->
     <footer>
         <div class="container">
-            <div class="footer-content">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">
+                        <div class="logo-mark">I</div>
+                        <div class="logo-text" style="font-size:1.3rem;">Iqra Mart</div>
+                    </a>
+                    <p data-cms="footer-tagline">Your premium online shopping destination. Quality products, fast delivery, exceptional service — all in one place.</p>
+                    <div class="footer-social">
+                        <a href="#" data-cms-link="facebook" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" data-cms-link="twitter" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" data-cms-link="instagram" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" data-cms-link="linkedin" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
                 <div class="footer-section">
-                    <h4>Quick Links</h4>
-                    <ul>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#products">Products</a></li>
-                        <li><a href="#categories">Categories</a></li>
-                        <li><a href="#about">About</a></li>
-                        <li><a href="contact.html">Contact</a></li>
+                    <h4 data-i18n="quickLinks">Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html"><i class="fas fa-chevron-right"></i> <span data-i18n="home">Home</span></a></li>
+                        <li><a href="#products"><i class="fas fa-chevron-right"></i> <span data-i18n="products">Products</span></a></li>
+                        <li><a href="#categories"><i class="fas fa-chevron-right"></i> <span data-i18n="categories">Categories</span></a></li>
+                        <li><a href="blog.html"><i class="fas fa-chevron-right"></i> <span data-i18n="blog">Blog</span></a></li>
+                        <li><a href="#about"><i class="fas fa-chevron-right"></i> <span data-i18n="about">About</span></a></li>
+                        <li><a href="contact.html"><i class="fas fa-chevron-right"></i> <span data-i18n="contact">Contact</span></a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
-                    <h4>Contact Us</h4>
-                    <p><i class="fas fa-phone"></i> +123 456 7890</p>
-                    <p><i class="fas fa-envelope"></i> info@iqramart.com</p>
-                    <p><i class="fas fa-map-marker-alt"></i> 123 Market Street, Dhaka</p>
+                    <h4 data-i18n="contactUs">Contact Us</h4>
+                    <div class="footer-contact-item"><i class="fas fa-phone"></i> <span data-cms="phone">+880 1234 567890</span></div>
+                    <div class="footer-contact-item"><i class="fas fa-envelope"></i> <span data-cms="email">support@iqramart.com</span></div>
+                    <div class="footer-contact-item"><i class="fas fa-map-marker-alt"></i> <span data-cms="address">123 Shopping Street, Dhaka</span></div>
+                    <div class="footer-contact-item"><i class="fas fa-clock"></i> 24/7 Customer Support</div>
                 </div>
                 <div class="footer-section">
-                    <h4>Follow Us</h4>
-                    <div class="social-links">
-                        <a href="#"><i class="fab facebook-f"></i></a>
-                        <a href="#"><i class="fab twitter"></i></a>
-                        <a href="#"><i class="fab instagram"></i></a>
-                        <a href="#"><i class="fab linkedin-in"></i></a>
-                        <a href="#"><i class="fab youtube"></i></a>
+                    <h4 data-i18n="followUs">Follow Us</h4>
+                    <p style="color:var(--text-tertiary);font-size:0.9rem;margin-bottom:1rem;">Stay connected for the latest updates and exclusive offers.</p>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-tiktok"></i></a>
                     </div>
                 </div>
             </div>
             <div class="footer-bottom">
-                © 2026 Iqra Online Mart. All rights reserved.
+                <div data-cms="copyright" data-i18n="copyright">© 2026 Iqra Online Mart. All rights reserved.</div>
+                <div class="footer-bottom-links">
+                    <a href="#" data-i18n="privacy">Privacy Policy</a>
+                    <a href="#" data-i18n="terms">Terms of Service</a>
+                </div>
             </div>
         </div>
     </footer>
 
+    <!-- Cart Drawer -->
+    <div id="cartDrawerOverlay" class="cart-drawer-overlay"></div>
+    <div id="cartDrawer" class="cart-drawer">
+        <div class="cart-drawer-header">
+            <h3><i class="fas fa-shopping-cart"></i> <span data-i18n="cart">Cart</span></h3>
+            <button id="cartClose" class="modal-close"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="cart-drawer-body" id="cartDrawerBody"></div>
+        <div class="cart-drawer-footer">
+            <div class="cart-total-row">
+                <span class="label" data-i18n="total">Total</span>
+                <span class="total" id="cartTotalValue">$0.00</span>
+            </div>
+            <button id="checkoutBtn" class="btn btn-lg" style="width:100%;">
+                <i class="fas fa-lock"></i>
+                <span data-i18n="checkout">Checkout</span>
+            </button>
+        </div>
+    </div>
+
     <!-- Search Modal -->
     <div id="searchModal" class="modal">
-        <div class="modal-content">
-            <span class="close-modal">&times;</span>
-            <h2>Search Products</h2>
-            <input type="text" id="searchInput" placeholder="Search for products...">
-            <button id="searchSubmit">Search</button>
+        <div class="modal-content search-content">
+            <button id="searchClose" class="modal-close"><i class="fas fa-times"></i></button>
+            <h2 data-i18n="search">Search</h2>
+            <div class="search-input-wrap">
+                <i class="fas fa-search"></i>
+                <input id="searchInput" type="text" class="search-big-input" placeholder="Search for products..." data-i18n-placeholder="searchPlaceholder">
+            </div>
             <div id="searchResults"></div>
         </div>
     </div>
 
-    <!-- Cart Modal -->
-    <div id="cartModal" class="modal">
-        <div class="modal-content">
-            <span class="close-modal">&times;</span>
-            <h2>Your Cart</h2>
-            <div id="cartItems"></div>
-            <div id="cartTotal">
-                <p>Total: $<span id="totalAmount">0.00</span></p>
-                <button class="btn-primary" id="checkoutBtn">Proceed to Checkout</button>
-            </div>
-        </div>
-    </div>
-
     <script src="script.js"></script>
+    <script>
+        // Render filter tabs after products are loaded
+        setTimeout(() => {
+            const filterTabs = document.querySelector('#filterTabs');
+            if (filterTabs && window.Store) {
+                const tabs = ['all', ...new Set(window.Store.state.products.map(p => p.category))];
+                filterTabs.innerHTML = tabs.map(cat => `<button class="filter-tab ${cat === 'all' ? 'active' : ''}" data-category="${cat}">${cat === 'all' ? 'All' : cat}</button>`).join('');
+            }
+        }, 500);
+    </script>
 </body>
 </html>

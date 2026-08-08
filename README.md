@@ -1,128 +1,94 @@
 # Iqra Online Mart
 
-An elegant, responsive e-commerce website with a dark colorful theme, built with HTML, CSS, and JavaScript.
+A professional, full-featured e-commerce SaaS-style website with an elegant dark theme, vibrant animations, multi-language support, and a complete built-in CMS.
 
-## Features
+## ✨ Features
 
-- **Dark Colorful Theme**: Modern dark theme with vibrant accent colors
-- **Multi-language Support**: English, Urdu, Arabic, and Spanish language switching
-- **Responsive Design**: Works perfectly on mobile, tablet, and desktop devices
-- **Interactive Animations**: Smooth hover effects, floating icons, and scroll animations
-- **Product Catalog**: Dynamic product grid with sample products
-- **Search Functionality**: Real-time product search with filtering
-- **Shopping Cart**: Add items to cart with persistence using localStorage
-- **Accessible Navigation**: Keyboard-friendly navigation and ARIA labels
-- **Font Awesome Icons**: Beautiful vector icons for enhanced UI
-- **Google Fonts**: Custom typography with Poppins font family
+### Storefront
+- **Elegant dark theme** with vibrant gradients (purple → pink, cyan → violet) and colorful animations
+- **Animated hero section** with floating cards, orbiting gradient orbs, and floating shapes
+- **Featured products** with hover animations, badges (new/sale/hot), wishlist, quick view
+- **Dynamic product grid** with category filters, sorting (price/rating/newest), search
+- **Shopping cart drawer** with full quantity controls and persistent localStorage
+- **Multi-step checkout** with shipping info and multiple payment methods (COD, card, bKash, Nagad)
+- **Order management** - orders saved to localStorage and visible in admin
+- **Blog system** with full posts, modal reader, and CMS-editable content
+- **Newsletter subscription** with admin subscriber list
+- **Contact form** with admin message inbox
+- **Testimonials** fully editable from CMS
 
-## Technologies Used
+### Multi-language Support
+- English, Urdu, Arabic, Spanish, Bengali
+- RTL support for Urdu/Arabic
+- Persistent language preference
 
-- HTML5
-- CSS3 (with CSS Variables, Flexbox, Grid)
-- JavaScript (ES6+)
-- Font Awesome 6
-- Google Fonts (Poppins)
+### Theme System
+- Dark mode (default) with vibrant accents
+- Light mode toggle
+- Persistent theme preference
 
-## Pages & Sections
+### 🛠️ Full CMS Admin Panel
+Accessible at `/admin-login.html` (default: `admin` / `admin123`)
+- **Dashboard** - real-time stats (products, orders, revenue, posts)
+- **Products** - full CRUD with categories, badges, pricing, stock, ratings
+- **Categories** - manage category icons and descriptions
+- **Blog Posts** - publish/draft, HTML content, categories
+- **Orders** - view, update status, delete orders
+- **Testimonials** - add/edit/delete customer reviews
+- **Subscribers** - manage newsletter list
+- **Messages** - read contact form submissions
+- **Page Content** - edit hero, features, about, footer text
+- **Settings** - site name, contact info, currency, admin credentials, social links
 
-1. **Hero Section** - Welcome message with call-to-action
-2. **Categories** - Product categories with icons
-3. **Featured Products** - Dynamic product grid
-4. **About Us** - Company information
-5. **Footer** - Contact info, social links, and quick navigation
+### Responsive Design
+- Mobile-first approach
+- Breakpoints: mobile (≤640px), tablet (≤968px), desktop
+- Touch-friendly cart drawer
+- Adaptive admin sidebar
+- Mobile navigation menu
 
-## Setup
+## 🚀 Quick Start
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/yourusername/iqra-online-mart.git
-   ```
+1. Clone or download the repo
+2. Open `index.html` in a browser
+3. To access the CMS, navigate to `admin-login.html` (or click "Admin" in the nav)
+4. Default login: **admin / admin123** (change in Settings)
 
-2. Open `index.html` in your browser to view the website
+## 📁 File Structure
 
-3. For development:
-   - Modify `index.html` for structure
-   - Edit `styles.css` for styling
-   - Update `script.js` for functionality
-
-## Customization
-
-### Changing Theme Colors
-Edit the CSS variables in `styles.css`:
-```css
-:root {
-    --primary-color: #6366f1;    /* Indigo */
-    --secondary-color: #8b5cf6;  /* Purple */
-    --accent-color: #06b6d4;     /* Cyan */
-    --dark-bg: #0f172a;          /* Dark blue-gray */
-    --darker-bg: #020617;        /* Near black */
-    --card-bg: #1e293b;          /* Slate gray */
-    --text-primary: #f8fafc;     /* White */
-    --text-secondary: #cbd5e1;   /* Light gray */
-}
+```
+├── index.html          # Homepage
+├── product.html        # Product detail page
+├── blog.html           # Blog listing
+├── contact.html        # Contact page
+├── checkout.html       # Checkout flow
+├── admin-login.html    # Admin login
+├── admin.html          # Admin dashboard (CMS)
+├── styles.css          # All styles (dark theme + responsive)
+└── script.js           # App logic, Store, UI, Admin, ProductDetail, Checkout
 ```
 
-### Adding More Products
-Edit the `sampleProducts` array in `script.js`:
-```javascript
-const sampleProducts = [
-    {
-        id: 11,
-        name: "New Product Name",
-        price: 29.99,
-        category: "Category",
-        rating: 4.5,
-        description: "Product description here...",
-        image: "fa-icon-name"  // Font Awesome icon class
-    }
-];
-```
+## 🎨 Design System
 
-### Adding Languages
-Add new language objects to the `translations` object in `script.js`:
-```javascript
-translations = {
-    // ... existing languages
-    fr: {
-        home: "Accueil",
-        products: "Produits",
-        // ... all other translations
-    }
-};
-```
+- **Primary**: Purple `#7c3aed` → Pink `#ec4899`
+- **Accent**: Cyan `#06b6d4`
+- **Background**: Deep black `#0a0a0f` with gradient mesh
+- **Typography**: Poppins (300-800)
+- **Animations**: Cubic-bezier easing, scroll reveals, hover transforms
+- **Icons**: Font Awesome 6
 
-## Browser Support
+## 💾 Data Persistence
 
-- Chrome (latest)
-- Firefox (latest)
-- Safari (latest)
-- Edge (latest)
-- Mobile browsers (iOS Safari, Android Chrome)
+All CMS data is stored in `localStorage` under `iqra_*` keys:
+- `iqra_products`, `iqra_categories`, `iqra_posts`
+- `iqra_settings`, `iqra_pages`, `iqra_testimonials`
+- `iqra_orders`, `iqra_subscribers`, `iqra_messages`
+- `iqra_cart`, `iqra_lang`, `iqra_theme`, `iqra_isAdmin`
 
-## Deployment
+## 🔐 Security Note
 
-This website is designed to be hosted on GitHub Pages:
+This is a client-side demo. For production, replace localStorage with a real backend (Firebase, Supabase, custom API) and add proper authentication.
 
-1. Push to GitHub repository
-2. Go to repository Settings → Pages
-3. Select source branch (usually main or master)
-4. Choose `/ (root)` folder
-5. Save and wait for deployment
+---
 
-## Contributing
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-## License
-
-This project is open source and available under the MIT License.
-
-## Acknowledgments
-
-- Font Awesome for icons
-- Google Fonts for Poppins typography
-- Inspired by modern e-commerce designs
+Built for **Iqra Online Mart** · 2026

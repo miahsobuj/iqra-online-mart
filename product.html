@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog - Iqra Online Mart</title>
+    <title>Product Details - Iqra Online Mart</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -49,7 +49,7 @@
                     <li><a href="index.html">Home</a></li>
                     <li><a href="index.html#products">Products</a></li>
                     <li><a href="index.html#categories">Categories</a></li>
-                    <li><a href="blog.html" class="active">Blog</a></li>
+                    <li><a href="blog.html">Blog</a></li>
                     <li><a href="index.html#about">About</a></li>
                     <li><a href="contact.html">Contact</a></li>
                 </ul>
@@ -65,35 +65,23 @@
         </div>
     </header>
 
-    <!-- Blog Hero -->
-    <section class="section" style="padding-top:3rem;">
+    <!-- Product Detail -->
+    <section class="section">
         <div class="container">
-            <div class="section-header">
-                <div class="section-tag">📰 Our Blog</div>
-                <h2 class="section-title">Latest <span class="gradient-text">News & Insights</span></h2>
-                <p class="section-subtitle">Stay updated with shopping tips, product reviews, and exclusive stories</p>
-            </div>
-            <div class="blog-grid" id="blogGrid"></div>
+            <div id="productDetail"></div>
         </div>
     </section>
 
-    <!-- Blog Posts List -->
-    <section class="section" id="allPosts">
+    <!-- Related Products -->
+    <section class="section">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">All <span class="gradient-text">Articles</span></h2>
+                <div class="section-tag">Related</div>
+                <h2 class="section-title">You May <span class="gradient-text">Also Like</span></h2>
             </div>
-            <div id="allPostsList"></div>
+            <div class="products-grid" id="relatedProducts"></div>
         </div>
     </section>
-
-    <!-- Post Modal -->
-    <div id="postModal" class="modal">
-        <div class="modal-content">
-            <button class="modal-close" data-close-modal><i class="fas fa-times"></i></button>
-            <div id="postContent"></div>
-        </div>
-    </div>
 
     <!-- Footer -->
     <footer>
@@ -104,11 +92,12 @@
                         <div class="logo-mark">I</div>
                         <div class="logo-text" style="font-size:1.3rem;">Iqra Mart</div>
                     </a>
-                    <p>Your premium online shopping destination.</p>
+                    <p>Your premium online shopping destination with quality products and fast delivery.</p>
                     <div class="footer-social">
                         <a href="#"><i class="fab fa-facebook-f"></i></a>
                         <a href="#"><i class="fab fa-twitter"></i></a>
                         <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
                     </div>
                 </div>
                 <div class="footer-section">
@@ -117,6 +106,7 @@
                         <li><a href="index.html">Home</a></li>
                         <li><a href="index.html#products">Products</a></li>
                         <li><a href="index.html#categories">Categories</a></li>
+                        <li><a href="blog.html">Blog</a></li>
                         <li><a href="contact.html">Contact</a></li>
                     </ul>
                 </div>
@@ -124,10 +114,11 @@
                     <h4>Contact Us</h4>
                     <div class="footer-contact-item"><i class="fas fa-phone"></i> +880 1234 567890</div>
                     <div class="footer-contact-item"><i class="fas fa-envelope"></i> support@iqramart.com</div>
+                    <div class="footer-contact-item"><i class="fas fa-map-marker-alt"></i> 123 Shopping Street, Dhaka</div>
                 </div>
                 <div class="footer-section">
                     <h4>Follow Us</h4>
-                    <p style="color:var(--text-tertiary);font-size:0.9rem;">Stay connected.</p>
+                    <p style="color:var(--text-tertiary);font-size:0.9rem;">Stay connected for the latest updates.</p>
                     <div class="footer-social">
                         <a href="#"><i class="fab fa-facebook-f"></i></a>
                         <a href="#"><i class="fab fa-instagram"></i></a>
@@ -175,60 +166,5 @@
     </div>
 
     <script src="script.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            setTimeout(() => {
-                if (window.Store) {
-                    const posts = Store.state.posts.filter(p => p.status === 'published');
-                    const allPostsList = document.querySelector('#allPostsList');
-                    if (allPostsList) {
-                        allPostsList.innerHTML = '<div class="blog-grid">' + posts.map(post => `
-                            <div class="blog-card" data-id="${post.id}">
-                                <div class="blog-image" style="background: var(--gradient-${['primary','accent','warm','cool'][post.id % 4]});">
-                                    <i class="fas ${post.icon}"></i>
-                                </div>
-                                <div class="blog-content">
-                                    <div class="blog-meta">
-                                        <span class="blog-category">${post.category}</span>
-                                        <span><i class="far fa-calendar"></i> ${post.date}</span>
-                                        <span><i class="far fa-clock"></i> ${post.readTime}</span>
-                                    </div>
-                                    <h3 class="blog-title">${post.title}</h3>
-                                    <p class="blog-excerpt">${post.excerpt}</p>
-                                    <span class="blog-link">Read More <i class="fas fa-arrow-right"></i></span>
-                                </div>
-                            </div>
-                        `).join('') + '</div>';
-                        allPostsList.querySelectorAll('.blog-card').forEach(card => {
-                            card.onclick = () => {
-                                const post = Store.state.posts.find(p => p.id === parseInt(card.dataset.id));
-                                if (post) showPostModal(post);
-                            };
-                        });
-                    }
-                }
-            }, 500);
-        });
-
-        function showPostModal(post) {
-            const modal = document.querySelector('#postModal');
-            const content = document.querySelector('#postContent');
-            content.innerHTML = `
-                <div class="post-header">
-                    <span style="color:var(--accent-light);font-weight:600;text-transform:uppercase;letter-spacing:1px;font-size:0.85rem;">${post.category}</span>
-                    <h2 style="margin:1rem 0;font-size:1.8rem;line-height:1.3;">${post.title}</h2>
-                    <div class="blog-meta" style="margin-bottom:1.5rem;">
-                        <span><i class="far fa-calendar"></i> ${post.date}</span>
-                        <span><i class="far fa-clock"></i> ${post.readTime}</span>
-                    </div>
-                </div>
-                <div style="background:var(--gradient-primary);aspect-ratio:16/9;border-radius:var(--radius-lg);display:flex;align-items:center;justify-content:center;margin-bottom:2rem;">
-                    <i class="fas ${post.icon}" style="font-size:5rem;color:rgba(255,255,255,0.9);"></i>
-                </div>
-                <div style="color:var(--text-secondary);line-height:1.8;font-size:1.05rem;">${post.content}</div>
-            `;
-            modal.classList.add('active');
-        }
-    </script>
 </body>
 </html>
