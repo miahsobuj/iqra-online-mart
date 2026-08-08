@@ -761,6 +761,8 @@ const UI = {
             n.classList.remove('show');
             setTimeout(() => n.remove(), 300);
         }, 3000);
+        // Dispatch event for SoundSystem to pick up
+        try { document.dispatchEvent(new CustomEvent(`notify:${type}`)); } catch {}
     },
 
     renderCategories() {
@@ -852,6 +854,7 @@ const UI = {
                     Store.addToCart(parseInt(btn.dataset.id));
                     UI.updateCartBadge();
                     UI.renderCartDrawer();
+                    try { document.dispatchEvent(new CustomEvent('cart:add')); } catch {}
                     UI.showNotification(UI.t('addedToCart'), 'success', btn.closest('.product-card').querySelector('.product-title').textContent);
                 });
             });
@@ -929,6 +932,7 @@ const UI = {
                     Store.addToCart(parseInt(id));
                     UI.updateCartBadge();
                     UI.renderCartDrawer();
+                    try { document.dispatchEvent(new CustomEvent('cart:add')); } catch {}
                     UI.showNotification(UI.t('addedToCart'), 'success');
                     return;
                 }
@@ -1294,6 +1298,39 @@ const UI = {
         UI.setupMobileMenu();
         UI.setupCartUI();
         UI.setupNewsletter();
+        UI.setupHeroTypo();
+    },
+
+    setupHeroTypo() {
+        const el = document.querySelector('#heroTypo');
+        if (!el) return;
+        const products = Store.state.products || [];
+        if (!products.length) {
+            el.textContent = 'Iqra Online Mart';
+            return;
+        }
+        const productName = (p) => (Store.state.currentLang === 'bn' && p.nameBn) ? p.nameBn : p.name;
+        let lastIdx = -1;
+        const tick = () => {
+            let idx;
+            do { idx = Math.floor(Math.random() * products.length); } while (idx === lastIdx && products.length > 1);
+            lastIdx = idx;
+            el.textContent = productName(products[idx]);
+        };
+        tick();
+        // Rotate every 4s
+        if (UI._heroTypoTimer) clearInterval(UI._heroTypoTimer);
+        UI._heroTypoTimer = setInterval(tick, 4000);
+        // Re-render on language change (subscribe by listening to body event)
+        const observer = new MutationObserver(() => {
+            const lang = Store.state.currentLang;
+            if (el.dataset.lang !== lang) {
+                el.dataset.lang = lang;
+                tick();
+            }
+        });
+        observer.observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
+        el.dataset.lang = Store.state.currentLang;
     }
 };
 
@@ -2607,6 +2644,162 @@ UI.bindAuth = function() {
 };
 
 // ============================================
+// SOUND SYSTEM (minimal, opt-in)
+// ============================================
+const SoundSystem = {
+    ctx: null,
+    enabled: true,
+    masterGain: 0.18, // keep it minimal
+
+    _ensure() {
+        if (!this.ctx) {
+            try {
+                this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+            } catch (e) { this.enabled = false; }
+        }
+        if (this.ctx && this.ctx.state === 'suspended') {
+            this.ctx.resume();
+        }
+        return this.ctx;
+    },
+
+    _tone(freq, duration = 0.08, type = 'sine', volume = 1) {
+        if (!this.enabled) return;
+        const ctx = this._ensure();
+        if (!ctx) return;
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(Math.max(40, freq * 0.5), ctx.currentTime + duration);
+        gain.gain.setValueAtTime(this.masterGain * volume, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + duration);
+        osc.connect(gain).connect(ctx.destination);
+        osc.start();
+        osc.stop(ctx.currentTime + duration);
+    },
+
+    click()    { this._tone(620, 0.06, 'sine', 0.7); },
+    hover()    { this._tone(880, 0.04, 'sine', 0.35); },
+    success()  { this._tone(660, 0.10, 'triangle', 0.7);
+                 setTimeout(() => this._tone(990, 0.08, 'triangle', 0.7), 70); },
+    notify()   { this._tone(740, 0.10, 'sine', 0.6); },
+    addToCart(){ this._tone(523, 0.06, 'triangle', 0.7);
+                 setTimeout(() => this._tone(784, 0.06, 'triangle', 0.7), 60); },
+    error()    { this._tone(220, 0.14, 'sawtooth', 0.5); },
+
+    bind() {
+        // Resume audio context on first user interaction
+        const unlock = () => {
+            this._ensure();
+            document.removeEventListener('pointerdown', unlock);
+            document.removeEventListener('keydown', unlock);
+        };
+        document.addEventListener('pointerdown', unlock, { once: true });
+        document.addEventListener('keydown', unlock, { once: true });
+
+        // Click sounds on interactive elements
+        document.addEventListener('click', e => {
+            const t = e.target.closest('button, .btn, a.btn, .product-card, .blog-card, .category-card, .filter-tab, .payment-option, .account-tab, .auth-tab');
+            if (!t) return;
+            if (t.classList.contains('btn') || t.tagName === 'BUTTON') {
+                if (t.classList.contains('btn-secondary')) this.error();
+                else this.click();
+            } else this.click();
+        });
+        // Hover sounds (throttled)
+        let lastHover = 0;
+        document.addEventListener('mouseover', e => {
+            const t = e.target.closest('button, .btn, .product-card, .blog-card, .category-card, .payment-option, .account-tab');
+            if (!t) return;
+            const now = Date.now();
+            if (now - lastHover < 180) return;
+            lastHover = now;
+            this.hover();
+        });
+        // Cart add — listen for a custom event fired by UI
+        document.addEventListener('cart:add', () => this.addToCart());
+        document.addEventListener('notify:success', () => this.success());
+        document.addEventListener('notify:error', () => this.error());
+        document.addEventListener('notify:info', () => this.notify());
+    }
+};
+
+// ============================================
+// TRAIL EFFECT (mouse + touch)
+// ============================================
+const TrailEffect = {
+    enabled: true,
+    lastSpawn: 0,
+    throttle: 18, // ms between particles
+    maxParticles: 60,
+
+    init() {
+        if (!this.enabled) return;
+        // Skip on very small screens / touch-only when disabled
+        const layer = document.createElement('div');
+        layer.id = 'trailLayer';
+        layer.className = 'trail-layer';
+        document.body.appendChild(layer);
+        this.layer = layer;
+        let count = 0;
+
+        const spawn = (x, y, color) => {
+            if (count > this.maxParticles) return;
+            count++;
+            const p = document.createElement('div');
+            p.className = 'trail-particle';
+            p.style.left = x + 'px';
+            p.style.top = y + 'px';
+            p.style.background = color;
+            const size = 8 + Math.random() * 10;
+            p.style.width = size + 'px';
+            p.style.height = size + 'px';
+            this.layer.appendChild(p);
+            // animate
+            const dx = (Math.random() - 0.5) * 50;
+            const dy = -20 - Math.random() * 30;
+            p.animate([
+                { transform: 'translate(0,0) scale(1)', opacity: 0.85 },
+                { transform: `translate(${dx}px,${dy}px) scale(0.2)`, opacity: 0 }
+            ], { duration: 700 + Math.random() * 300, easing: 'cubic-bezier(0.4,0,0.2,1)' }).onfinish = () => {
+                p.remove();
+                count--;
+            };
+        };
+
+        const colors = [
+            'radial-gradient(circle, rgba(124,58,237,0.85), transparent 70%)',
+            'radial-gradient(circle, rgba(236,72,153,0.85), transparent 70%)',
+            'radial-gradient(circle, rgba(6,182,212,0.85), transparent 70%)',
+            'radial-gradient(circle, rgba(168,85,247,0.85), transparent 70%)'
+        ];
+
+        const onMove = (x, y) => {
+            const now = Date.now();
+            if (now - this.lastSpawn < this.throttle) return;
+            this.lastSpawn = now;
+            const color = colors[Math.floor(Math.random() * colors.length)];
+            spawn(x, y, color);
+        };
+
+        window.addEventListener('mousemove', e => onMove(e.clientX, e.clientY), { passive: true });
+        window.addEventListener('touchmove', e => {
+            const t = e.touches[0];
+            if (t) onMove(t.clientX, t.clientY);
+        }, { passive: true });
+        // Touch tap burst
+        window.addEventListener('touchstart', e => {
+            const t = e.touches[0];
+            if (!t) return;
+            for (let i = 0; i < 5; i++) {
+                setTimeout(() => spawn(t.clientX + (Math.random()-0.5)*20, t.clientY + (Math.random()-0.5)*20, colors[i % colors.length]), i * 30);
+            }
+        }, { passive: true });
+    }
+};
+
+// ============================================
 // BOOTSTRAP
 // ============================================
 
@@ -2628,4 +2821,9 @@ document.addEventListener('DOMContentLoaded', () => {
             Auth.refreshAccountIcon();
         }
     }, 250);
+    // Sound + Trail effects (storefront only)
+    if (!path.includes('admin') && !path.includes('checkout.html')) {
+        if (Store.state.settings.enableTrail !== false) TrailEffect.init();
+        if (Store.state.settings.enableSound !== false) SoundSystem.bind();
+    }
 });
