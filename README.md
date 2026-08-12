@@ -1,94 +1,86 @@
 # Iqra Online Mart
 
-A professional, full-featured e-commerce SaaS-style website with an elegant dark theme, vibrant animations, multi-language support, and a complete built-in CMS.
+A professional, full-featured e-commerce storefront with an elegant dark theme, bilingual UI (English / বাংলা), and a complete built-in CMS. Everything runs in the browser — no backend required.
 
-## ✨ Features
+**Live repo:** [github.com/soobujmiah/iqra-online-mart](https://github.com/soobujmiah/iqra-online-mart)
+
+## Features
 
 ### Storefront
-- **Elegant dark theme** with vibrant gradients (purple → pink, cyan → violet) and colorful animations
-- **Animated hero section** with floating cards, orbiting gradient orbs, and floating shapes
-- **Featured products** with hover animations, badges (new/sale/hot), wishlist, quick view
-- **Dynamic product grid** with category filters, sorting (price/rating/newest), search
-- **Shopping cart drawer** with full quantity controls and persistent localStorage
-- **Multi-step checkout** with shipping info and multiple payment methods (COD, card, bKash, Nagad)
-- **Order management** - orders saved to localStorage and visible in admin
-- **Blog system** with full posts, modal reader, and CMS-editable content
-- **Newsletter subscription** with admin subscriber list
-- **Contact form** with admin message inbox
-- **Testimonials** fully editable from CMS
+- Dark theme with purple–pink gradients, light-mode toggle, and motion
+- Animated hero, featured products, category grid, and smart catalog filters
+- Product badges (new / sale / hot), wishlist, search, and product detail pages
+- Cart drawer with quantity controls and `localStorage` persistence
+- Multi-step checkout: shipping + COD / card / bKash / Nagad
+- Customer accounts (register, login, profile, addresses, order history)
+- Blog with modal reader, contact form, newsletter, and testimonials
 
-### Multi-language Support
-- English, Urdu, Arabic, Spanish, Bengali
-- RTL support for Urdu/Arabic
-- Persistent language preference
+### Languages & theme
+- English and Bengali with persistent preference
+- Dark (default) and light themes
 
-### Theme System
-- Dark mode (default) with vibrant accents
-- Light mode toggle
-- Persistent theme preference
+### CMS Admin
+Open `admin-login.html` — default **admin** / **admin123** (change in Settings).
 
-### 🛠️ Full CMS Admin Panel
-Accessible at `/admin-login.html` (default: `admin` / `admin123`)
-- **Dashboard** - real-time stats (products, orders, revenue, posts)
-- **Products** - full CRUD with categories, badges, pricing, stock, ratings
-- **Categories** - manage category icons and descriptions
-- **Blog Posts** - publish/draft, HTML content, categories
-- **Orders** - view, update status, delete orders
-- **Testimonials** - add/edit/delete customer reviews
-- **Subscribers** - manage newsletter list
-- **Messages** - read contact form submissions
-- **Page Content** - edit hero, features, about, footer text
-- **Settings** - site name, contact info, currency, admin credentials, social links
+- Dashboard stats (products, orders, revenue, posts)
+- CRUD for products, categories, blog posts, testimonials
+- Orders: view, status updates, delete
+- Subscribers and contact-message inbox
+- Editable page copy (hero, about, footer)
+- Site settings: name, contact, currency, credentials, social links
 
-### Responsive Design
-- Mobile-first approach
-- Breakpoints: mobile (≤640px), tablet (≤968px), desktop
-- Touch-friendly cart drawer
-- Adaptive admin sidebar
-- Mobile navigation menu
+### Responsive
+Mobile-first layout, adaptive admin sidebar, touch-friendly cart and nav.
 
-## 🚀 Quick Start
+## Quick start
 
-1. Clone or download the repo
-2. Open `index.html` in a browser
-3. To access the CMS, navigate to `admin-login.html` (or click "Admin" in the nav)
-4. Default login: **admin / admin123** (change in Settings)
+1. Clone the repository
+2. Open `index.html` in a modern browser (or serve the folder with any static host)
+3. Admin: `admin-login.html` → `admin` / `admin123`
 
-## 📁 File Structure
-
-```
-├── index.html          # Homepage
-├── product.html        # Product detail page
-├── blog.html           # Blog listing
-├── contact.html        # Contact page
-├── checkout.html       # Checkout flow
-├── admin-login.html    # Admin login
-├── admin.html          # Admin dashboard (CMS)
-├── styles.css          # All styles (dark theme + responsive)
-└── script.js           # App logic, Store, UI, Admin, ProductDetail, Checkout
+```bash
+git clone https://github.com/soobujmiah/iqra-online-mart.git
+cd iqra-online-mart
+# optional: python3 -m http.server 8080
 ```
 
-## 🎨 Design System
+## File structure
 
-- **Primary**: Purple `#7c3aed` → Pink `#ec4899`
-- **Accent**: Cyan `#06b6d4`
-- **Background**: Deep black `#0a0a0f` with gradient mesh
-- **Typography**: Poppins (300-800)
-- **Animations**: Cubic-bezier easing, scroll reveals, hover transforms
-- **Icons**: Font Awesome 6
+```
+├── index.html          Homepage
+├── product.html        Product detail
+├── blog.html           Blog listing
+├── contact.html        Contact
+├── checkout.html       Checkout
+├── account.html        Customer account
+├── admin-login.html    CMS login
+├── admin.html          CMS dashboard
+├── styles.css          Design system + responsive styles
+├── script.js           Store, Auth, UI, Admin, Checkout
+├── manifest.json       PWA manifest
+└── robots.txt
+```
 
-## 💾 Data Persistence
+## Design system
 
-All CMS data is stored in `localStorage` under `iqra_*` keys:
-- `iqra_products`, `iqra_categories`, `iqra_posts`
-- `iqra_settings`, `iqra_pages`, `iqra_testimonials`
-- `iqra_orders`, `iqra_subscribers`, `iqra_messages`
-- `iqra_cart`, `iqra_lang`, `iqra_theme`, `iqra_isAdmin`
+| Token | Value |
+| --- | --- |
+| Primary | `#7c3aed` → `#ec4899` |
+| Accent | `#06b6d4` |
+| Background | `#0a0a0f` |
+| Type | Poppins |
+| Icons | Font Awesome 6 |
 
-## 🔐 Security Note
+## Data persistence
 
-This is a client-side demo. For production, replace localStorage with a real backend (Firebase, Supabase, custom API) and add proper authentication.
+Client-side keys under `iqra_*`:
+
+`iqra_products`, `iqra_categories`, `iqra_posts`, `iqra_settings`, `iqra_pages`, `iqra_testimonials`, `iqra_orders`, `iqra_subscribers`, `iqra_messages`, `iqra_cart`, `iqra_lang`, `iqra_theme`, `iqra_isAdmin`, plus auth/user keys.
+
+## Security
+
+This is a **client-side demo**. Admin credentials and orders live in `localStorage`. For production, use a real backend (Firebase, Supabase, or a custom API) and proper authentication.
 
 ---
 
-Built for **Iqra Online Mart** · 2026
+Iqra Online Mart · 2026 · Quality Over Quantity

@@ -96,7 +96,7 @@ const DEFAULT_SETTINGS = {
     currency: '৳',
     currencyCode: 'BDT',
     freeShippingThreshold: 1000,
-    repoUrl: 'https://github.com/miahsobuj/iqraonlinemart',
+    repoUrl: 'https://github.com/soobujmiah/iqra-online-mart',
     primaryLanguage: 'en',
     supportedLanguages: ['en', 'bn'],
     enableSound: true,

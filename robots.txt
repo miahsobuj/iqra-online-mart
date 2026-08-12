@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /admin.html
+Disallow: /admin-login.html
+
+Sitemap: https://soobujmiah.github.io/iqra-online-mart/sitemap.xml
