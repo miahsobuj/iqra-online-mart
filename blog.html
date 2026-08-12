@@ -1,287 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog - Iqra Online Mart</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Journal · Iqra Mart</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Top Bar -->
-    <div class="topbar">
-        <div class="container topbar-inner">
-            <div class="topbar-info">
-                <span><i class="fas fa-phone"></i> 01617040846</span>
-                <span><i class="fas fa-envelope"></i> iqrabintesobuj@gmail.com</span>
-            </div>
-            <div class="topbar-actions">
-                <div class="lang-selector">
-                    <button id="langBtn" class="lang-btn"><i class="fas fa-globe"></i> <span id="currentLangLabel">English</span> <i class="fas fa-chevron-down" style="font-size:0.7rem"></i></button>
-                    <div id="langDropdown" class="lang-dropdown">
-                        <button data-lang="en" class="lang-option active">🇬🇧 English</button>
-                        <button data-lang="bn" class="lang-option">🇧🇩 বাংলা</button>
-                    </div>
-                </div>
-                <button id="themeToggle" class="theme-toggle"><i class="fas fa-moon"></i></button>
-            </div>
-        </div>
+  <header><div class="container header-inner">
+    <a href="index.html" class="logo"><div class="logo-mark">I</div><div class="logo-text">Iqra Mart</div></a>
+    <nav><ul class="nav-links"><li><a href="index.html">Home</a></li><li><a href="blog.html" class="active">Journal</a></li><li><a href="contact.html">Contact</a></li></ul></nav>
+    <div class="header-actions">
+      <button id="themeToggle" class="theme-toggle"><i class="fas fa-moon"></i></button>
+      <button id="cartBtn" class="icon-btn"><i class="fas fa-bag-shopping"></i><span class="cart-badge" style="display:none">0</span></button>
+      <button id="accountBtn" class="icon-btn"><i class="fas fa-user"></i></button>
+      <button id="mobileMenuBtn" class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
     </div>
-
-    <!-- Header -->
-    <header>
-        <div class="container header-inner">
-            <a href="index.html" class="logo">
-                <div class="logo-mark">I</div>
-                <div>
-                    <div class="logo-text">Iqra Mart</div>
-                    <div class="logo-sub">Online Shopping</div>
-                </div>
-            </a>
-            <nav>
-                <ul class="nav-links">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="index.html#products">Products</a></li>
-                    <li><a href="index.html#categories">Categories</a></li>
-                    <li><a href="blog.html" class="active">Blog</a></li>
-                    <li><a href="index.html#about">About</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
-            </nav>
-            <div class="header-actions">
-                <button id="searchBtn" class="icon-btn"><i class="fas fa-search"></i></button>
-                <button id="cartBtn" class="icon-btn">
-                    <i class="fas fa-shopping-cart"></i>
-                    <span class="cart-badge badge" style="display:none">0</span>
-                </button>
-                <button id="accountBtn" class="icon-btn" title="Account"><i class="fas fa-user"></i></button>
-                <button id="mobileMenuBtn" class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
-            </div>
-        </div>
-    </header>
-
-    <!-- Blog Hero -->
-    <section class="section" style="padding-top:3rem;">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-tag">📰 Our Blog</div>
-                <h2 class="section-title">Latest <span class="gradient-text">News & Insights</span></h2>
-                <p class="section-subtitle">Stay updated with shopping tips, product reviews, and exclusive stories</p>
-            </div>
-            <div class="blog-grid" id="blogGrid"></div>
-        </div>
-    </section>
-
-    <!-- Blog Posts List -->
-    <section class="section" id="allPosts">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">All <span class="gradient-text">Articles</span></h2>
-            </div>
-            <div id="allPostsList"></div>
-        </div>
-    </section>
-
-    <!-- Post Modal -->
-    <div id="postModal" class="modal">
-        <div class="modal-content">
-            <button class="modal-close" data-close-modal><i class="fas fa-times"></i></button>
-            <div id="postContent"></div>
-        </div>
-    </div>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-brand">
-                    <a href="index.html" class="logo">
-                        <div class="logo-mark">I</div>
-                        <div class="logo-text" style="font-size:1.3rem;">Iqra Mart</div>
-                    </a>
-                    <p>Your premium online shopping destination.</p>
-                    <div class="footer-social">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-                <div class="footer-section">
-                    <h4>Quick Links</h4>
-                    <ul class="footer-links">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="index.html#products">Products</a></li>
-                        <li><a href="index.html#categories">Categories</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Contact Us</h4>
-                    <div class="footer-contact-item"><i class="fas fa-phone"></i> 01617040846</div>
-                    <div class="footer-contact-item"><i class="fas fa-envelope"></i> iqrabintesobuj@gmail.com</div>
-                    <div class="footer-contact-item"><i class="fas fa-map-marker-alt"></i> Savar, Dhaka, Bangladesh</div>
-                </div>
-                <div class="footer-section">
-                    <h4>Follow Us</h4>
-                    <p style="color:var(--text-tertiary);font-size:0.9rem;">Stay connected.</p>
-                    <div class="footer-social">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <div>© 2026 Iqra Online Mart. All rights reserved.</div>
-                <div class="footer-bottom-links">
-                    <a href="#">Privacy Policy</a>
-                    <a href="#">Terms of Service</a>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Cart Drawer -->
-    <div id="cartDrawerOverlay" class="cart-drawer-overlay"></div>
-    <div id="cartDrawer" class="cart-drawer">
-        <div class="cart-drawer-header">
-            <h3><i class="fas fa-shopping-cart"></i> Cart</h3>
-            <button id="cartClose" class="modal-close"><i class="fas fa-times"></i></button>
-        </div>
-        <div class="cart-drawer-body" id="cartDrawerBody"></div>
-        <div class="cart-drawer-footer">
-            <div class="cart-total-row">
-                <span class="label">Total</span>
-                <span class="total" id="cartTotalValue">$0.00</span>
-            </div>
-            <button id="checkoutBtn" class="btn btn-lg" style="width:100%;"><i class="fas fa-lock"></i> Checkout</button>
-        </div>
-    </div>
-
-    <!-- Search Modal -->
-    <div id="searchModal" class="modal">
-        <div class="modal-content search-content">
-            <button id="searchClose" class="modal-close"><i class="fas fa-times"></i></button>
-            <h2>Search</h2>
-            <div class="search-input-wrap">
-                <i class="fas fa-search"></i>
-                <input id="searchInput" type="text" class="search-big-input" placeholder="Search for products...">
-            </div>
-            <div id="searchResults"></div>
-        </div>
-    </div>
-
-    <script src="script.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            setTimeout(() => {
-                if (window.Store) {
-                    const posts = Store.state.posts.filter(p => p.status === 'published');
-                    const allPostsList = document.querySelector('#allPostsList');
-                    if (allPostsList) {
-                        allPostsList.innerHTML = '<div class="blog-grid">' + posts.map(post => `
-                            <div class="blog-card" data-id="${post.id}">
-                                <div class="blog-image" style="background: var(--gradient-${['primary','accent','warm','cool'][post.id % 4]});">
-                                    <i class="fas ${post.icon}"></i>
-                                </div>
-                                <div class="blog-content">
-                                    <div class="blog-meta">
-                                        <span class="blog-category">${post.category}</span>
-                                        <span><i class="far fa-calendar"></i> ${post.date}</span>
-                                        <span><i class="far fa-clock"></i> ${post.readTime}</span>
-                                    </div>
-                                    <h3 class="blog-title">${post.title}</h3>
-                                    <p class="blog-excerpt">${post.excerpt}</p>
-                                    <span class="blog-link">Read More <i class="fas fa-arrow-right"></i></span>
-                                </div>
-                            </div>
-                        `).join('') + '</div>';
-                        allPostsList.querySelectorAll('.blog-card').forEach(card => {
-                            card.onclick = () => {
-                                const post = Store.state.posts.find(p => p.id === parseInt(card.dataset.id));
-                                if (post) showPostModal(post);
-                            };
-                        });
-                    }
-                }
-            }, 500);
-        });
-
-        function showPostModal(post) {
-            const modal = document.querySelector('#postModal');
-            const content = document.querySelector('#postContent');
-            content.innerHTML = `
-                <div class="post-header">
-                    <span style="color:var(--accent-light);font-weight:600;text-transform:uppercase;letter-spacing:1px;font-size:0.85rem;">${post.category}</span>
-                    <h2 style="margin:1rem 0;font-size:1.8rem;line-height:1.3;">${post.title}</h2>
-                    <div class="blog-meta" style="margin-bottom:1.5rem;">
-                        <span><i class="far fa-calendar"></i> ${post.date}</span>
-                        <span><i class="far fa-clock"></i> ${post.readTime}</span>
-                    </div>
-                </div>
-                <div style="background:var(--gradient-primary);aspect-ratio:16/9;border-radius:var(--radius-lg);display:flex;align-items:center;justify-content:center;margin-bottom:2rem;">
-                    <i class="fas ${post.icon}" style="font-size:5rem;color:rgba(255,255,255,0.9);"></i>
-                </div>
-                <div style="color:var(--text-secondary);line-height:1.8;font-size:1.05rem;">${post.content}</div>
-            `;
-            modal.classList.add('active');
-        }
-    </script>
-    <!-- Auth Modal (Login / Register) -->
-    <div id="authModal" class="modal" aria-hidden="true">
-        <div class="modal-content auth-modal-content">
-            <button id="authClose" class="modal-close"><i class="fas fa-times"></i></button>
-            <div class="auth-tabs">
-                <button class="auth-tab active" data-tab="login" data-i18n="signIn">Sign In</button>
-                <button class="auth-tab" data-tab="register" data-i18n="register">Register</button>
-            </div>
-            <form id="loginForm" class="auth-form" data-pane="login">
-                <h3 data-i18n="signInTitle">Welcome back!</h3>
-                <div class="form-group">
-                    <label class="form-label" data-i18n="email">Email</label>
-                    <input class="form-input" name="email" type="email" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label" data-i18n="password">Password</label>
-                    <input class="form-input" name="password" type="password" required minlength="4">
-                </div>
-                <button type="submit" class="btn btn-lg" style="width:100%;"><i class="fas fa-sign-in-alt"></i> <span data-i18n="signIn">Sign In</span></button>
-                <p class="auth-switch" data-i18n="noAccount">Don't have an account? <a href="#" data-switch="register" data-i18n="register">Register</a></p>
-            </form>
-            <form id="registerForm" class="auth-form" data-pane="register" style="display:none">
-                <h3 data-i18n="registerTitle">Create your account</h3>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label class="form-label" data-i18n="firstName">First Name</label>
-                        <input class="form-input" name="firstName" required>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label" data-i18n="lastName">Last Name</label>
-                        <input class="form-input" name="lastName" required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-label" data-i18n="email">Email</label>
-                    <input class="form-input" name="email" type="email" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label" data-i18n="phone">Phone</label>
-                    <input class="form-input" name="phone" type="tel" placeholder="01XXXXXXXXX">
-                </div>
-                <div class="form-group">
-                    <label class="form-label" data-i18n="password">Password</label>
-                    <input class="form-input" name="password" type="password" required minlength="4">
-                </div>
-                <div class="form-group">
-                    <label class="form-label" data-i18n="confirmPassword">Confirm Password</label>
-                    <input class="form-input" name="confirmPassword" type="password" required minlength="4">
-                </div>
-                <button type="submit" class="btn btn-lg" style="width:100%;"><i class="fas fa-user-plus"></i> <span data-i18n="register">Register</span></button>
-                <p class="auth-switch" data-i18n="haveAccount">Already have an account? <a href="#" data-switch="login" data-i18n="signIn">Sign In</a></p>
-            </form>
-        </div>
-    </div>
+  </div></header>
+  <section class="section"><div class="container">
+    <div class="section-header"><div class="section-tag">Journal</div><h2 class="section-title">Stories from the <span class="gradient-text">mart</span></h2></div>
+    <div id="blogReader" style="margin-bottom:2rem"></div>
+    <div class="blog-grid" id="blogList"></div>
+  </div></section>
+  <div id="cartDrawerOverlay" class="cart-drawer-overlay"></div>
+  <div id="cartDrawer" class="cart-drawer">
+    <div class="cart-drawer-header"><h3>Bag</h3><button id="cartClose" class="modal-close"><i class="fas fa-times"></i></button></div>
+    <div class="cart-drawer-body" id="cartDrawerBody"></div>
+    <div class="cart-drawer-footer"><div class="cart-total-row"><span>Total</span><span class="total" id="cartTotalValue">৳0</span></div>
+      <button id="checkoutBtn" class="btn btn-lg" style="width:100%">Checkout</button></div>
+  </div>
+  <div id="authModal" class="modal"><div class="modal-content">
+    <button id="authClose" class="modal-close"><i class="fas fa-times"></i></button>
+    <div class="auth-tabs"><button class="auth-tab active" data-tab="login">Sign in</button><button class="auth-tab" data-tab="register">Register</button></div>
+    <form id="loginForm" class="auth-form" data-pane="login">
+      <div class="form-group"><label class="form-label">Email</label><input class="form-input" name="email" type="email" required></div>
+      <div class="form-group"><label class="form-label">Password</label><input class="form-input" name="password" type="password" required></div>
+      <button class="btn" style="width:100%">Sign in</button>
+    </form>
+    <form id="registerForm" class="auth-form" data-pane="register" style="display:none">
+      <div class="form-row"><div class="form-group"><label class="form-label">First</label><input class="form-input" name="firstName" required></div>
+      <div class="form-group"><label class="form-label">Last</label><input class="form-input" name="lastName" required></div></div>
+      <div class="form-group"><label class="form-label">Email</label><input class="form-input" name="email" type="email" required></div>
+      <div class="form-group"><label class="form-label">Phone</label><input class="form-input" name="phone"></div>
+      <div class="form-group"><label class="form-label">Password</label><input class="form-input" name="password" type="password" required></div>
+      <div class="form-group"><label class="form-label">Confirm</label><input class="form-input" name="confirmPassword" type="password" required></div>
+      <button class="btn" style="width:100%">Register</button>
+    </form>
+  </div></div>
+  <script src="script.js"></script>
 </body>
 </html>

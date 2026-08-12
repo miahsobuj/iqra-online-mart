@@ -1,278 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Account - Iqra Online Mart</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Account · Iqra Mart</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Top Bar -->
-    <div class="topbar">
-        <div class="container topbar-inner">
-            <div class="topbar-info">
-                <span><i class="fas fa-phone"></i> 01617040846</span>
-                <span><i class="fas fa-envelope"></i> iqrabintesobuj@gmail.com</span>
-            </div>
-            <div class="topbar-actions">
-                <div class="lang-selector">
-                    <button id="langBtn" class="lang-btn"><i class="fas fa-globe"></i> <span id="currentLangLabel">English</span> <i class="fas fa-chevron-down" style="font-size:0.7rem"></i></button>
-                    <div id="langDropdown" class="lang-dropdown">
-                        <button data-lang="en" class="lang-option active">🇬🇧 English</button>
-                        <button data-lang="bn" class="lang-option">🇧🇩 বাংলা</button>
-                    </div>
-                </div>
-                <button id="themeToggle" class="theme-toggle"><i class="fas fa-moon"></i></button>
-            </div>
-        </div>
+  <header><div class="container header-inner">
+    <a href="index.html" class="logo"><div class="logo-mark">I</div><div class="logo-text">Iqra Mart</div></a>
+    <div class="header-actions">
+      <button id="themeToggle" class="theme-toggle"><i class="fas fa-moon"></i></button>
+      <button id="cartBtn" class="icon-btn"><i class="fas fa-bag-shopping"></i><span class="cart-badge" style="display:none">0</span></button>
     </div>
-
-    <!-- Header -->
-    <header>
-        <div class="container header-inner">
-            <a href="index.html" class="logo">
-                <div class="logo-mark">I</div>
-                <div>
-                    <div class="logo-text">Iqra Mart</div>
-                    <div class="logo-sub">Online Shopping</div>
-                </div>
-            </a>
-            <nav>
-                <ul class="nav-links">
-                    <li><a href="index.html" data-i18n="home">Home</a></li>
-                    <li><a href="index.html#products" data-i18n="products">Products</a></li>
-                    <li><a href="index.html#categories" data-i18n="categories">Categories</a></li>
-                    <li><a href="blog.html" data-i18n="blog">Blog</a></li>
-                    <li><a href="index.html#about" data-i18n="about">About</a></li>
-                    <li><a href="contact.html" data-i18n="contact">Contact</a></li>
-                    <li><a href="account.html" class="active" data-i18n="myAccount">My Account</a></li>
-                </ul>
-            </nav>
-            <div class="header-actions">
-                <button id="cartBtn" class="icon-btn" title="Cart">
-                    <i class="fas fa-shopping-cart"></i>
-                    <span class="cart-badge badge" style="display:none">0</span>
-                </button>
-                <button id="accountBtn" class="icon-btn" title="Account"><i class="fas fa-user"></i></button>
-                <button id="mobileMenuBtn" class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
-            </div>
-        </div>
-    </header>
-
-    <!-- Account Section -->
-    <section class="section">
-        <div class="container">
-            <!-- If not logged in, show login prompt -->
-            <div id="accountLoggedOut" style="display:none">
-                <div class="section-header">
-                    <div class="section-tag">🔒 Account Required</div>
-                    <h2 class="section-title"><span data-i18n="signInTitle">Welcome back!</span></h2>
-                    <p class="section-subtitle" data-i18n="signInPrompt">Sign in to view your orders, profile, and saved addresses.</p>
-                </div>
-                <div style="max-width:480px;margin:0 auto;">
-                    <form id="loginFormPage" class="auth-form">
-                        <div class="form-group">
-                            <label class="form-label" data-i18n="email">Email</label>
-                            <input class="form-input" name="email" type="email" required>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label" data-i18n="password">Password</label>
-                            <input class="form-input" name="password" type="password" required minlength="4">
-                        </div>
-                        <button type="submit" class="btn btn-lg" style="width:100%;"><i class="fas fa-sign-in-alt"></i> <span data-i18n="signIn">Sign In</span></button>
-                        <p class="auth-switch" data-i18n="noAccount">Don't have an account? <a href="#" id="gotoRegister" data-i18n="register">Register</a></p>
-                    </form>
-                </div>
-            </div>
-
-            <!-- If logged in, show dashboard -->
-            <div id="accountLoggedIn" style="display:none">
-                <div class="section-header">
-                    <div class="section-tag">👋 <span data-i18n="welcomeBack">Welcome back!</span></div>
-                    <h2 class="section-title"><span id="userGreeting">Hello</span></h2>
-                    <p class="section-subtitle" data-i18n="accountDashboardSubtitle">Manage your profile, orders, and addresses.</p>
-                </div>
-
-                <div class="account-tabs">
-                    <button class="account-tab active" data-pane="profile" data-i18n="profile">Profile</button>
-                    <button class="account-tab" data-pane="orders" data-i18n="orders">Orders</button>
-                    <button class="account-tab" data-pane="addresses" data-i18n="addresses">Addresses</button>
-                    <button class="account-tab" data-pane="security" data-i18n="security">Security</button>
-                </div>
-
-                <!-- Profile pane -->
-                <div class="account-pane active" data-pane="profile">
-                    <form id="profileForm" class="auth-form">
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label class="form-label" data-i18n="firstName">First Name</label>
-                                <input class="form-input" name="firstName" required>
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label" data-i18n="lastName">Last Name</label>
-                                <input class="form-input" name="lastName" required>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label" data-i18n="email">Email</label>
-                            <input class="form-input" name="email" type="email" required>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label" data-i18n="phone">Phone</label>
-                            <input class="form-input" name="phone" type="tel">
-                        </div>
-                        <button type="submit" class="btn"><i class="fas fa-save"></i> <span data-i18n="saveChanges">Save Changes</span></button>
-                    </form>
-                </div>
-
-                <!-- Orders pane -->
-                <div class="account-pane" data-pane="orders">
-                    <div id="userOrders"></div>
-                </div>
-
-                <!-- Addresses pane -->
-                <div class="account-pane" data-pane="addresses">
-                    <form id="addressForm" class="auth-form">
-                        <h3 data-i18n="defaultAddress">Default Address</h3>
-                        <div class="form-group">
-                            <label class="form-label" data-i18n="address">Address</label>
-                            <input class="form-input" name="address" placeholder="House, Road, Area">
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label class="form-label" data-i18n="city">City</label>
-                                <input class="form-input" name="city">
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label" data-i18n="zipCode">Zip Code</label>
-                                <input class="form-input" name="zip">
-                            </div>
-                        </div>
-                        <button type="submit" class="btn"><i class="fas fa-save"></i> <span data-i18n="saveAddress">Save Address</span></button>
-                    </form>
-                </div>
-
-                <!-- Security pane -->
-                <div class="account-pane" data-pane="security">
-                    <form id="passwordForm" class="auth-form">
-                        <h3 data-i18n="changePassword">Change Password</h3>
-                        <div class="form-group">
-                            <label class="form-label" data-i18n="currentPassword">Current Password</label>
-                            <input class="form-input" name="currentPassword" type="password" required minlength="4">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label" data-i18n="newPassword">New Password</label>
-                            <input class="form-input" name="newPassword" type="password" required minlength="4">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label" data-i18n="confirmPassword">Confirm Password</label>
-                            <input class="form-input" name="confirmPassword" type="password" required minlength="4">
-                        </div>
-                        <button type="submit" class="btn"><i class="fas fa-lock"></i> <span data-i18n="updatePassword">Update Password</span></button>
-                    </form>
-                    <hr style="margin:2rem 0;border-color:var(--border-color)">
-                    <button id="logoutBtn" class="btn btn-secondary" style="background:var(--danger);color:white;"><i class="fas fa-sign-out-alt"></i> <span data-i18n="logout">Logout</span></button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-bottom" style="border-top:none;padding-top:0;">
-                <div>© 2026 Iqra Online Mart. All rights reserved.</div>
-                <div class="footer-bottom-links">
-                    <a href="#">Privacy Policy</a>
-                    <a href="#">Terms of Service</a>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Cart Drawer -->
-    <div id="cartDrawerOverlay" class="cart-drawer-overlay"></div>
-    <div id="cartDrawer" class="cart-drawer">
-        <div class="cart-drawer-header">
-            <h3><i class="fas fa-shopping-cart"></i> <span data-i18n="cart">Cart</span></h3>
-            <button id="cartClose" class="modal-close"><i class="fas fa-times"></i></button>
-        </div>
-        <div class="cart-drawer-body" id="cartDrawerBody"></div>
-        <div class="cart-drawer-footer">
-            <div class="cart-total-row">
-                <span class="label" data-i18n="total">Total</span>
-                <span class="total" id="cartTotalValue">৳0</span>
-            </div>
-            <button id="checkoutBtn" class="btn btn-lg" style="width:100%;"><i class="fas fa-lock"></i> <span data-i18n="checkout">Checkout</span></button>
-        </div>
-    </div>
-
-    <!-- Auth Modal (Login / Register) -->
-    <div id="authModal" class="modal" aria-hidden="true">
-        <div class="modal-content auth-modal-content">
-            <button id="authClose" class="modal-close"><i class="fas fa-times"></i></button>
-            <div class="auth-tabs">
-                <button class="auth-tab active" data-tab="login" data-i18n="signIn">Sign In</button>
-                <button class="auth-tab" data-tab="register" data-i18n="register">Register</button>
-            </div>
-            <form id="loginForm" class="auth-form" data-pane="login">
-                <h3 data-i18n="signInTitle">Welcome back!</h3>
-                <div class="form-group">
-                    <label class="form-label" data-i18n="email">Email</label>
-                    <input class="form-input" name="email" type="email" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label" data-i18n="password">Password</label>
-                    <input class="form-input" name="password" type="password" required minlength="4">
-                </div>
-                <button type="submit" class="btn btn-lg" style="width:100%;"><i class="fas fa-sign-in-alt"></i> <span data-i18n="signIn">Sign In</span></button>
-                <p class="auth-switch" data-i18n="noAccount">Don't have an account? <a href="#" data-switch="register" data-i18n="register">Register</a></p>
-            </form>
-            <form id="registerForm" class="auth-form" data-pane="register" style="display:none">
-                <h3 data-i18n="registerTitle">Create your account</h3>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label class="form-label" data-i18n="firstName">First Name</label>
-                        <input class="form-input" name="firstName" required>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label" data-i18n="lastName">Last Name</label>
-                        <input class="form-input" name="lastName" required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-label" data-i18n="email">Email</label>
-                    <input class="form-input" name="email" type="email" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label" data-i18n="phone">Phone</label>
-                    <input class="form-input" name="phone" type="tel" placeholder="01XXXXXXXXX">
-                </div>
-                <div class="form-group">
-                    <label class="form-label" data-i18n="password">Password</label>
-                    <input class="form-input" name="password" type="password" required minlength="4">
-                </div>
-                <div class="form-group">
-                    <label class="form-label" data-i18n="confirmPassword">Confirm Password</label>
-                    <input class="form-input" name="confirmPassword" type="password" required minlength="4">
-                </div>
-                <button type="submit" class="btn btn-lg" style="width:100%;"><i class="fas fa-user-plus"></i> <span data-i18n="register">Register</span></button>
-                <p class="auth-switch" data-i18n="haveAccount">Already have an account? <a href="#" data-switch="login" data-i18n="signIn">Sign In</a></p>
-            </form>
-        </div>
-    </div>
-
-    <script src="script.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            setTimeout(() => {
-                if (window.Auth) Auth.renderAccountPage();
-            }, 200);
-        });
-    </script>
+  </div></header>
+  <section class="section"><div class="container">
+    <div class="section-header"><div class="section-tag">Account</div><h2 class="section-title">Your <span class="gradient-text">space</span></h2></div>
+    <div id="accountRoot"></div>
+  </div></section>
+  <div id="cartDrawerOverlay" class="cart-drawer-overlay"></div>
+  <div id="cartDrawer" class="cart-drawer">
+    <div class="cart-drawer-header"><h3>Bag</h3><button id="cartClose" class="modal-close"><i class="fas fa-times"></i></button></div>
+    <div class="cart-drawer-body" id="cartDrawerBody"></div>
+    <div class="cart-drawer-footer"><div class="cart-total-row"><span>Total</span><span class="total" id="cartTotalValue">৳0</span></div>
+      <button id="checkoutBtn" class="btn btn-lg" style="width:100%">Checkout</button></div>
+  </div>
+  <script src="script.js"></script>
 </body>
 </html>

@@ -1,46 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Login - Iqra Mart CMS</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CMS · Iqra Mart</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body class="auth-page">
-    <div class="auth-card">
-        <div class="auth-header">
-            <div class="auth-logo"><i class="fas fa-lock"></i></div>
-            <h1>Welcome Back</h1>
-            <p>Sign in to access the Iqra Mart CMS dashboard</p>
-        </div>
-        <form id="loginForm">
-            <div class="form-group">
-                <label class="form-label">Username</label>
-                <input type="text" name="username" class="form-input" placeholder="Enter your username" required autofocus>
-            </div>
-            <div class="form-group">
-                <label class="form-label">Password</label>
-                <input type="password" name="password" class="form-input" placeholder="Enter your password" required>
-            </div>
-            <button type="submit" class="btn btn-lg" style="width:100%;">
-                <i class="fas fa-sign-in-alt"></i> Sign In
-            </button>
-        </form>
-        <div class="auth-credentials">
-            <strong>Demo Credentials:</strong><br>
-            Username: <code>admin</code> &nbsp; Password: <code>admin123</code>
-        </div>
-        <div style="text-align:center;margin-top:1.5rem;">
-            <a href="index.html" style="color:var(--text-tertiary);text-decoration:none;font-size:0.9rem;">
-                <i class="fas fa-arrow-left"></i> Back to site
-            </a>
-        </div>
+  <div class="auth-card">
+    <div class="auth-header">
+      <div class="auth-logo"><i class="fas fa-lock"></i></div>
+      <h1 style="font-family:var(--serif);font-weight:500">Iqra CMS</h1>
+      <p style="color:var(--muted)">Sign in to the house ledger</p>
     </div>
-
-    <script src="script.js"></script>
+    <form id="loginForm">
+      <div class="form-group"><label class="form-label">Username</label><input class="form-input" name="username" required autofocus></div>
+      <div class="form-group"><label class="form-label">Password</label><input class="form-input" name="password" type="password" required></div>
+      <button class="btn btn-lg" style="width:100%">Enter</button>
+    </form>
+    <div class="auth-credentials">Demo · <code>admin</code> / <code>admin123</code></div>
+    <p style="text-align:center;margin-top:1.2rem"><a href="index.html" style="color:var(--faint)">← Storefront</a></p>
+  </div>
+  <script src="script.js"></script>
 </body>
 </html>
