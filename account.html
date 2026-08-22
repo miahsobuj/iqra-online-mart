@@ -4,13 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Customer Account & Order Tracking · Iqra Online Mart">
-  <meta name="theme-color" content="#09090b">
+  <meta name="theme-color" content="#09090d">
   <title>Customer Space · Iqra Online Mart</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@300;400;500;600;700&family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -19,13 +14,13 @@
   <div class="topbar">
     <div class="container topbar-inner">
       <div class="topbar-info">
-        <span><i class="fa-solid fa-user-shield gold"></i> Client Portal & Parcel Tracking</span>
+        <span><svg class="svg-icon gold" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="currentColor" stroke-width="2" fill="none"/></svg> Client Portal & Parcel Tracking</span>
       </div>
       <div class="topbar-actions">
         <!-- Currency Dropdown -->
         <div class="select-dropdown-wrap" id="currencyDropdownWrap">
           <button class="select-trigger-btn" id="currencyBtn">
-            <i class="fa-solid fa-coins gold"></i> <span id="currentCurrencyLabel">BDT (৳)</span> <i class="fa-solid fa-chevron-down" style="font-size:0.65rem"></i>
+            <span class="gold">🪙</span> <span id="currentCurrencyLabel">BDT (৳)</span> <span style="font-size:0.65rem">▼</span>
           </button>
           <div class="dropdown-menu">
             <button class="dropdown-item currency-option active" data-cur="BDT"><span>BDT</span> <strong>৳</strong></button>
@@ -39,7 +34,7 @@
         </div>
 
         <button id="themeToggle" class="icon-btn" style="width:32px;height:32px;font-size:0.85rem" title="Toggle Theme">
-          <i class="fa-solid fa-moon"></i>
+          <svg class="svg-icon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" stroke="currentColor" stroke-width="2" fill="none"/></svg>
         </button>
       </div>
     </div>
@@ -64,7 +59,7 @@
         </ul>
       </nav>
       <div class="header-actions">
-        <button id="cartBtn" class="icon-btn" title="Bag"><i class="fa-solid fa-bag-shopping"></i><span class="cart-badge" style="display:none">0</span></button>
+        <button id="cartBtn" class="icon-btn" title="Bag"><svg class="svg-icon" viewBox="0 0 24 24"><path d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg><span class="cart-badge" style="display:none">0</span></button>
       </div>
     </div>
   </header>
@@ -97,21 +92,21 @@
   <div id="cartDrawerOverlay" class="cart-drawer-overlay"></div>
   <div id="cartDrawer" class="cart-drawer">
     <div class="cart-drawer-header">
-      <h3><i class="fa-solid fa-bag-shopping gold"></i> Shopping Bag</h3>
-      <button id="cartClose" class="modal-close" style="position:static"><i class="fa-solid fa-times"></i></button>
+      <h3><svg class="svg-icon gold" viewBox="0 0 24 24"><path d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg> Shopping Bag</h3>
+      <button id="cartClose" class="modal-close" style="position:static"><svg class="svg-icon" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg></button>
     </div>
     <div id="freeShippingBox" class="free-shipping-box"></div>
     <div class="cart-drawer-body" id="cartDrawerBody"></div>
     <div class="cart-drawer-footer">
       <div class="cart-total-row grand-total"><span>Total</span><span class="gold" id="cartTotalValue">৳0</span></div>
-      <button id="checkoutBtn" class="btn btn-lg" style="width:100%"><i class="fa-solid fa-lock"></i> Checkout</button>
+      <button id="checkoutBtn" class="btn btn-lg" style="width:100%"><svg class="svg-icon" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" stroke="currentColor" stroke-width="2" fill="none"/><path d="M7 11V7a5 5 0 0110 0v4" stroke="currentColor" stroke-width="2" fill="none"/></svg> Checkout</button>
     </div>
   </div>
 
   <!-- Auth Modal -->
   <div id="authModal" class="modal">
     <div class="modal-content">
-      <button id="authClose" class="modal-close" data-close-modal><i class="fa-solid fa-times"></i></button>
+      <button id="authClose" class="modal-close" data-close-modal><svg class="svg-icon" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg></button>
       <div style="display:flex;gap:1rem;margin-bottom:1.5rem;border-bottom:1px solid var(--line-faint)">
         <button class="pd-tab-btn active" id="authTabLogin" onclick="$$('.auth-form').forEach(f=>f.style.display='none');$('#loginForm').style.display='block';this.classList.add('active');$('#authTabReg').classList.remove('active')">Sign In</button>
         <button class="pd-tab-btn" id="authTabReg" onclick="$$('.auth-form').forEach(f=>f.style.display='none');$('#registerForm').style.display='block';this.classList.add('active');$('#authTabLogin').classList.remove('active')">Register</button>

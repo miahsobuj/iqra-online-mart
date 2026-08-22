@@ -4,49 +4,46 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="CMS Dashboard · Iqra Online Mart">
-  <meta name="theme-color" content="#09090b">
+  <meta name="theme-color" content="#09090d">
   <title>CMS Management Desk · Iqra Mart</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
   <div class="admin-layout">
-    <!-- Sidebar Toggle for Mobile -->
-    <button id="adminSidebarToggle" class="icon-btn" style="position:fixed;bottom:20px;left:20px;z-index:99;box-shadow:var(--shadow-lg)" aria-label="Open sidebar"><i class="fa-solid fa-bars"></i></button>
+    <!-- Mobile Sidebar Button -->
+    <button id="adminSidebarToggle" class="icon-btn" style="position:fixed;bottom:20px;left:20px;z-index:99;box-shadow:var(--shadow-lg)" aria-label="Open sidebar">
+      <svg class="svg-icon" viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg>
+    </button>
 
     <!-- Admin Sidebar -->
     <aside class="admin-sidebar">
       <div class="admin-logo">
         <div class="logo-mark" style="width:36px;height:36px;font-size:1.1rem">I</div>
         <span>Iqra House CMS</span>
-        <button id="adminSidebarClose" class="modal-close" style="position:static;margin-left:auto;width:28px;height:28px;font-size:0.8rem"><i class="fa-solid fa-times"></i></button>
+        <button id="adminSidebarClose" class="modal-close" style="position:static;margin-left:auto;width:28px;height:28px;font-size:0.8rem"><svg class="svg-icon" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg></button>
       </div>
 
       <nav>
         <ul class="admin-nav">
-          <li><button class="admin-nav-item active" data-section="dashboard"><i class="fa-solid fa-gauge"></i> Dashboard</button></li>
-          <li><button class="admin-nav-item" data-section="products"><i class="fa-solid fa-box-archive"></i> Products</button></li>
-          <li><button class="admin-nav-item" data-section="categories"><i class="fa-solid fa-tags"></i> Categories</button></li>
-          <li><button class="admin-nav-item" data-section="orders"><i class="fa-solid fa-bag-shopping"></i> Orders</button></li>
-          <li><button class="admin-nav-item" data-section="coupons"><i class="fa-solid fa-ticket"></i> Coupons</button></li>
-          <li><button class="admin-nav-item" data-section="posts"><i class="fa-solid fa-pen-nib"></i> Journal</button></li>
-          <li><button class="admin-nav-item" data-section="testimonials"><i class="fa-solid fa-quote-left"></i> Testimonials</button></li>
-          <li><button class="admin-nav-item" data-section="subscribers"><i class="fa-solid fa-envelope-open"></i> Subscribers</button></li>
-          <li><button class="admin-nav-item" data-section="messages"><i class="fa-solid fa-comments"></i> Inquiries</button></li>
-          <li><button class="admin-nav-item" data-section="pages"><i class="fa-solid fa-file-pen"></i> Page Copy</button></li>
-          <li><button class="admin-nav-item" data-section="settings"><i class="fa-solid fa-gear"></i> Settings</button></li>
-          <li style="margin-top:1.5rem"><a href="index.html" class="admin-nav-item" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i> View Store</a></li>
-          <li><button class="admin-nav-item" id="adminLogout" style="color:var(--danger)"><i class="fa-solid fa-right-from-bracket"></i> Log Out</button></li>
+          <li><button class="admin-nav-item active" data-section="dashboard">📊 Dashboard</button></li>
+          <li><button class="admin-nav-item" data-section="products">📦 Products</button></li>
+          <li><button class="admin-nav-item" data-section="categories">🏷️ Categories</button></li>
+          <li><button class="admin-nav-item" data-section="orders">🛍️ Orders</button></li>
+          <li><button class="admin-nav-item" data-section="coupons">🎟️ Coupons</button></li>
+          <li><button class="admin-nav-item" data-section="posts">✍️ Journal</button></li>
+          <li><button class="admin-nav-item" data-section="testimonials">💬 Testimonials</button></li>
+          <li><button class="admin-nav-item" data-section="subscribers">📬 Subscribers</button></li>
+          <li><button class="admin-nav-item" data-section="messages">💬 Inquiries</button></li>
+          <li><button class="admin-nav-item" data-section="pages">📄 Page Copy</button></li>
+          <li><button class="admin-nav-item" data-section="settings">⚙️ Settings</button></li>
+          <li style="margin-top:1.5rem"><a href="index.html" class="admin-nav-item" target="_blank">🌐 View Store</a></li>
+          <li><button class="admin-nav-item" id="adminLogout" style="color:var(--danger)">🚪 Log Out</button></li>
         </ul>
       </nav>
     </aside>
 
-    <!-- Main Content Work Area -->
+    <!-- Main Content -->
     <main class="admin-main">
 
       <!-- Section: Dashboard -->
@@ -57,8 +54,8 @@
             <p style="color:var(--muted)">Operational performance and financial metrics</p>
           </div>
           <div style="display:flex;gap:0.75rem">
-            <button class="btn btn-outline btn-sm" id="exportDbBtn"><i class="fa-solid fa-download"></i> Backup JSON</button>
-            <button id="themeToggle" class="icon-btn" style="width:36px;height:36px" title="Theme"><i class="fa-solid fa-moon"></i></button>
+            <button class="btn btn-outline btn-sm" id="exportDbBtn">💾 Backup JSON</button>
+            <button id="themeToggle" class="icon-btn" style="width:36px;height:36px" title="Theme"><svg class="svg-icon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" stroke="currentColor" stroke-width="2" fill="none"/></svg></button>
           </div>
         </div>
 
@@ -67,7 +64,7 @@
         <!-- SVG Analytics Chart -->
         <div class="checkout-card" style="margin-bottom:2rem">
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem">
-            <h3><i class="fa-solid fa-chart-line gold"></i> Sales & Revenue Trajectory</h3>
+            <h3>Sales & Revenue Trajectory</h3>
             <span style="font-size:0.8rem;color:var(--muted)">2026 Fiscal Trend (30 Days)</span>
           </div>
           <svg viewBox="0 0 700 160" style="width:100%;height:auto;overflow:visible">
@@ -87,11 +84,11 @@
 
         <div class="checkout-grid" style="grid-template-columns:1fr 1fr">
           <div class="checkout-card">
-            <h3 style="margin-bottom:1rem"><i class="fa-solid fa-receipt gold"></i> Recent Orders</h3>
+            <h3 style="margin-bottom:1rem">Recent Orders</h3>
             <div id="recentOrders"></div>
           </div>
           <div class="checkout-card">
-            <h3 style="margin-bottom:1rem"><i class="fa-solid fa-triangle-exclamation gold"></i> Inventory Attention</h3>
+            <h3 style="margin-bottom:1rem">Inventory Status</h3>
             <p style="color:var(--muted);font-size:0.9rem">Manage low stock notifications and automatic restocking thresholds from the Products tab.</p>
           </div>
         </div>
@@ -106,7 +103,7 @@
           </div>
           <div style="display:flex;gap:0.75rem">
             <input class="form-input" id="productSearch" placeholder="Search catalog..." style="width:220px">
-            <button class="btn" data-open-modal="productModal"><i class="fa-solid fa-plus"></i> Add Product</button>
+            <button class="btn" data-open-modal="productModal">+ Add Product</button>
           </div>
         </div>
 
@@ -127,7 +124,7 @@
             <h1>Collections & Categories</h1>
             <p style="color:var(--muted)">Curate store departments and icons</p>
           </div>
-          <button class="btn" data-open-modal="categoryModal"><i class="fa-solid fa-plus"></i> Add Category</button>
+          <button class="btn" data-open-modal="categoryModal">+ Add Category</button>
         </div>
 
         <div class="checkout-card" style="padding:0;overflow-x:auto">
@@ -166,7 +163,7 @@
             <h1>Promo Coupons</h1>
             <p style="color:var(--muted)">Discount codes and seasonal campaigns</p>
           </div>
-          <button class="btn" data-open-modal="couponModal"><i class="fa-solid fa-plus"></i> Create Coupon</button>
+          <button class="btn" data-open-modal="couponModal">+ Create Coupon</button>
         </div>
 
         <div class="checkout-card" style="padding:0;overflow-x:auto">
@@ -186,7 +183,7 @@
             <h1>Journal & Articles</h1>
             <p style="color:var(--muted)">Publish editorial essays and announcements</p>
           </div>
-          <button class="btn" data-open-modal="postModal"><i class="fa-solid fa-plus"></i> New Article</button>
+          <button class="btn" data-open-modal="postModal">+ New Article</button>
         </div>
 
         <div class="checkout-card" style="padding:0;overflow-x:auto">
@@ -206,7 +203,7 @@
             <h1>Customer Testimonials</h1>
             <p style="color:var(--muted)">Manage homepage client reviews</p>
           </div>
-          <button class="btn" data-open-modal="testimonialModal"><i class="fa-solid fa-plus"></i> Add Testimonial</button>
+          <button class="btn" data-open-modal="testimonialModal">+ Add Testimonial</button>
         </div>
 
         <div class="checkout-card" style="padding:0;overflow-x:auto">
@@ -274,7 +271,7 @@
           </div>
           <form id="pagesForm">
             <div id="pageContent"></div>
-            <button class="btn" style="margin-top:1.5rem"><i class="fa-solid fa-floppy-disk"></i> Save Content</button>
+            <button class="btn" style="margin-top:1.5rem">Save Content</button>
           </form>
         </div>
       </section>
@@ -311,7 +308,7 @@
               <div class="form-group"><label class="form-label">Admin Username</label><input class="form-input" name="adminUsername"></div>
               <div class="form-group"><label class="form-label">New Password (leave empty to keep current)</label><input class="form-input" name="adminPassword" type="password"></div>
             </div>
-            <button class="btn" style="margin-top:1.5rem"><i class="fa-solid fa-floppy-disk"></i> Save Store Settings</button>
+            <button class="btn" style="margin-top:1.5rem">Save Store Settings</button>
           </form>
         </div>
       </section>
@@ -322,7 +319,7 @@
   <!-- Product Modal -->
   <div id="productModal" class="modal">
     <div class="modal-content modal-lg">
-      <button class="modal-close" data-close-modal><i class="fa-solid fa-times"></i></button>
+      <button class="modal-close" data-close-modal><svg class="svg-icon" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg></button>
       <h2 style="font-family:var(--serif);margin-bottom:1.25rem">Product Specification</h2>
       <form id="productForm">
         <input type="hidden" name="id">
@@ -334,17 +331,14 @@
           <div class="form-group"><label class="form-label">Price (BDT)</label><input class="form-input" name="price" type="number" required></div>
           <div class="form-group"><label class="form-label">Old Price (Regular)</label><input class="form-input" name="oldPrice" type="number"></div>
         </div>
-        <div class="form-row">
-          <div class="form-group"><label class="form-label">Image URL (Unsplash or direct CDN)</label><input class="form-input" name="image" placeholder="https://..."></div>
-          <div class="form-group"><label class="form-label">Badge</label>
-            <select class="form-select" name="badge">
-              <option value="">None</option>
-              <option value="new">New</option>
-              <option value="sale">Sale</option>
-              <option value="hot">Hot</option>
-              <option value="featured">Featured</option>
-            </select>
-          </div>
+        <div class="form-group"><label class="form-label">Badge</label>
+          <select class="form-select" name="badge">
+            <option value="">None</option>
+            <option value="new">New</option>
+            <option value="sale">Sale</option>
+            <option value="hot">Hot</option>
+            <option value="featured">Featured</option>
+          </select>
         </div>
         <div class="form-group"><label class="form-label">Description (English)</label><textarea class="form-textarea" name="description" required></textarea></div>
         <div class="form-group"><label class="form-label">Description (বাংলা)</label><textarea class="form-textarea" name="descriptionBn"></textarea></div>
@@ -366,12 +360,11 @@
   <!-- Category Modal -->
   <div id="categoryModal" class="modal">
     <div class="modal-content">
-      <button class="modal-close" data-close-modal><i class="fa-solid fa-times"></i></button>
+      <button class="modal-close" data-close-modal><svg class="svg-icon" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg></button>
       <h2 style="font-family:var(--serif);margin-bottom:1.25rem">Collection Category</h2>
       <form id="categoryForm">
         <input type="hidden" name="id">
         <div class="form-group"><label class="form-label">Category Name</label><input class="form-input" name="name" required></div>
-        <div class="form-group"><label class="form-label">FontAwesome Icon Class</label><input class="form-input" name="icon" placeholder="fa-laptop" required></div>
         <div class="form-group"><label class="form-label">Description</label><textarea class="form-textarea" name="description" required></textarea></div>
         <button class="btn btn-lg" style="width:100%;margin-top:1rem">Save Category</button>
       </form>
@@ -381,7 +374,7 @@
   <!-- Coupon Modal -->
   <div id="couponModal" class="modal">
     <div class="modal-content">
-      <button class="modal-close" data-close-modal><i class="fa-solid fa-times"></i></button>
+      <button class="modal-close" data-close-modal><svg class="svg-icon" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg></button>
       <h2 style="font-family:var(--serif);margin-bottom:1.25rem">Promo Coupon</h2>
       <form id="couponForm">
         <div class="form-group"><label class="form-label">Coupon Code (Uppercase)</label><input class="form-input" name="code" placeholder="EID2026" required></div>
@@ -405,7 +398,7 @@
   <!-- Post Modal -->
   <div id="postModal" class="modal">
     <div class="modal-content modal-lg">
-      <button class="modal-close" data-close-modal><i class="fa-solid fa-times"></i></button>
+      <button class="modal-close" data-close-modal><svg class="svg-icon" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg></button>
       <h2 style="font-family:var(--serif);margin-bottom:1.25rem">Journal Story</h2>
       <form id="postForm">
         <input type="hidden" name="id">
@@ -430,7 +423,7 @@
   <!-- Testimonial Modal -->
   <div id="testimonialModal" class="modal">
     <div class="modal-content">
-      <button class="modal-close" data-close-modal><i class="fa-solid fa-times"></i></button>
+      <button class="modal-close" data-close-modal><svg class="svg-icon" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg></button>
       <h2 style="font-family:var(--serif);margin-bottom:1.25rem">Client Review</h2>
       <form id="testimonialForm">
         <input type="hidden" name="id">
@@ -451,7 +444,7 @@
   <!-- Order Detail Modal -->
   <div id="orderModal" class="modal">
     <div class="modal-content modal-lg">
-      <button class="modal-close" data-close-modal><i class="fa-solid fa-times"></i></button>
+      <button class="modal-close" data-close-modal><svg class="svg-icon" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg></button>
       <div id="orderContent"></div>
     </div>
   </div>

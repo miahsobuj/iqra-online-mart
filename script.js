@@ -1,14 +1,18 @@
 /* ==========================================================================
-   IQRA ONLINE MART — CORE APPLICATION ENGINE (INTERNATIONAL STANDARD)
-   Features: Multi-currency, i18n (EN/BN), Audio FX, Faceted Search, CMS,
-             Interactive Checkout, Live Chatbot, PWA, DOM XSS Sanitization
+   IQRA ONLINE MART — STANDALONE JAVASCRIPT ENGINE (ZERO NETWORK DEPENDENCY)
+   Includes: Embedded SVG Icon Library, Inline SVG Product Vector Artwork,
+             Multi-Currency, Bilingual i18n, Audio FX, CMS, & Interactive Checkout
    ========================================================================== */
 
 "use strict";
 
 const STORE_KEY = "iqra2_";
 
-// HTML Sanitizer to prevent DOM & Stored XSS
+// DOM & String Helpers
+const uid = () => Date.now() + Math.floor(Math.random() * 9999);
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+
 function escapeHtml(str) {
   if (str === null || str === undefined) return "";
   return String(str)
@@ -19,12 +23,188 @@ function escapeHtml(str) {
     .replace(/'/g, "&#039;");
 }
 
-const uid = () => Date.now() + Math.floor(Math.random() * 9999);
-const $ = (s, r = document) => r.querySelector(s);
-const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+/* ==========================================================================
+   EMBEDDED SVG ICON SYSTEM (Zero External Fonts or CDNs)
+   ========================================================================== */
+const Icons = {
+  get(name, className = "svg-icon") {
+    const d = {
+      bag: `<path d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>`,
+      search: `<path d="M21 21l-4.35-4.35M19 11a8 8 0 11-16 0 8 8 0 0116 0z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>`,
+      user: `<path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2M12 11a4 4 0 100-8 4 4 0 000 8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>`,
+      heart: `<path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>`,
+      heartFill: `<path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" fill="currentColor"/>`,
+      compare: `<path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>`,
+      star: `<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" fill="currentColor"/>`,
+      check: `<path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>`,
+      truck: `<path d="M1 3h15v13H1zM16 8h4l3 3v5h-7V8zM5.5 18.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM18.5 18.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>`,
+      shield: `<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>`,
+      lock: `<rect x="3" y="11" width="18" height="11" rx="2" ry="2" stroke="currentColor" stroke-width="2" fill="none"/><path d="M7 11V7a5 5 0 0110 0v4" stroke="currentColor" stroke-width="2" fill="none"/>`,
+      sliders: `<path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>`,
+      grid: `<rect x="3" y="3" width="7" height="7" stroke="currentColor" stroke-width="2" fill="none"/><rect x="14" y="3" width="7" height="7" stroke="currentColor" stroke-width="2" fill="none"/><rect x="14" y="14" width="7" height="7" stroke="currentColor" stroke-width="2" fill="none"/><rect x="3" y="14" width="7" height="7" stroke="currentColor" stroke-width="2" fill="none"/>`,
+      list: `<path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>`,
+      eye: `<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2" fill="none"/>`,
+      trash: `<path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>`,
+      close: `<path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>`,
+      plus: `<path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>`,
+      minus: `<path d="M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>`,
+      arrowRight: `<path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>`,
+      arrowLeft: `<path d="M19 12H5M12 19l-7-7 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>`,
+      share: `<circle cx="18" cy="5" r="3" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="6" cy="12" r="3" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="18" cy="19" r="3" stroke="currentColor" stroke-width="2" fill="none"/><path d="M8.59 13.51l6.83 3.98M15.41 6.51l-6.82 3.98" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>`,
+      phone: `<path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" stroke="currentColor" stroke-width="2" fill="none"/>`,
+      mail: `<path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="currentColor" stroke-width="2" fill="none"/><path d="M22 6l-10 7L2 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>`,
+      location: `<path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="2" fill="none"/>`,
+      globe: `<circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z" stroke="currentColor" stroke-width="2" fill="none"/>`,
+      moon: `<path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" stroke="currentColor" stroke-width="2" fill="none"/>`,
+      sun: `<circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="2" fill="none"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>`,
+      paperPlane: `<path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>`,
+      bolt: `<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" stroke="currentColor" stroke-width="2" fill="none"/>`,
+      gem: `<polygon points="6 3 18 3 22 9 12 22 2 9 6 3" stroke="currentColor" stroke-width="2" fill="none"/>`,
+      chat: `<path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>`,
+      card: `<rect x="1" y="4" width="22" height="16" rx="2" ry="2" stroke="currentColor" stroke-width="2" fill="none"/><path d="M1 10h22" stroke="currentColor" stroke-width="2"/>`,
+      mobile: `<rect x="5" y="2" width="14" height="20" rx="2" ry="2" stroke="currentColor" stroke-width="2" fill="none"/><path d="M12 18h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>`,
+      print: `<polyline points="6 9 6 2 18 2 18 9" stroke="currentColor" stroke-width="2" fill="none"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2" stroke="currentColor" stroke-width="2" fill="none"/><rect x="6" y="14" width="12" height="8" stroke="currentColor" stroke-width="2" fill="none"/>`,
+      edit: `<path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7" stroke="currentColor" stroke-width="2" fill="none"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z" stroke="currentColor" stroke-width="2" fill="none"/>`
+    };
+    const content = d[name] || d.box || d.gem;
+    return `<svg class="${className}" viewBox="0 0 24 24" aria-hidden="true">${content}</svg>`;
+  }
+};
 
 /* ==========================================================================
-   CURRENCIES & CONVERSION RATES (Base: BDT)
+   INLINE SVG PRODUCT VECTOR ARTWORK (100% Offline & Sharp)
+   ========================================================================== */
+const ProductArtwork = {
+  get(sku, name = "") {
+    const s = sku || "";
+    if (s.includes("HP")) {
+      // Headphones Artwork
+      return `<svg viewBox="0 0 200 200" class="product-img-svg">
+        <defs>
+          <linearGradient id="hpGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#fae49d"/><stop offset="100%" stop-color="#9e7516"/></linearGradient>
+          <radialGradient id="cupGrad"><stop offset="70%" stop-color="#1c1c24"/><stop offset="100%" stop-color="#0b0b0e"/></radialGradient>
+        </defs>
+        <path d="M40,110 C40,55 70,30 100,30 C130,30 160,55 160,110" fill="none" stroke="url(#hpGrad)" stroke-width="12" stroke-linecap="round"/>
+        <rect x="30" y="95" width="28" height="55" rx="14" fill="url(#cupGrad)" stroke="#d4af37" stroke-width="2"/>
+        <rect x="142" y="95" width="28" height="55" rx="14" fill="url(#cupGrad)" stroke="#d4af37" stroke-width="2"/>
+        <circle cx="44" cy="122" r="6" fill="#d4af37"/>
+        <circle cx="156" cy="122" r="6" fill="#d4af37"/>
+      </svg>`;
+    }
+    if (s.includes("SW")) {
+      // Smartwatch Artwork
+      return `<svg viewBox="0 0 200 200" class="product-img-svg">
+        <defs>
+          <linearGradient id="swBand" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2a2a38"/><stop offset="100%" stop-color="#14141c"/></linearGradient>
+        </defs>
+        <rect x="75" y="20" width="50" height="160" rx="8" fill="url(#swBand)" stroke="#3a3a4c" stroke-width="2"/>
+        <rect x="60" y="55" width="80" height="90" rx="20" fill="#0d0d12" stroke="#d4af37" stroke-width="3"/>
+        <circle cx="100" cy="100" r="30" fill="none" stroke="#d4af37" stroke-width="2" stroke-dasharray="140 40"/>
+        <text x="100" y="106" font-family="sans-serif" font-weight="bold" font-size="14" fill="#fae49d" text-anchor="middle">10:45</text>
+      </svg>`;
+    }
+    if (s.includes("TS")) {
+      // Supima Cotton T-Shirt Artwork
+      return `<svg viewBox="0 0 200 200" class="product-img-svg">
+        <path d="M60,45 L85,60 C95,55 105,55 115,60 L140,45 L170,75 L148,95 L145,160 L55,160 L52,95 L30,75 Z" fill="#181822" stroke="#d4af37" stroke-width="2.5" stroke-linejoin="round"/>
+        <path d="M85,60 C95,72 105,72 115,60" fill="none" stroke="#d4af37" stroke-width="2"/>
+      </svg>`;
+    }
+    if (s.includes("HB")) {
+      // Leather Handbag Artwork
+      return `<svg viewBox="0 0 200 200" class="product-img-svg">
+        <path d="M75,90 C75,55 125,55 125,90" fill="none" stroke="#d4af37" stroke-width="4"/>
+        <rect x="45" y="90" width="110" height="75" rx="14" fill="#1d1712" stroke="#d4af37" stroke-width="2.5"/>
+        <polygon points="45,90 100,120 155,90" fill="none" stroke="#d4af37" stroke-width="2"/>
+        <circle cx="100" cy="120" r="5" fill="#d4af37"/>
+      </svg>`;
+    }
+    if (s.includes("CT")) {
+      // Coffee Table Artwork
+      return `<svg viewBox="0 0 200 200" class="product-img-svg">
+        <ellipse cx="100" cy="90" rx="70" ry="24" fill="rgba(212,175,55,0.15)" stroke="#d4af37" stroke-width="3"/>
+        <line x1="55" y1="95" x2="40" y2="155" stroke="#d4af37" stroke-width="4" stroke-linecap="round"/>
+        <line x1="145" y1="95" x2="160" y2="155" stroke="#d4af37" stroke-width="4" stroke-linecap="round"/>
+        <line x1="100" y1="110" x2="100" y2="160" stroke="#d4af37" stroke-width="4" stroke-linecap="round"/>
+      </svg>`;
+    }
+    if (s.includes("BS")) {
+      // Bedding Set Artwork
+      return `<svg viewBox="0 0 200 200" class="product-img-svg">
+        <rect x="40" y="60" width="120" height="95" rx="12" fill="#1c1a17" stroke="#d4af37" stroke-width="2.5"/>
+        <rect x="52" y="70" width="42" height="24" rx="6" fill="rgba(212,175,55,0.2)" stroke="#d4af37" stroke-width="1.5"/>
+        <rect x="106" y="70" width="42" height="24" rx="6" fill="rgba(212,175,55,0.2)" stroke="#d4af37" stroke-width="1.5"/>
+        <path d="M40,105 Q100,120 160,105 L160,155 L40,155 Z" fill="#29241d"/>
+      </svg>`;
+    }
+    if (s.includes("PY")) {
+      // Python AI Book Artwork
+      return `<svg viewBox="0 0 200 200" class="product-img-svg">
+        <rect x="55" y="40" width="90" height="120" rx="6" fill="#14141c" stroke="#d4af37" stroke-width="2.5"/>
+        <line x1="70" y1="40" x2="70" y2="160" stroke="#d4af37" stroke-width="2"/>
+        <text x="110" y="85" font-family="sans-serif" font-weight="bold" font-size="13" fill="#fae49d" text-anchor="middle">PYTHON</text>
+        <text x="110" y="102" font-family="sans-serif" font-size="10" fill="#a09788" text-anchor="middle">& AI SYSTEMS</text>
+        <polygon points="105,120 115,120 110,130" fill="#d4af37"/>
+      </svg>`;
+    }
+    if (s.includes("YM")) {
+      // Yoga Mat Artwork
+      return `<svg viewBox="0 0 200 200" class="product-img-svg">
+        <ellipse cx="60" cy="100" rx="18" ry="35" fill="#1a241e" stroke="#d4af37" stroke-width="2.5"/>
+        <path d="M60,65 L145,85 A18,35 0 0,1 145,155 L60,135" fill="#121814" stroke="#d4af37" stroke-width="2"/>
+        <ellipse cx="145" cy="120" rx="14" ry="28" fill="#24332a" stroke="#d4af37" stroke-width="2"/>
+      </svg>`;
+    }
+    if (s.includes("BR")) {
+      // Basmati Rice Artwork
+      return `<svg viewBox="0 0 200 200" class="product-img-svg">
+        <path d="M60,50 L140,50 L150,150 L50,150 Z" rx="10" fill="#241e17" stroke="#d4af37" stroke-width="2.5"/>
+        <rect x="70" y="75" width="60" height="45" rx="6" fill="#14110d" stroke="#d4af37" stroke-width="1.5"/>
+        <text x="100" y="98" font-family="serif" font-weight="bold" font-size="11" fill="#fae49d" text-anchor="middle">BASMATI</text>
+        <text x="100" y="112" font-family="sans-serif" font-size="9" fill="#a09788" text-anchor="middle">5 KG ROYAL</text>
+      </svg>`;
+    }
+    if (s.includes("HN")) {
+      // Organic Honey Artwork
+      return `<svg viewBox="0 0 200 200" class="product-img-svg">
+        <rect x="75" y="45" width="50" height="15" rx="3" fill="#d4af37"/>
+        <rect x="60" y="60" width="80" height="95" rx="14" fill="rgba(212,175,55,0.25)" stroke="#d4af37" stroke-width="2.5"/>
+        <circle cx="100" cy="108" r="18" fill="#18140c" stroke="#d4af37" stroke-width="1.5"/>
+        <text x="100" y="112" font-family="serif" font-weight="bold" font-size="11" fill="#fae49d" text-anchor="middle">HONEY</text>
+      </svg>`;
+    }
+    if (s.includes("VC")) {
+      // Vitamin C Serum Artwork
+      return `<svg viewBox="0 0 200 200" class="product-img-svg">
+        <rect x="92" y="35" width="16" height="25" fill="#333" stroke="#d4af37" stroke-width="1.5"/>
+        <rect x="70" y="60" width="60" height="100" rx="10" fill="#1c1622" stroke="#d4af37" stroke-width="2.5"/>
+        <text x="100" y="105" font-family="sans-serif" font-weight="bold" font-size="12" fill="#fae49d" text-anchor="middle">VITAMIN C</text>
+        <text x="100" y="120" font-family="sans-serif" font-size="9" fill="#a09788" text-anchor="middle">SERUM 30ML</text>
+      </svg>`;
+    }
+    if (s.includes("KB")) {
+      // Mechanical Keyboard Artwork
+      return `<svg viewBox="0 0 200 200" class="product-img-svg">
+        <rect x="35" y="65" width="130" height="75" rx="8" fill="#14141c" stroke="#d4af37" stroke-width="2.5"/>
+        <rect x="45" y="75" width="16" height="12" rx="2" fill="#2a2a3a"/>
+        <rect x="67" y="75" width="16" height="12" rx="2" fill="#2a2a3a"/>
+        <rect x="89" y="75" width="16" height="12" rx="2" fill="#2a2a3a"/>
+        <rect x="111" y="75" width="16" height="12" rx="2" fill="#2a2a3a"/>
+        <rect x="133" y="75" width="22" height="12" rx="2" fill="#d4af37"/>
+        <rect x="60" y="115" width="70" height="14" rx="3" fill="#fae49d"/>
+      </svg>`;
+    }
+    // Generic Luxury Box Fallback Artwork
+    return `<svg viewBox="0 0 200 200" class="product-img-svg">
+      <polygon points="100,40 160,70 100,100 40,70" fill="#22201b" stroke="#d4af37" stroke-width="2.5"/>
+      <polygon points="40,70 100,100 100,160 40,130" fill="#141310" stroke="#d4af37" stroke-width="2.5"/>
+      <polygon points="160,70 100,100 100,160 160,130" fill="#1a1914" stroke="#d4af37" stroke-width="2.5"/>
+    </svg>`;
+  }
+};
+
+/* ==========================================================================
+   CURRENCY RATES (Base BDT)
    ========================================================================== */
 const CURRENCIES = {
   BDT: { symbol: "৳", rate: 1, label: "BDT (৳)", locale: "en-BD" },
@@ -37,7 +217,7 @@ const CURRENCIES = {
 };
 
 /* ==========================================================================
-   SOUND EFFECTS SYNTHESIZER (Web Audio API — Zero External Audio Files)
+   WEB AUDIO SOUND SYNTHESIZER (No External Audio Files)
    ========================================================================== */
 const SoundFX = {
   ctx: null,
@@ -70,9 +250,9 @@ const SoundFX = {
         osc.stop(now + 0.05);
       } else if (type === "chime") {
         osc.type = "triangle";
-        osc.frequency.setValueAtTime(523.25, now); // C5
-        osc.frequency.setValueAtTime(659.25, now + 0.08); // E5
-        osc.frequency.setValueAtTime(783.99, now + 0.16); // G5
+        osc.frequency.setValueAtTime(523.25, now);
+        osc.frequency.setValueAtTime(659.25, now + 0.08);
+        osc.frequency.setValueAtTime(783.99, now + 0.16);
         gain.gain.setValueAtTime(0.12, now);
         gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
         osc.start(now);
@@ -86,14 +266,12 @@ const SoundFX = {
         osc.start(now);
         osc.stop(now + 0.4);
       }
-    } catch (e) {
-      // Audio autoplay policy catch
-    }
+    } catch (e) {}
   }
 };
 
 /* ==========================================================================
-   DEFAULT CATALOG DATA & ASSETS
+   DEFAULT CATALOG PRODUCTS & CATEGORIES
    ========================================================================== */
 const DEFAULT_PRODUCTS = [
   {
@@ -107,13 +285,6 @@ const DEFAULT_PRODUCTS = [
     rating: 4.8,
     reviews: 142,
     badge: "hot",
-    icon: "fa-headphones",
-    image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=600&q=80",
-    gallery: [
-      "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1484704849700-f032a568e944?auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1546435770-a3e426bf472b?auto=format&fit=crop&w=800&q=80"
-    ],
     description: "Premium studio-grade ANC wireless headphones with 40-hour battery life, high-res audio drivers, and plush memory foam earcups.",
     descriptionBn: "স্টুডিও গ্রেড অ্যাক্টিভ নয়েজ ক্যান্সেলেশন ও ৪০ ঘণ্টার দীর্ঘস্থায়ী ব্যাটারি ব্যাকআপযুক্ত প্রিমিয়াম হেডফোন।",
     specs: { "Brand": "AuraSound", "Battery": "40 Hours ANC On", "Connectivity": "Bluetooth 5.3 & 3.5mm", "Weight": "250g", "Warranty": "1 Year Official" },
@@ -135,12 +306,6 @@ const DEFAULT_PRODUCTS = [
     rating: 4.9,
     reviews: 98,
     badge: "new",
-    icon: "fa-clock",
-    image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=600&q=80",
-    gallery: [
-      "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?auto=format&fit=crop&w=800&q=80"
-    ],
     description: "Aerospace titanium casing, AMOLED sapphire glass, continuous heart-rate & SpO2 monitoring, and 50m water resistance.",
     descriptionBn: "টাইটানিয়াম বডি, অ্যামোলেড স্যাফায়ার ডিসপ্লে, হার্ট রেট ও রক্তে অক্সিজেন মনিটরিং এবং ৫০ মিটার ওয়াটারপ্রুফ।",
     specs: { "Brand": "Apex", "Display": "1.96\" AMOLED", "Water Resistance": "5 ATM", "Sensors": "Optical HR, SpO2, GPS", "Warranty": "2 Years" },
@@ -162,12 +327,6 @@ const DEFAULT_PRODUCTS = [
     rating: 4.7,
     reviews: 210,
     badge: "sale",
-    icon: "fa-shirt",
-    image: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=600&q=80",
-    gallery: [
-      "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&w=800&q=80"
-    ],
     description: "Crafted from 100% long-staple Supima cotton. 240 GSM heavy fabric with pre-shrunk silky handfeel.",
     descriptionBn: "১০০% প্রিমিয়াম সুপিমা কটনে তৈরি ২৪০ জিএসএম টেকসই ও নরম টি-শার্ট।",
     specs: { "Fabric": "100% Supima Cotton", "GSM": "240 Heavyweight", "Fit": "Relaxed Tailored", "Origin": "Bangladesh" },
@@ -189,12 +348,6 @@ const DEFAULT_PRODUCTS = [
     rating: 4.8,
     reviews: 84,
     badge: "hot",
-    icon: "fa-bag-shopping",
-    image: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=600&q=80",
-    gallery: [
-      "https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?auto=format&fit=crop&w=800&q=80"
-    ],
     description: "Full-grain vegetable-tanned leather tote with solid brass hardware, laptop divider, and reinforced straps.",
     descriptionBn: "ফুল গ্রেইন লেদার ও ব্রাস হার্ডওয়্যার দিয়ে তৈরি টেকসই এবং দৃষ্টিনন্দন ব্যাগ।",
     specs: { "Material": "Full Grain Leather", "Compartment": "Fits 15.6\" Laptop", "Hardware": "Solid Brass", "Origin": "Hazaribagh, BD" },
@@ -216,11 +369,6 @@ const DEFAULT_PRODUCTS = [
     rating: 4.6,
     reviews: 38,
     badge: null,
-    icon: "fa-table",
-    image: "https://images.unsplash.com/photo-1533090161767-e6ffed986c88?auto=format&fit=crop&w=600&q=80",
-    gallery: [
-      "https://images.unsplash.com/photo-1533090161767-e6ffed986c88?auto=format&fit=crop&w=800&q=80"
-    ],
     description: "Scandinavian minimalist coffee table featuring 10mm tempered safety glass and kiln-dried white oak base.",
     descriptionBn: "১০ মিলিমিটার টেম্পার্ড গ্লাস ও সিজন করা সাদা ওক কাঠের আধুনিক ড্রয়িং টেবিল।",
     specs: { "Top Material": "10mm Tempered Glass", "Base": "Solid White Oak", "Dimensions": "100 x 55 x 45 cm", "Assembly": "Tool-free 5 mins" },
@@ -242,11 +390,6 @@ const DEFAULT_PRODUCTS = [
     rating: 4.9,
     reviews: 115,
     badge: "sale",
-    icon: "fa-bed",
-    image: "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&w=600&q=80",
-    gallery: [
-      "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&w=800&q=80"
-    ],
     description: "Silky soft 400 thread-count sateen weave organic cotton. Includes 1 fitted sheet, 1 duvet cover, and 2 pillowcases.",
     descriptionBn: "৪০০ থ্রেড কাউন্ট অর্গানিক কটন শিট, ডুভেট কাভার ও বালিশের কাভারের বিলাসবহুল সেট।",
     specs: { "Thread Count": "400 TC", "Weave": "Sateen Luxury", "Certification": "OEKO-TEX Standard 100", "Pieces": "4 Piece Set" },
@@ -268,11 +411,6 @@ const DEFAULT_PRODUCTS = [
     rating: 4.9,
     reviews: 320,
     badge: "hot",
-    icon: "fa-book",
-    image: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=600&q=80",
-    gallery: [
-      "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=800&q=80"
-    ],
     description: "Comprehensive guide to building production-grade on-device AI, local LLM orchestration, and high-performance Python services.",
     descriptionBn: "অন-ডিভাইস এআই, লোকাল এলএলএম ও উচ্চক্ষমতাসম্পন্ন সিস্টেম তৈরির বিশদ নির্দেশিকা।",
     specs: { "Author": "Engineering Press", "Pages": "480 Hardcover", "Language": "English & Bangla Notes", "Edition": "2026 Updated" },
@@ -294,11 +432,6 @@ const DEFAULT_PRODUCTS = [
     rating: 4.7,
     reviews: 176,
     badge: "sale",
-    icon: "fa-person-running",
-    image: "https://images.unsplash.com/photo-1601925260368-ae2f83cf8b7f?auto=format&fit=crop&w=600&q=80",
-    gallery: [
-      "https://images.unsplash.com/photo-1601925260368-ae2f83cf8b7f?auto=format&fit=crop&w=800&q=80"
-    ],
     description: "High-density natural tree rubber with laser-etched body alignment lines and non-slip textured grip.",
     descriptionBn: "প্রাকৃতিক রাবার দ্বারা তৈরি নন-স্লিপ গ্রিপযুক্ত ৬ মিমি কুশন ম্যাট।",
     specs: { "Material": "Natural Tree Rubber + PU", "Thickness": "6mm Cushioned", "Dimensions": "183 x 68 cm", "Weight": "2.6 kg" },
@@ -320,11 +453,6 @@ const DEFAULT_PRODUCTS = [
     rating: 4.9,
     reviews: 189,
     badge: "hot",
-    icon: "fa-basket-shopping",
-    image: "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&w=600&q=80",
-    gallery: [
-      "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&w=800&q=80"
-    ],
     description: "2-year aged long-grain aromatic basmati rice. Perfect elongation and non-sticky texture for premium Biryani & Pulao.",
     descriptionBn: "বিরিয়ানি ও পোলাও রান্নার জন্য ২ বছর পুরনো খাঁটি সুগন্ধি বাসমতি চাল।",
     specs: { "Origin": "Punjab Valley", "Age": "2 Years Matured", "Pack Size": "5 kg Air-tight Sack", "Grain Length": "8.4 mm+" },
@@ -346,11 +474,6 @@ const DEFAULT_PRODUCTS = [
     rating: 4.9,
     reviews: 245,
     badge: null,
-    icon: "fa-jar",
-    image: "https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&w=600&q=80",
-    gallery: [
-      "https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&w=800&q=80"
-    ],
     description: "100% pure raw unfiltered honey collected directly from natural beehives. Zero added sugar or preservatives.",
     descriptionBn: "কোনো প্রকার কৃত্রিম চিনি বা প্রিজারভেটিভ ছাড়া সুন্দরবনের প্রাকৃতিক খাঁটি মধু।",
     specs: { "Source": "Sundarbans Flora", "Processing": "Cold Unfiltered Raw", "Purity": "100% Lab Tested", "Net Weight": "500g Glass Jar" },
@@ -372,11 +495,6 @@ const DEFAULT_PRODUCTS = [
     rating: 4.8,
     reviews: 198,
     badge: "sale",
-    icon: "fa-spa",
-    image: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=600&q=80",
-    gallery: [
-      "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=800&q=80"
-    ],
     description: "Potent brightening and anti-aging serum with stabilized L-Ascorbic acid, Ferulic acid, and pure botanicals.",
     descriptionBn: "ত্বকের উজ্জ্বলতা বৃদ্ধি ও অ্যান্টি-এজিং ফর্মুলা সমৃদ্ধ অর্গানিক সিরাম।",
     specs: { "Key Actives": "20% Vitamin C, 1% Ferulic, Hyaluronic", "Volume": "30ml Dropper", "Skin Type": "All Skin Types", "Paraben Free": "Yes" },
@@ -398,11 +516,6 @@ const DEFAULT_PRODUCTS = [
     rating: 4.9,
     reviews: 164,
     badge: "new",
-    icon: "fa-keyboard",
-    image: "https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=600&q=80",
-    gallery: [
-      "https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=800&q=80"
-    ],
     description: "CNC Aluminum chassis, hot-swappable tactile switches, gasket mounted acoustics, RGB per-key backlighting, and Tri-mode wireless.",
     descriptionBn: "সিএনসি অ্যালুমিনিয়াম বডি, হট-সোয়াপ গ্যাস্কেট মাউন্টেড মেকানিক্যাল কীবোর্ড।",
     specs: { "Layout": "75% Compact (82 Keys)", "Switches": "Pre-lubed Gateron Yellow", "Connectivity": "2.4GHz + BT 5.1 + Type-C", "Battery": "4000 mAh" },
@@ -416,13 +529,13 @@ const DEFAULT_PRODUCTS = [
 ];
 
 const DEFAULT_CATEGORIES = [
-  { id: "electronics", name: "Electronics", nameBn: "ইলেকট্রনিক্স", icon: "fa-laptop", description: "Audio, wearables, computing & smart accessories", descriptionBn: "অডিও, ওয়্যারেবল ও স্মার্ট গ্যাজেটস" },
-  { id: "fashion", name: "Fashion", nameBn: "ফ্যাশন", icon: "fa-shirt", description: "Apparel, leather craft & lifestyle goods", descriptionBn: "পোশাক ও প্রিমিয়াম চামড়ার পণ্য" },
-  { id: "home", name: "Home & Living", nameBn: "ঘর ও বসবাস", icon: "fa-house", description: "Minimalist furniture & luxury bedding", descriptionBn: "আসবাবপত্র ও আরামদায়ক বেডিং" },
-  { id: "groceries", name: "Groceries", nameBn: "মুদিখানা", icon: "fa-basket-shopping", description: "Aged basmati, pure honey & organic pantry", descriptionBn: "খাঁটি মধু ও অর্গানিক খাদ্যপণ্য" },
-  { id: "beauty", name: "Beauty & Care", nameBn: "সৌন্দর্য ও যত্ন", icon: "fa-spa", description: "Clean skincare & holistic wellness formulas", descriptionBn: "ত্বকের যত্ন ও অর্গানিক প্রসাধনী" },
-  { id: "books", name: "Books & Education", nameBn: "বই ও শিক্ষা", icon: "fa-book", description: "Engineering, system design & literature", descriptionBn: "প্রকৌশল ও জ্ঞানচর্চার বই" },
-  { id: "sports", name: "Sports & Fitness", nameBn: "খেলা ও ফিটনেস", icon: "fa-dumbbell", description: "Yoga, movement & training essentials", descriptionBn: "ব্যায়াম ও ফিটনেস সরঞ্জাম" }
+  { id: "electronics", name: "Electronics", nameBn: "ইলেকট্রনিক্স", icon: "bolt", description: "Audio, wearables, computing & smart accessories", descriptionBn: "অডিও, ওয়্যারেবল ও স্মার্ট গ্যাজেটস" },
+  { id: "fashion", name: "Fashion", nameBn: "ফ্যাশন", icon: "gem", description: "Apparel, leather craft & lifestyle goods", descriptionBn: "পোশাক ও প্রিমিয়াম চামড়ার পণ্য" },
+  { id: "home", name: "Home & Living", nameBn: "ঘর ও বসবাস", icon: "gem", description: "Minimalist furniture & luxury bedding", descriptionBn: "আসবাবপত্র ও আরামদায়ক বেডিং" },
+  { id: "groceries", name: "Groceries", nameBn: "মুদিখানা", icon: "bag", description: "Aged basmati, pure honey & organic pantry", descriptionBn: "খাঁটি মধু ও অর্গানিক খাদ্যপণ্য" },
+  { id: "beauty", name: "Beauty & Care", nameBn: "সৌন্দর্য ও যত্ন", icon: "gem", description: "Clean skincare & holistic wellness formulas", descriptionBn: "ত্বকের যত্ন ও অর্গানিক প্রসাধনী" },
+  { id: "books", name: "Books & Education", nameBn: "বই ও শিক্ষা", icon: "gem", description: "Engineering, system design & literature", descriptionBn: "প্রকৌশল ও জ্ঞানচর্চার বই" },
+  { id: "sports", name: "Sports & Fitness", nameBn: "খেলা ও ফিটনেস", icon: "bolt", description: "Yoga, movement & training essentials", descriptionBn: "ব্যায়াম ও ফিটনেস সরঞ্জাম" }
 ];
 
 const DEFAULT_COUPONS = [
@@ -440,7 +553,6 @@ const DEFAULT_POSTS = [
     category: "Philosophy",
     date: "2026-03-15",
     readTime: "4 min",
-    icon: "fa-gem",
     excerpt: "Why fewer, better products transform both your workspace and your state of mind.",
     content: "<p>In an age saturated with disposable goods and planned obsolescence, choosing intention over volume is a form of quiet rebellion. At Iqra Online Mart, our curation follows a simple architectural doctrine: everything we stock must age gracefully, function with precision, and respect the human who holds it.</p><h3>The Longevity Standard</h3><p>From 400-thread-count Egyptian cotton to CNC-machined mechanical keyboards, we look for honest craftsmanship. When an object is built properly, you buy it once.</p>",
     status: "published"
@@ -452,7 +564,6 @@ const DEFAULT_POSTS = [
     category: "Productivity",
     date: "2026-03-10",
     readTime: "5 min",
-    icon: "fa-laptop",
     excerpt: "Audio isolation, tactile feedback, and ergonomic lighting for deep engineering work.",
     content: "<p>High-leverage work requires sensory calm. ANC headphones create an acoustic boundary, while mechanical switches provide positive tactile confirmation of every keypress. When you strip away visual clutter, concentration follows naturally.</p>",
     status: "published"
@@ -477,8 +588,6 @@ const DEFAULT_SETTINGS = {
   standardShippingFee: 80,
   expressShippingFee: 160,
   repoUrl: "https://github.com/soobujmiah/iqra-online-mart",
-  facebook: "https://facebook.com",
-  instagram: "https://instagram.com",
   adminCredentials: { username: "admin", password: "admin123" }
 };
 
@@ -487,7 +596,7 @@ const DEFAULT_PAGES = {
     badge: "Curated 2026 Collection",
     title: "Shop with intention.",
     highlight: "Live beautifully.",
-    subtitle: "A quiet, dark luxury marketplace for high-performance tech, crafted fashion, and daily essentials — delivered nationwide."
+    subtitle: "A dark, quiet luxury marketplace for high-performance tech, crafted fashion, and daily essentials — delivered nationwide."
   },
   about: {
     title: "A mart with manners.",
@@ -550,7 +659,7 @@ const Store = {
   currency: "BDT",
   appliedCoupon: null,
 
-  // Filters & sorting state
+  // Filters state
   filter: "all",
   priceMin: 0,
   priceMax: 10000,
@@ -591,9 +700,7 @@ const Store = {
   save(k, v) {
     try {
       localStorage.setItem(STORE_KEY + k, JSON.stringify(v));
-    } catch (e) {
-      console.warn("Storage write error", e);
-    }
+    } catch (e) {}
   },
 
   persistAll() {
@@ -617,7 +724,6 @@ const Store = {
     return this.lang === "bn" && p.descriptionBn ? p.descriptionBn : p.description;
   },
 
-  // Currency Converter & Formatter
   money(amountInBDT) {
     const cur = CURRENCIES[this.currency] || CURRENCIES.BDT;
     const converted = Number(amountInBDT || 0) * cur.rate;
@@ -633,7 +739,6 @@ const Store = {
     return this.products.filter((p) => p.status !== "inactive");
   },
 
-  /* Cart Operations */
   addToCart(id, qty = 1, variant = null) {
     const p = this.products.find((x) => x.id == id);
     if (!p || p.stock < 1) {
@@ -707,7 +812,6 @@ const Store = {
     return Math.max(0, sub - disc + ship);
   },
 
-  /* Wishlist Operations */
   toggleWish(id) {
     if (this.wishlist.includes(id)) {
       this.wishlist = this.wishlist.filter((x) => x !== id);
@@ -722,7 +826,6 @@ const Store = {
     UI.renderWishlistState();
   },
 
-  /* Comparison Operations */
   toggleCompare(id) {
     if (this.compareList.includes(id)) {
       this.compareList = this.compareList.filter((x) => x !== id);
@@ -795,7 +898,6 @@ const Auth = {
   }
 };
 
-/* Admin Authentication */
 const AdminAuth = {
   is() { return localStorage.getItem(STORE_KEY + "admin") === "1"; },
   login(user, pass) {
@@ -813,7 +915,7 @@ const AdminAuth = {
 };
 
 /* ==========================================================================
-   UI HELPERS, TOASTS & STAR RATING
+   TOASTS & STARS
    ========================================================================== */
 function toast(msg, type = "info") {
   let container = $(".toast-container");
@@ -824,12 +926,11 @@ function toast(msg, type = "info") {
   }
   const el = document.createElement("div");
   el.className = `toast toast-${type}`;
-  let icon = "fa-circle-info";
-  if (type === "success") icon = "fa-circle-check";
-  if (type === "danger") icon = "fa-circle-xmark";
-  if (type === "warning") icon = "fa-triangle-exclamation";
+  let icon = Icons.get("shield");
+  if (type === "success") icon = Icons.get("check");
+  if (type === "danger") icon = Icons.get("close");
 
-  el.innerHTML = `<i class="fa-solid ${icon} gold"></i> <span>${escapeHtml(msg)}</span>`;
+  el.innerHTML = `${icon} <span>${escapeHtml(msg)}</span>`;
   container.appendChild(el);
   setTimeout(() => {
     el.style.opacity = "0";
@@ -839,17 +940,15 @@ function toast(msg, type = "info") {
 }
 
 function stars(n) {
-  const rounded = Math.round(n * 2) / 2;
+  const rounded = Math.round(n);
   let html = "";
   for (let i = 1; i <= 5; i++) {
-    if (i <= rounded) html += '<i class="fa-solid fa-star"></i>';
-    else if (i - 0.5 === rounded) html += '<i class="fa-solid fa-star-half-stroke"></i>';
-    else html += '<i class="fa-regular fa-star"></i>';
+    html += `<span class="gold" style="font-size:0.9rem">${i <= rounded ? '★' : '☆'}</span>`;
   }
   return html;
 }
 
-/* Reusable Product Card Component */
+/* Product Card Generator */
 function productCard(p) {
   const isWish = Store.wishlist.includes(p.id);
   const discountPercent = p.oldPrice ? Math.round(((p.oldPrice - p.price) / p.oldPrice) * 100) : 0;
@@ -858,21 +957,18 @@ function productCard(p) {
     <div class="product-media">
       ${p.badge ? `<span class="p-badge ${p.badge}">${escapeHtml(p.badge)}</span>` : (discountPercent > 0 ? `<span class="p-badge sale">-${discountPercent}%</span>` : "")}
       <div class="product-media-actions">
-        <button class="media-action-btn ${isWish ? "active" : ""}" data-wish="${p.id}" title="Wishlist" aria-label="Add to wishlist">
-          <i class="fa-solid fa-heart"></i>
+        <button class="media-action-btn ${isWish ? "active" : ""}" data-wish="${p.id}" title="Wishlist" aria-label="Wishlist">
+          ${Icons.get(isWish ? "heartFill" : "heart")}
         </button>
-        <button class="media-action-btn" data-compare="${p.id}" title="Compare" aria-label="Compare product">
-          <i class="fa-solid fa-code-compare"></i>
+        <button class="media-action-btn" data-compare="${p.id}" title="Compare" aria-label="Compare">
+          ${Icons.get("compare")}
         </button>
       </div>
-      <a href="product.html?id=${p.id}" class="product-img-link" style="display:block;width:100%;height:100%">
-        ${p.image ? `<img src="${escapeHtml(p.image)}" alt="${escapeHtml(p.name)}" class="product-img" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'">` : ""}
-        <div class="product-icon-fallback" style="${p.image ? 'display:none;' : ''}width:100%;height:100%;display:grid;place-items:center;">
-          <i class="fa-solid ${escapeHtml(p.icon || "fa-box")}"></i>
-        </div>
+      <a href="product.html?id=${p.id}" class="product-img-link" style="display:grid;place-items:center;width:100%;height:100%">
+        ${ProductArtwork.get(p.sku, p.name)}
       </a>
       <button class="quick-view-overlay-btn" data-quickview="${p.id}">
-        <i class="fa-solid fa-eye"></i> ${Store.t("quickView")}
+        ${Icons.get("eye")} <span>${Store.t("quickView")}</span>
       </button>
     </div>
     <div class="product-body">
@@ -888,7 +984,7 @@ function productCard(p) {
       </div>
       <div class="product-actions">
         <button class="btn btn-sm" data-add="${p.id}" ${p.stock < 1 ? "disabled" : ""}>
-          <i class="fa-solid fa-bag-shopping"></i> ${p.stock > 0 ? Store.t("addToCart") : Store.t("outOfStock")}
+          ${Icons.get("bag")} <span>${p.stock > 0 ? Store.t("addToCart") : Store.t("outOfStock")}</span>
         </button>
         <a class="btn btn-outline btn-sm" href="product.html?id=${p.id}">${Store.t("viewDetails")}</a>
       </div>
@@ -897,7 +993,7 @@ function productCard(p) {
 }
 
 /* ==========================================================================
-   UI CONTROLLER & EVENT BINDINGS
+   UI CONTROLLER
    ========================================================================== */
 const UI = {
   applyChrome() {
@@ -905,30 +1001,27 @@ const UI = {
     document.documentElement.setAttribute("data-theme", Store.theme);
 
     // Theme toggle button icons
-    const icon = Store.theme === "dark" ? "fa-moon" : "fa-sun";
-    $$("#themeToggle i, .theme-toggle i").forEach((i) => { i.className = `fa-solid ${icon}`; });
+    $$("#themeToggle, .theme-toggle").forEach((btn) => {
+      btn.innerHTML = Icons.get(Store.theme === "dark" ? "moon" : "sun");
+    });
 
-    // Language label & buttons
     const langLabel = $("#currentLangLabel");
     if (langLabel) langLabel.textContent = Store.lang === "bn" ? "বাংলা" : "English";
     $$(".lang-option").forEach((b) => {
       b.classList.toggle("active", b.dataset.lang === Store.lang);
     });
 
-    // Currency label & buttons
     const curLabel = $("#currentCurrencyLabel");
     if (curLabel) curLabel.textContent = CURRENCIES[Store.currency]?.label || Store.currency;
     $$(".currency-option").forEach((b) => {
       b.classList.toggle("active", b.dataset.cur === Store.currency);
     });
 
-    // i18n text keys
     $$("[data-i18n]").forEach((el) => {
       const v = Store.t(el.dataset.i18n);
       if (v) el.textContent = v;
     });
 
-    // CMS dynamic text sync
     const s = Store.settings;
     $$("[data-cms=phone]").forEach((el) => { el.textContent = s.phone; });
     $$("[data-cms=email]").forEach((el) => { el.textContent = s.email; });
@@ -957,7 +1050,9 @@ const UI = {
   renderWishlistState() {
     $$("[data-wish]").forEach((btn) => {
       const id = +btn.dataset.wish;
-      btn.classList.toggle("active", Store.wishlist.includes(id));
+      const on = Store.wishlist.includes(id);
+      btn.classList.toggle("active", on);
+      btn.innerHTML = Icons.get(on ? "heartFill" : "heart");
     });
   },
 
@@ -969,29 +1064,28 @@ const UI = {
     const sub = Store.cartSubtotal();
     const threshold = Store.settings.freeShippingThreshold || 1500;
 
-    // Free Shipping Progress calculation
     const freeShipBox = $("#freeShippingBox");
     if (freeShipBox) {
       if (sub >= threshold) {
-        freeShipBox.innerHTML = `<span class="gold"><i class="fa-solid fa-truck-fast"></i> ${Store.t("freeShippingUnlocked")}</span>
+        freeShipBox.innerHTML = `<span class="gold">${Icons.get("truck")} ${Store.t("freeShippingUnlocked")}</span>
           <div class="free-shipping-bar-wrap"><div class="free-shipping-bar-fill" style="width:100%"></div></div>`;
       } else {
         const remaining = threshold - sub;
         const progress = Math.min(100, Math.round((sub / threshold) * 100));
-        freeShipBox.innerHTML = `<span><i class="fa-solid fa-truck"></i> ${Store.t("addMoreForFreeShip").replace("{amount}", Store.money(remaining))}</span>
+        freeShipBox.innerHTML = `<span>${Icons.get("truck")} ${Store.t("addMoreForFreeShip").replace("{amount}", Store.money(remaining))}</span>
           <div class="free-shipping-bar-wrap"><div class="free-shipping-bar-fill" style="width:${progress}%"></div></div>`;
       }
     }
 
     if (!items.length) {
       body.innerHTML = `<div class="empty">
-        <i class="fa-solid fa-bag-shopping gold" style="font-size:2.5rem;margin-bottom:1rem;display:block"></i>
+        <div class="gold" style="font-size:2.5rem;margin-bottom:1rem">${Icons.get("bag")}</div>
         <p>${Store.t("emptyCart")}</p>
         <a href="index.html#products" class="btn btn-sm" style="margin-top:1rem">${Store.t("shopNow")}</a>
       </div>`;
     } else {
       body.innerHTML = items.map((i) => `<div class="cart-item">
-        <img src="${escapeHtml(i.image || 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=150&q=80')}" class="cart-item-img" alt="${escapeHtml(i.name)}">
+        <div class="cart-item-img">${ProductArtwork.get(i.sku, i.name)}</div>
         <div>
           <h4>${escapeHtml(Store.pname(i))}</h4>
           ${i.variant ? `<small style="color:var(--muted)">Variant: ${escapeHtml(i.variant)}</small><br>` : ""}
@@ -1004,7 +1098,7 @@ const UI = {
         <div style="text-align:right">
           <strong>${Store.money(i.line)}</strong><br>
           <button class="btn-ghost btn-sm" data-qty="${i.id}" data-d="0" style="margin-top:0.4rem;color:var(--danger)">
-            <i class="fa-solid fa-trash-can"></i>
+            ${Icons.get("trash")}
           </button>
         </div>
       </div>`).join("");
@@ -1033,12 +1127,11 @@ const UI = {
     }
   },
 
-  /* Home View Renderer */
   renderHome() {
     const cats = $("#categoriesGrid");
     if (cats) {
       cats.innerHTML = Store.categories.map((c) => `<div class="cat-card" data-gocat="${escapeHtml(c.name)}">
-        <div class="cat-ico"><i class="fa-solid ${escapeHtml(c.icon)}"></i></div>
+        <div class="cat-ico">${Icons.get(c.icon || "gem")}</div>
         <h3>${escapeHtml(Store.lang === "bn" && c.nameBn ? c.nameBn : c.name)}</h3>
         <p>${escapeHtml(Store.lang === "bn" && c.descriptionBn ? c.descriptionBn : c.description)}</p>
       </div>`).join("");
@@ -1076,7 +1169,6 @@ const UI = {
       </article>`).join("");
     }
 
-    // Dynamic CMS content for Hero & About
     const h = Store.pages.hero || {};
     const setTxt = (sel, val) => { const el = $(sel); if (el && val) el.textContent = val; };
     setTxt("[data-cms=hero-badge]", h.badge);
@@ -1092,47 +1184,37 @@ const UI = {
     setTxt("[data-cms=about-p2]", a.p2);
   },
 
-  /* Catalog Renderer with Full Faceted Filters */
   renderCatalog() {
     const grid = $("#productsGrid");
     if (!grid) return;
 
     let list = Store.activeProducts();
 
-    // Category filter
     if (Store.filter !== "all") {
       list = list.filter((p) => p.category.toLowerCase() === Store.filter.toLowerCase());
     }
-
-    // Price Range Filter
     if (Store.priceMax > 0) {
       list = list.filter((p) => p.price >= Store.priceMin && p.price <= Store.priceMax);
     }
-
-    // In Stock Only
     if (Store.onlyInStock) {
       list = list.filter((p) => p.stock > 0);
     }
-
-    // On Sale Only
     if (Store.onlyOnSale) {
       list = list.filter((p) => p.oldPrice && p.oldPrice > p.price);
     }
 
-    // Sorting
     if (Store.sort === "priceLow") list.sort((a, b) => a.price - b.price);
     if (Store.sort === "priceHigh") list.sort((a, b) => b.price - a.price);
     if (Store.sort === "rating") list.sort((a, b) => b.rating - a.rating);
     if (Store.sort === "newest") list.sort((a, b) => (b.createdAt || "").localeCompare(a.createdAt || ""));
     if (Store.sort === "name") list.sort((a, b) => a.name.localeCompare(b.name));
 
-    // View Mode Class
     grid.className = `products-grid ${Store.viewMode === "list" ? "list-view" : ""}`;
 
     grid.innerHTML = list.length
       ? list.map(productCard).join("")
       : `<div class="empty" style="grid-column: 1 / -1;">
-          <i class="fa-solid fa-box-open gold" style="font-size:2.5rem;margin-bottom:1rem;display:block"></i>
+          <div class="gold" style="font-size:2.5rem;margin-bottom:1rem">${Icons.get("search")}</div>
           <p>No products found matching your current filter criteria.</p>
           <button class="btn btn-outline btn-sm" id="clearFilterBtn" style="margin-top:1rem">Clear Filters</button>
         </div>`;
@@ -1158,7 +1240,6 @@ const UI = {
     }
   },
 
-  /* Quick View Modal Renderer */
   openQuickView(id) {
     const p = Store.products.find((x) => x.id == id);
     if (!p) return;
@@ -1169,7 +1250,7 @@ const UI = {
       modal.id = "quickViewModal";
       modal.className = "modal";
       modal.innerHTML = `<div class="modal-content modal-lg">
-        <button class="modal-close" data-close-modal><i class="fa-solid fa-times"></i></button>
+        <button class="modal-close" data-close-modal>${Icons.get("close")}</button>
         <div id="quickViewContent"></div>
       </div>`;
       document.body.appendChild(modal);
@@ -1179,7 +1260,7 @@ const UI = {
     content.innerHTML = `<div class="pd-grid" style="gap:2rem">
       <div class="pd-gallery">
         <div class="pd-main-img-wrap" style="aspect-ratio:1/1">
-          <img src="${escapeHtml(p.image || '')}" class="pd-main-img" id="qvMainImg" alt="${escapeHtml(p.name)}">
+          ${ProductArtwork.get(p.sku, p.name)}
         </div>
       </div>
       <div class="pd-info">
@@ -1206,7 +1287,7 @@ const UI = {
             <button class="qty-btn" id="qvPlus">+</button>
           </div>
           <button class="btn" id="qvAddBtn" style="flex:1">
-            <i class="fa-solid fa-bag-shopping"></i> ${Store.t("addToCart")}
+            ${Icons.get("bag")} <span>${Store.t("addToCart")}</span>
           </button>
         </div>
 
@@ -1239,7 +1320,6 @@ const UI = {
     SoundFX.play("click");
   },
 
-  /* Product Comparison Modal */
   renderCompareModal() {
     let modal = $("#compareModal");
     if (!modal) {
@@ -1247,7 +1327,7 @@ const UI = {
       modal.id = "compareModal";
       modal.className = "modal";
       modal.innerHTML = `<div class="modal-content modal-xl">
-        <button class="modal-close" data-close-modal><i class="fa-solid fa-times"></i></button>
+        <button class="modal-close" data-close-modal>${Icons.get("close")}</button>
         <h2 style="font-family:var(--serif);margin-bottom:1rem">Product <span class="gradient-text">Comparison</span></h2>
         <div id="compareContent"></div>
       </div>`;
@@ -1259,7 +1339,7 @@ const UI = {
 
     if (!items.length) {
       content.innerHTML = `<div class="empty">
-        <i class="fa-solid fa-code-compare gold" style="font-size:2.5rem;margin-bottom:1rem;display:block"></i>
+        <div class="gold" style="font-size:2.5rem;margin-bottom:1rem">${Icons.get("compare")}</div>
         <p>No products added for comparison yet.</p>
       </div>`;
     } else {
@@ -1269,7 +1349,7 @@ const UI = {
             <tr>
               <th>Feature</th>
               ${items.map((i) => `<td>
-                <img src="${escapeHtml(i.image || '')}" style="width:90px;height:90px;object-fit:cover;border-radius:var(--radius-sm);margin:0 auto 0.5rem" alt="${escapeHtml(i.name)}">
+                <div style="width:70px;height:70px;margin:0 auto 0.5rem">${ProductArtwork.get(i.sku, i.name)}</div>
                 <strong>${escapeHtml(Store.pname(i))}</strong><br>
                 <button class="btn-ghost btn-sm" data-rem-compare="${i.id}" style="color:var(--danger);font-size:0.75rem">Remove</button>
               </td>`).join("")}
@@ -1289,9 +1369,7 @@ const UI = {
     modal.classList.add("open");
   },
 
-  /* Global Event Listeners */
   bind() {
-    // Theme toggle
     $$("#themeToggle, .theme-toggle").forEach((btn) => {
       btn.addEventListener("click", () => {
         Store.theme = Store.theme === "dark" ? "light" : "dark";
@@ -1301,7 +1379,6 @@ const UI = {
       });
     });
 
-    // Language Dropdown
     $("#langBtn")?.addEventListener("click", (e) => {
       e.stopPropagation();
       $("#langDropdownWrap")?.classList.toggle("open");
@@ -1316,7 +1393,6 @@ const UI = {
       });
     });
 
-    // Currency Dropdown
     $("#currencyBtn")?.addEventListener("click", (e) => {
       e.stopPropagation();
       $("#currencyDropdownWrap")?.classList.toggle("open");
@@ -1338,24 +1414,20 @@ const UI = {
       });
     });
 
-    // Close Dropdowns on outside click
     document.addEventListener("click", () => {
       $("#langDropdownWrap")?.classList.remove("open");
       $("#currencyDropdownWrap")?.classList.remove("open");
     });
 
-    // Mobile Menu Toggle
     $("#mobileMenuBtn")?.addEventListener("click", () => {
       $(".nav-links")?.classList.toggle("open");
     });
 
-    // Cart Drawer Open/Close
     $("#cartBtn")?.addEventListener("click", () => this.openCart(true));
     $("#cartClose")?.addEventListener("click", () => this.openCart(false));
     $("#cartDrawerOverlay")?.addEventListener("click", () => this.openCart(false));
     $("#checkoutBtn")?.addEventListener("click", () => { location.href = "checkout.html"; });
 
-    // Promo Code Application in Cart
     $("#applyCouponBtn")?.addEventListener("click", () => {
       const code = ($("#couponCodeInput")?.value || "").trim().toUpperCase();
       const match = Store.coupons.find((c) => c.code === code);
@@ -1370,14 +1442,12 @@ const UI = {
       }
     });
 
-    // Live Search Autocomplete & Overlay
     $("#searchBtn")?.addEventListener("click", () => {
       $("#searchModal")?.classList.add("open");
       $("#searchInput")?.focus();
     });
     $("#searchClose")?.addEventListener("click", () => $("#searchModal")?.classList.remove("open"));
 
-    // Keyboard shortcut '/' or 'Ctrl+K' to open search
     document.addEventListener("keydown", (e) => {
       if ((e.key === "/" || (e.ctrlKey && e.key === "k")) && !["INPUT", "TEXTAREA"].includes(document.activeElement.tagName)) {
         e.preventDefault();
@@ -1408,7 +1478,7 @@ const UI = {
 
       box.innerHTML = hits.length
         ? `<div class="search-results-list">${hits.map((p) => `<div class="search-hit-item" onclick="location.href='product.html?id=${p.id}'">
-            <img src="${escapeHtml(p.image || '')}" class="search-hit-img" alt="${escapeHtml(p.name)}">
+            <div class="search-hit-img">${ProductArtwork.get(p.sku, p.name)}</div>
             <div>
               <strong>${escapeHtml(Store.pname(p))}</strong>
               <small style="color:var(--muted);display:block">${escapeHtml(p.category)} · ${p.stock > 0 ? 'In Stock' : 'Out of Stock'}</small>
@@ -1418,7 +1488,6 @@ const UI = {
         : `<p class="empty">No matching products found for "${escapeHtml(q)}"</p>`;
     });
 
-    // Catalog Filter Controls
     $("#priceMinInput")?.addEventListener("input", (e) => {
       Store.priceMin = Number(e.target.value) || 0;
       this.renderCatalog();
@@ -1452,39 +1521,22 @@ const UI = {
       this.renderCatalog();
     });
 
-    // Global Delegated Click Handlers
     document.addEventListener("click", (e) => {
-      // Add to Cart
       const add = e.target.closest("[data-add]");
-      if (add) {
-        Store.addToCart(+add.dataset.add);
-      }
+      if (add) Store.addToCart(+add.dataset.add);
 
-      // Wishlist Toggle
       const w = e.target.closest("[data-wish]");
-      if (w) {
-        Store.toggleWish(+w.dataset.wish);
-      }
+      if (w) Store.toggleWish(+w.dataset.wish);
 
-      // Quick View
       const qv = e.target.closest("[data-quickview]");
-      if (qv) {
-        this.openQuickView(+qv.dataset.quickview);
-      }
+      if (qv) this.openQuickView(+qv.dataset.quickview);
 
-      // Compare Toggle
       const cmp = e.target.closest("[data-compare]");
-      if (cmp) {
-        Store.toggleCompare(+cmp.dataset.compare);
-      }
+      if (cmp) Store.toggleCompare(+cmp.dataset.compare);
 
-      // Remove from comparison table
       const remCmp = e.target.closest("[data-rem-compare]");
-      if (remCmp) {
-        Store.toggleCompare(+remCmp.dataset.remCompare);
-      }
+      if (remCmp) Store.toggleCompare(+remCmp.dataset.remCompare);
 
-      // Cart Quantity Stepper
       const q = e.target.closest("[data-qty]");
       if (q) {
         const id = +q.dataset.qty;
@@ -1494,14 +1546,12 @@ const UI = {
         else Store.setQty(id, (line?.qty || 1) + d);
       }
 
-      // Category Chip Filter Click
       const catChip = e.target.closest("[data-filter-cat]");
       if (catChip) {
         Store.filter = catChip.dataset.filterCat;
         this.renderCatalog();
       }
 
-      // Home category card go-to
       const gc = e.target.closest("[data-gocat]");
       if (gc) {
         Store.filter = gc.dataset.gocat;
@@ -1509,13 +1559,11 @@ const UI = {
         document.querySelector("#products")?.scrollIntoView({ behavior: "smooth" });
       }
 
-      // Modal Closers
       const closeModal = e.target.closest("[data-close-modal]");
       if (closeModal) {
         $$(".modal").forEach((m) => m.classList.remove("open"));
       }
 
-      // Clear Filters button
       if (e.target.id === "clearFilterBtn" || e.target.closest("#clearFilterBtn")) {
         Store.filter = "all";
         Store.priceMin = 0;
@@ -1530,7 +1578,6 @@ const UI = {
       }
     });
 
-    // Newsletter Submission
     $("#newsletterForm")?.addEventListener("submit", (e) => {
       e.preventDefault();
       const email = e.target.querySelector("input").value.trim();
@@ -1546,7 +1593,7 @@ const UI = {
 };
 
 /* ==========================================================================
-   PRODUCT DETAIL CONTROLLER (GALLERY, REVIEWS, SPECS)
+   PRODUCT DETAIL CONTROLLER
    ========================================================================== */
 const ProductDetail = {
   render() {
@@ -1561,10 +1608,7 @@ const ProductDetail = {
     }
 
     document.title = `${Store.pname(p)} · Iqra Mart`;
-
-    // Calculate savings
     const discountPercent = p.oldPrice ? Math.round(((p.oldPrice - p.price) / p.oldPrice) * 100) : 0;
-    const galleryImages = p.gallery && p.gallery.length ? p.gallery : (p.image ? [p.image] : []);
 
     box.innerHTML = `
       <div class="breadcrumb">
@@ -1576,13 +1620,8 @@ const ProductDetail = {
       <div class="pd-grid">
         <div class="pd-gallery">
           <div class="pd-main-img-wrap">
-            <img src="${escapeHtml(galleryImages[0] || '')}" class="pd-main-img" id="pdCurrentImg" alt="${escapeHtml(p.name)}">
+            ${ProductArtwork.get(p.sku, p.name)}
           </div>
-          ${galleryImages.length > 1 ? `<div class="pd-thumbnails">
-            ${galleryImages.map((img, i) => `<div class="pd-thumb ${i === 0 ? 'active' : ''}" data-gallery-img="${escapeHtml(img)}">
-              <img src="${escapeHtml(img)}" alt="${escapeHtml(p.name)} thumbnail ${i+1}">
-            </div>`).join('')}
-          </div>` : ''}
         </div>
 
         <div class="pd-info">
@@ -1590,7 +1629,7 @@ const ProductDetail = {
             <span class="product-cat">${escapeHtml(p.category)}</span>
             <span class="pd-sku">SKU: <strong>${escapeHtml(p.sku || 'IQ-' + p.id)}</strong></span>
             <span class="pd-stock-badge ${p.stock > 10 ? 'in-stock' : p.stock > 0 ? 'low-stock' : 'out-of-stock'}">
-              <i class="fa-solid fa-circle" style="font-size:0.5rem"></i> ${p.stock > 0 ? `In Stock (${p.stock} units)` : 'Out of Stock'}
+              ${Icons.get("check")} ${p.stock > 0 ? `In Stock (${p.stock} units)` : 'Out of Stock'}
             </span>
           </div>
 
@@ -1630,24 +1669,20 @@ const ProductDetail = {
               <button class="qty-btn" id="pdPlus" aria-label="Increase quantity">+</button>
             </div>
             <button class="btn btn-lg" id="pdAdd" style="flex:1" ${p.stock < 1 ? 'disabled' : ''}>
-              <i class="fa-solid fa-bag-shopping"></i> ${p.stock > 0 ? Store.t("addToCart") : Store.t("outOfStock")}
+              ${Icons.get("bag")} <span>${p.stock > 0 ? Store.t("addToCart") : Store.t("outOfStock")}</span>
             </button>
             <button class="icon-btn" id="pdWishBtn" title="Wishlist">
-              <i class="fa-solid fa-heart ${Store.wishlist.includes(p.id) ? 'gold' : ''}"></i>
+              ${Icons.get(Store.wishlist.includes(p.id) ? "heartFill" : "heart")}
             </button>
           </div>
 
-          <!-- Social Share Row -->
           <div style="display:flex;align-items:center;gap:1rem;padding-top:1.5rem;border-top:1px solid var(--line-faint)">
-            <span style="font-size:0.85rem;color:var(--muted)">Share product:</span>
-            <button class="icon-btn" style="width:34px;height:34px;font-size:0.85rem" id="shareCopyBtn" title="Copy link"><i class="fa-solid fa-link"></i></button>
-            <a href="https://api.whatsapp.com/send?text=${encodeURIComponent(location.href)}" target="_blank" class="icon-btn" style="width:34px;height:34px;font-size:0.85rem" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
-            <a href="https://t.me/share/url?url=${encodeURIComponent(location.href)}" target="_blank" class="icon-btn" style="width:34px;height:34px;font-size:0.85rem" title="Telegram"><i class="fa-brands fa-telegram"></i></a>
+            <span style="font-size:0.85rem;color:var(--muted)">Share item:</span>
+            <button class="icon-btn" style="width:34px;height:34px" id="shareCopyBtn" title="Copy link">${Icons.get("share")}</button>
           </div>
         </div>
       </div>
 
-      <!-- Tabbed Specifications, Reviews & Shipping -->
       <div class="pd-tabs-container">
         <div class="pd-tab-nav">
           <button class="pd-tab-btn active" data-tab="description">Description</button>
@@ -1686,12 +1721,9 @@ const ProductDetail = {
               <div class="rating-bar-row"><span>5 Star</span><div class="rating-bar-wrap"><div class="rating-bar-fill" style="width:85%"></div></div><span>85%</span></div>
               <div class="rating-bar-row"><span>4 Star</span><div class="rating-bar-wrap"><div class="rating-bar-fill" style="width:12%"></div></div><span>12%</span></div>
               <div class="rating-bar-row"><span>3 Star</span><div class="rating-bar-wrap"><div class="rating-bar-fill" style="width:3%"></div></div><span>3%</span></div>
-              <div class="rating-bar-row"><span>2 Star</span><div class="rating-bar-wrap"><div class="rating-bar-fill" style="width:0%"></div></div><span>0%</span></div>
-              <div class="rating-bar-row"><span>1 Star</span><div class="rating-bar-wrap"><div class="rating-bar-fill" style="width:0%"></div></div><span>0%</span></div>
             </div>
           </div>
 
-          <!-- Review Form -->
           <div class="checkout-card" style="margin-top:2rem">
             <h3 style="font-family:var(--serif);font-size:1.3rem;margin-bottom:1rem">Write a Verified Review</h3>
             <form id="productReviewForm">
@@ -1702,13 +1734,10 @@ const ProductDetail = {
                     <option value="5">⭐⭐⭐⭐⭐ (5 - Outstanding)</option>
                     <option value="4">⭐⭐⭐⭐ (4 - Very Good)</option>
                     <option value="3">⭐⭐⭐ (3 - Average)</option>
-                    <option value="2">⭐⭐ (2 - Poor)</option>
-                    <option value="1">⭐ (1 - Terrible)</option>
                   </select>
                 </div>
               </div>
-              <div class="form-group"><label class="form-label">Review Headline</label><input class="form-input" name="reviewTitle" placeholder="e.g. Exceptional sound and battery life" required></div>
-              <div class="form-group"><label class="form-label">Review Comments</label><textarea class="form-textarea" name="reviewBody" placeholder="Describe your experience with the product..." required></textarea></div>
+              <div class="form-group"><label class="form-label">Review Comments</label><textarea class="form-textarea" name="reviewBody" placeholder="Describe your experience..." required></textarea></div>
               <button class="btn">Submit Review</button>
             </form>
           </div>
@@ -1718,26 +1747,15 @@ const ProductDetail = {
           <div class="checkout-card" style="line-height:1.8">
             <h3 style="font-family:var(--serif);font-size:1.4rem;margin-bottom:1rem">Shipping & Returns Policy</h3>
             <ul style="padding-left:1.5rem;color:var(--ink-secondary);display:flex;flex-direction:column;gap:0.75rem">
-              <li><strong>Free Nationwide Shipping:</strong> Automatically applied to all orders above ${Store.money(Store.settings.freeShippingThreshold || 1500)}.</li>
-              <li><strong>Dhaka Metro Dispatch:</strong> Express next-day delivery available for ৳160.</li>
-              <li><strong>7-Day Hassle-Free Returns:</strong> Return eligible unused items in original packaging within 7 calendar days for a full refund or replacement.</li>
-              <li><strong>Payment Protection:</strong> Pay via Cash on Delivery, bKash, Nagad, Rocket or all major Debit/Credit Cards.</li>
+              <li><strong>Free Nationwide Shipping:</strong> Applied automatically on orders over ${Store.money(Store.settings.freeShippingThreshold || 1500)}.</li>
+              <li><strong>Dhaka Metro Dispatch:</strong> Express next-day delivery available.</li>
+              <li><strong>7-Day Returns:</strong> Full refunds on unblemished items in original packaging.</li>
             </ul>
           </div>
         </div>
       </div>
     `;
 
-    // Interactive Gallery Switcher
-    $$("[data-gallery-img]", box).forEach((thumb) => {
-      thumb.addEventListener("click", () => {
-        $$(".pd-thumb", box).forEach((t) => t.classList.remove("active"));
-        thumb.classList.add("active");
-        $("#pdCurrentImg").src = thumb.dataset.galleryImg;
-      });
-    });
-
-    // Variants Selection
     let selectedColor = p.colors ? p.colors[0] : null;
     let selectedSize = p.sizes ? p.sizes[0] : null;
 
@@ -1750,16 +1768,6 @@ const ProductDetail = {
       });
     });
 
-    $$("[data-pd-size]", box).forEach((btn) => {
-      btn.addEventListener("click", () => {
-        $$("[data-pd-size]", box).forEach((b) => b.classList.remove("active"));
-        btn.classList.add("active");
-        selectedSize = btn.dataset.pdSize;
-        $("#pdSelectedSize").textContent = selectedSize;
-      });
-    });
-
-    // Quantity Stepper
     let q = 1;
     $("#pdMinus").onclick = () => { q = Math.max(1, q - 1); $("#pdQty").textContent = q; };
     $("#pdPlus").onclick = () => { q = Math.min(p.stock, q + 1); $("#pdQty").textContent = q; };
@@ -1770,10 +1778,9 @@ const ProductDetail = {
 
     $("#pdWishBtn").onclick = () => {
       Store.toggleWish(p.id);
-      $("#pdWishBtn i").classList.toggle("gold", Store.wishlist.includes(p.id));
+      $("#pdWishBtn").innerHTML = Icons.get(Store.wishlist.includes(p.id) ? "heartFill" : "heart");
     };
 
-    // Tab Navigation
     $$(".pd-tab-btn", box).forEach((btn) => {
       btn.addEventListener("click", () => {
         $$(".pd-tab-btn", box).forEach((b) => b.classList.remove("active"));
@@ -1783,20 +1790,17 @@ const ProductDetail = {
       });
     });
 
-    // Copy Link
     $("#shareCopyBtn")?.addEventListener("click", () => {
       navigator.clipboard.writeText(location.href);
       toast("Link copied to clipboard!", "success");
     });
 
-    // Review Submission
     $("#productReviewForm")?.addEventListener("submit", (e) => {
       e.preventDefault();
       toast("Thank you! Your review has been submitted.", "success");
       e.target.reset();
     });
 
-    // Related Products
     const rel = $("#relatedProducts");
     if (rel) {
       rel.innerHTML = Store.activeProducts()
@@ -1809,7 +1813,7 @@ const ProductDetail = {
 };
 
 /* ==========================================================================
-   CHECKOUT CONTROLLER (MULTI-GATEWAY PAYMENT & INVOICE GENERATION)
+   CHECKOUT CONTROLLER
    ========================================================================== */
 const Checkout = {
   render() {
@@ -1820,7 +1824,7 @@ const Checkout = {
     const items = Store.cartItems();
     if (!items.length) {
       formBox.innerHTML = `<div class="empty">
-        <i class="fa-solid fa-bag-shopping gold" style="font-size:2.5rem;margin-bottom:1rem;display:block"></i>
+        <div class="gold" style="font-size:2.5rem;margin-bottom:1rem">${Icons.get("bag")}</div>
         <h3>Your shopping bag is empty</h3>
         <p style="margin:0.5rem 0 1.5rem">Add items to your bag to proceed with checkout.</p>
         <a class="btn" href="index.html#products">Browse Catalog</a>
@@ -1834,7 +1838,7 @@ const Checkout = {
 
     formBox.innerHTML = `
       <form class="checkout-card" id="orderCheckoutForm">
-        <h3><i class="fa-solid fa-location-dot gold"></i> 1. Contact & Shipping Address</h3>
+        <h3>${Icons.get("location")} <span>1. Shipping Address</span></h3>
 
         <div class="form-row">
           <div class="form-group"><label class="form-label">First Name</label><input class="form-input" name="firstName" value="${escapeHtml(user.firstName || '')}" required></div>
@@ -1843,14 +1847,14 @@ const Checkout = {
 
         <div class="form-row">
           <div class="form-group"><label class="form-label">Email Address</label><input class="form-input" name="email" type="email" value="${escapeHtml(user.email || '')}" required></div>
-          <div class="form-group"><label class="form-label">Mobile Phone (e.g. 017XXXXXXXX)</label><input class="form-input" name="phone" value="${escapeHtml(user.phone || '')}" required></div>
+          <div class="form-group"><label class="form-label">Phone Number (017XXXXXXXX)</label><input class="form-input" name="phone" value="${escapeHtml(user.phone || '')}" required></div>
         </div>
 
         <div class="form-group"><label class="form-label">Delivery Street Address</label><input class="form-input" name="address" placeholder="House, Road, Area, Ward" required></div>
 
         <div class="form-row-3">
           <div class="form-group"><label class="form-label">Division</label>
-            <select class="form-select" name="division" id="checkoutDivision">
+            <select class="form-select" name="division">
               <option value="Dhaka">Dhaka</option>
               <option value="Chattogram">Chattogram</option>
               <option value="Rajshahi">Rajshahi</option>
@@ -1861,11 +1865,11 @@ const Checkout = {
               <option value="Mymensingh">Mymensingh</option>
             </select>
           </div>
-          <div class="form-group"><label class="form-label">District / City</label><input class="form-input" name="city" value="Dhaka" required></div>
+          <div class="form-group"><label class="form-label">City / District</label><input class="form-input" name="city" value="Dhaka" required></div>
           <div class="form-group"><label class="form-label">Postal Code</label><input class="form-input" name="zip" value="1340" required></div>
         </div>
 
-        <h3 style="margin:2rem 0 1rem"><i class="fa-solid fa-truck gold"></i> 2. Delivery Method</h3>
+        <h3 style="margin:2rem 0 1rem">${Icons.get("truck")} <span>2. Delivery Option</span></h3>
         <div style="display:grid;gap:0.75rem;margin-bottom:1.5rem">
           <label class="pay-opt-card active" style="text-align:left;display:flex;align-items:center;justify-content:space-between">
             <div>
@@ -1879,44 +1883,43 @@ const Checkout = {
           <label class="pay-opt-card" style="text-align:left;display:flex;align-items:center;justify-content:space-between">
             <div>
               <input type="radio" name="shippingMethod" value="express">
-              <strong>Express Metro Priority Dispatch (Same/Next Day)</strong><br>
-              <small style="color:var(--muted)">Available for Dhaka Metro areas</small>
+              <strong>Express Metro Priority Dispatch (Next Day)</strong><br>
+              <small style="color:var(--muted)">Available for Dhaka Metro</small>
             </div>
             <strong>${Store.money(Store.settings.expressShippingFee || 160)}</strong>
           </label>
         </div>
 
-        <h3 style="margin:2rem 0 1rem"><i class="fa-solid fa-credit-card gold"></i> 3. Payment Method</h3>
+        <h3 style="margin:2rem 0 1rem">${Icons.get("card")} <span>3. Payment Gateway</span></h3>
         <div class="pay-opts">
           <label class="pay-opt-card active" data-pay="cod">
             <input type="radio" name="paymentMethod" value="cod" checked>
-            <i class="fa-solid fa-hand-holding-dollar"></i>
+            ${Icons.get("bag")}
             <span>Cash on Delivery</span>
           </label>
           <label class="pay-opt-card" data-pay="bkash">
             <input type="radio" name="paymentMethod" value="bkash">
-            <i class="fa-solid fa-mobile-screen-button"></i>
+            ${Icons.get("mobile")}
             <span>bKash</span>
           </label>
           <label class="pay-opt-card" data-pay="nagad">
             <input type="radio" name="paymentMethod" value="nagad">
-            <i class="fa-solid fa-bolt"></i>
+            ${Icons.get("bolt")}
             <span>Nagad</span>
           </label>
           <label class="pay-opt-card" data-pay="card">
             <input type="radio" name="paymentMethod" value="card">
-            <i class="fa-solid fa-credit-card"></i>
+            ${Icons.get("card")}
             <span>Card (Visa/MC)</span>
           </label>
         </div>
 
-        <!-- Payment Details Container -->
         <div id="paymentGatewayFields" class="pay-gateway-details">
-          <p style="font-size:0.88rem;color:var(--muted)"><i class="fa-solid fa-shield-halved gold"></i> Pay comfortably with cash or card upon receiving your parcel at your doorstep.</p>
+          <p style="font-size:0.88rem;color:var(--muted)">${Icons.get("shield")} Cash on Delivery: Pay the courier directly upon physical package arrival.</p>
         </div>
 
         <button class="btn btn-lg" id="placeOrderSubmitBtn" style="width:100%;margin-top:2rem">
-          <i class="fa-solid fa-lock"></i> Place Order · <span id="placeOrderTotalSpan">${Store.money(Store.cartTotal())}</span>
+          ${Icons.get("lock")} <span>Place Order · </span><span id="placeOrderTotalSpan">${Store.money(Store.cartTotal())}</span>
         </button>
       </form>
     `;
@@ -1932,7 +1935,7 @@ const Checkout = {
           <h3 style="font-family:var(--serif);font-size:1.4rem;margin-bottom:1.25rem">Order Summary</h3>
           <div style="display:flex;flex-direction:column;gap:0.85rem;max-height:280px;overflow-y:auto;padding-right:0.5rem">
             ${items.map((i) => `<div class="cart-item" style="grid-template-columns:50px 1fr auto;padding:0.5rem">
-              <img src="${escapeHtml(i.image || '')}" style="width:50px;height:50px;border-radius:4px;object-fit:cover" alt="${escapeHtml(i.name)}">
+              <div style="width:50px;height:50px">${ProductArtwork.get(i.sku, i.name)}</div>
               <div>
                 <strong style="font-size:0.86rem">${escapeHtml(Store.pname(i))}</strong><br>
                 <small style="color:var(--muted)">Qty: ${i.qty} ${i.variant ? '· ' + escapeHtml(i.variant) : ''}</small>
@@ -1941,7 +1944,6 @@ const Checkout = {
             </div>`).join("")}
           </div>
 
-          <!-- Promo Code Form -->
           <div class="promo-input-wrap" style="margin-top:1.5rem">
             <input class="promo-input" id="checkoutPromoCode" placeholder="PROMO CODE" value="${Store.appliedCoupon ? escapeHtml(Store.appliedCoupon.code) : ''}">
             <button type="button" class="btn btn-sm" id="checkoutApplyPromo">Apply</button>
@@ -1975,7 +1977,6 @@ const Checkout = {
 
     updateSummary();
 
-    // Payment Gateway Switcher
     $$(".pay-opts .pay-opt-card").forEach((card) => {
       card.addEventListener("click", () => {
         $$(".pay-opts .pay-opt-card").forEach((c) => c.classList.remove("active"));
@@ -1983,7 +1984,7 @@ const Checkout = {
         const method = card.dataset.pay;
         const box = $("#paymentGatewayFields");
         if (method === "cod") {
-          box.innerHTML = `<p style="font-size:0.88rem;color:var(--muted)"><i class="fa-solid fa-hand-holding-dollar gold"></i> Cash on Delivery: Pay the courier directly upon physical package arrival.</p>`;
+          box.innerHTML = `<p style="font-size:0.88rem;color:var(--muted)">${Icons.get("shield")} Cash on Delivery: Pay the courier directly upon physical package arrival.</p>`;
         } else if (method === "bkash") {
           box.innerHTML = `<div style="display:flex;flex-direction:column;gap:0.75rem">
             <div style="background:rgba(226,19,110,0.15);padding:0.75rem;border-radius:var(--radius-sm);border:1px solid rgba(226,19,110,0.3)">
@@ -2013,7 +2014,6 @@ const Checkout = {
       });
     });
 
-    // Shipping Method Toggle
     $$("input[name=shippingMethod]").forEach((radio) => {
       radio.addEventListener("change", (e) => {
         shippingMethod = e.target.value;
@@ -2022,7 +2022,6 @@ const Checkout = {
       });
     });
 
-    // Order Submission Handler
     $("#orderCheckoutForm").onsubmit = (e) => {
       e.preventDefault();
       const fd = new FormData(e.target);
@@ -2034,7 +2033,7 @@ const Checkout = {
       const order = {
         id: orderId,
         date: new Date().toISOString(),
-        items: items.map((i) => ({ id: i.id, name: i.name, nameBn: i.nameBn, qty: i.qty, price: i.price, variant: i.variant })),
+        items: items.map((i) => ({ id: i.id, sku: i.sku, name: i.name, nameBn: i.nameBn, qty: i.qty, price: i.price, variant: i.variant })),
         subtotal: Store.cartSubtotal(),
         discount: Store.discountAmount(),
         shipping: shipFee,
@@ -2056,7 +2055,6 @@ const Checkout = {
         trackingNumber: "TRK-" + Math.floor(10000000 + Math.random() * 90000000)
       };
 
-      // Deduct inventory
       items.forEach((item) => {
         const prod = Store.products.find((p) => p.id === item.id);
         if (prod) prod.stock = Math.max(0, prod.stock - item.qty);
@@ -2069,10 +2067,9 @@ const Checkout = {
 
       SoundFX.play("success");
 
-      // Render Order Confirmation & Printable Receipt
       formBox.innerHTML = `
         <div class="order-success-hero">
-          <div class="order-check-icon"><i class="fa-solid fa-check"></i></div>
+          <div class="order-check-icon">${Icons.get("check")}</div>
           <h2 style="font-family:var(--serif);font-size:2.4rem;margin-bottom:0.5rem">Order Confirmed!</h2>
           <p style="color:var(--muted);font-size:1.05rem">Thank you, <strong>${escapeHtml(order.customer.firstName)}</strong>. Your order is registered in our ledger.</p>
           <div style="background:var(--bg-elev);padding:1rem;border-radius:var(--radius-md);border:1px solid var(--line);display:inline-block;margin:1.5rem 0">
@@ -2080,15 +2077,13 @@ const Checkout = {
             Tracking Code: <strong>${order.trackingNumber}</strong>
           </div>
 
-          <!-- Live Order Timeline -->
           <div class="order-timeline">
-            <div class="timeline-step completed"><div class="step-circle"><i class="fa-solid fa-check"></i></div><strong>Placed</strong><small>Just now</small></div>
-            <div class="timeline-step active"><div class="step-circle"><i class="fa-solid fa-box"></i></div><strong>Processing</strong><small>Warehouse</small></div>
-            <div class="timeline-step"><div class="step-circle"><i class="fa-solid fa-truck-fast"></i></div><strong>Shipped</strong><small>Courier</small></div>
-            <div class="timeline-step"><div class="step-circle"><i class="fa-solid fa-house"></i></div><strong>Delivered</strong><small>Destination</small></div>
+            <div class="timeline-step completed"><div class="step-circle">✓</div><strong>Placed</strong><small>Just now</small></div>
+            <div class="timeline-step active"><div class="step-circle">📦</div><strong>Processing</strong><small>Warehouse</small></div>
+            <div class="timeline-step"><div class="step-circle">🚚</div><strong>Shipped</strong><small>Courier</small></div>
+            <div class="timeline-step"><div class="step-circle">🏠</div><strong>Delivered</strong><small>Destination</small></div>
           </div>
 
-          <!-- Printable Invoice Box -->
           <div class="printable-invoice checkout-card" style="text-align:left;margin-top:2rem">
             <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:1rem;margin-bottom:1.5rem">
               <div class="logo">
@@ -2142,7 +2137,7 @@ const Checkout = {
           </div>
 
           <div style="display:flex;gap:1rem;justify-content:center;margin-top:2rem">
-            <button class="btn" onclick="window.print()"><i class="fa-solid fa-print"></i> Print Official Invoice</button>
+            <button class="btn" onclick="window.print()">${Icons.get("print")} <span>Print Invoice</span></button>
             <a class="btn btn-outline" href="index.html">Return to Storefront</a>
           </div>
         </div>
@@ -2164,7 +2159,7 @@ const AccountPage = {
     if (!user) {
       root.innerHTML = `
         <div class="checkout-card" style="max-width:540px;margin:0 auto;text-align:center">
-          <i class="fa-solid fa-user-lock gold" style="font-size:3rem;margin-bottom:1rem"></i>
+          <div class="gold" style="font-size:3rem;margin-bottom:1rem">${Icons.get("user")}</div>
           <h2 style="font-family:var(--serif);margin-bottom:0.75rem">Customer Account Portal</h2>
           <p style="color:var(--muted);margin-bottom:1.5rem">Please sign in to view your order history, manage addresses, and access saved wishlist items.</p>
           <button class="btn btn-lg" onclick="$('#authModal')?.classList.add('open')">Sign In / Register</button>
@@ -2215,16 +2210,15 @@ const AccountPage = {
             <small style="color:var(--muted)">${escapeHtml(user.email)}</small>
           </div>
           <nav style="display:flex;flex-direction:column;gap:0.4rem">
-            <button class="admin-nav-item active" data-ap="overview"><i class="fa-solid fa-gauge"></i> Overview</button>
-            <button class="admin-nav-item" data-ap="orders"><i class="fa-solid fa-box"></i> Orders (${orders.length})</button>
-            <button class="admin-nav-item" data-ap="wishlist"><i class="fa-solid fa-heart"></i> Wishlist (${Store.wishlist.length})</button>
-            <button class="admin-nav-item" data-ap="profile"><i class="fa-solid fa-user-gear"></i> Profile Settings</button>
-            <button class="admin-nav-item" id="accLogoutBtn" style="color:var(--danger)"><i class="fa-solid fa-right-from-bracket"></i> Log Out</button>
+            <button class="admin-nav-item active" data-ap="overview">${Icons.get("gem")} Overview</button>
+            <button class="admin-nav-item" data-ap="orders">${Icons.get("bag")} Orders (${orders.length})</button>
+            <button class="admin-nav-item" data-ap="wishlist">${Icons.get("heart")} Wishlist (${Store.wishlist.length})</button>
+            <button class="admin-nav-item" data-ap="profile">${Icons.get("user")} Profile Settings</button>
+            <button class="admin-nav-item" id="accLogoutBtn" style="color:var(--danger)">Log Out</button>
           </nav>
         </aside>
 
         <main>
-          <!-- Pane: Overview -->
           <div class="account-pane" id="pane-overview">
             <div class="admin-stats-grid">
               <div class="admin-stat-card"><b>${orders.length}</b><span>Total Orders</span></div>
@@ -2235,21 +2229,19 @@ const AccountPage = {
             <div class="checkout-card" style="margin-top:1.5rem">
               <h3>Recent Order Activity</h3>
               ${orders.length ? `<table class="admin-table">
-                <thead><tr><th>Order ID</th><th>Date</th><th>Total</th><th>Status</th><th>Action</th></tr></thead>
+                <thead><tr><th>Order ID</th><th>Date</th><th>Total</th><th>Status</th></tr></thead>
                 <tbody>
                   ${orders.slice(0, 5).map((o) => `<tr>
                     <td><strong>${o.id}</strong></td>
                     <td>${o.date.slice(0, 10)}</td>
                     <td><strong>${Store.money(o.total)}</strong></td>
                     <td><span class="status ${o.status}">${o.status}</span></td>
-                    <td><button class="btn-sm btn-outline" data-acc-invoice="${o.id}">Invoice</button></td>
                   </tr>`).join("")}
                 </tbody>
               </table>` : `<p class="empty">No orders placed yet.</p>`}
             </div>
           </div>
 
-          <!-- Pane: Orders -->
           <div class="account-pane" id="pane-orders" style="display:none">
             <div class="checkout-card">
               <h3>All Orders</h3>
@@ -2264,14 +2256,12 @@ const AccountPage = {
                   </p>
                   <div style="display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line-faint);padding-top:0.75rem">
                     <strong class="gold">${Store.money(o.total)}</strong>
-                    <button class="btn btn-sm btn-outline" data-acc-invoice="${o.id}">View Printable Invoice</button>
                   </div>
                 </div>`).join("")}
               </div>` : `<p class="empty">No order history available.</p>`}
             </div>
           </div>
 
-          <!-- Pane: Wishlist -->
           <div class="account-pane" id="pane-wishlist" style="display:none">
             <div class="checkout-card">
               <h3>Saved Wishlist</h3>
@@ -2281,7 +2271,6 @@ const AccountPage = {
             </div>
           </div>
 
-          <!-- Pane: Profile -->
           <div class="account-pane" id="pane-profile" style="display:none">
             <div class="checkout-card">
               <h3>Account & Profile Settings</h3>
@@ -2291,7 +2280,7 @@ const AccountPage = {
                   <div class="form-group"><label class="form-label">Last Name</label><input class="form-input" name="lastName" value="${escapeHtml(user.lastName || '')}" required></div>
                 </div>
                 <div class="form-group"><label class="form-label">Mobile Phone</label><input class="form-input" name="phone" value="${escapeHtml(user.phone || '')}"></div>
-                <div class="form-group"><label class="form-label">New Password (leave blank to keep current)</label><input class="form-input" name="password" type="password" minlength="4"></div>
+                <div class="form-group"><label class="form-label">New Password</label><input class="form-input" name="password" type="password" minlength="4"></div>
                 <button class="btn" style="margin-top:1rem">Save Profile</button>
               </form>
             </div>
@@ -2300,7 +2289,6 @@ const AccountPage = {
       </div>
     `;
 
-    // Navigation Switcher
     $$(".admin-nav-item[data-ap]").forEach((btn) => {
       btn.onclick = () => {
         $$(".admin-nav-item[data-ap]").forEach((b) => b.classList.remove("active"));
@@ -2343,9 +2331,6 @@ const BlogPage = {
           
           <div style="border-top:1px solid var(--line-faint);padding-top:1.5rem;display:flex;justify-content:space-between;align-items:center">
             <a href="blog.html" class="btn btn-outline btn-sm">← Back to all stories</a>
-            <div style="display:flex;gap:0.5rem">
-              <button class="icon-btn" onclick="navigator.clipboard.writeText(location.href);toast('Link copied!')" title="Share"><i class="fa-solid fa-share-nodes"></i></button>
-            </div>
           </div>
         </article>
       `;
@@ -2365,7 +2350,7 @@ const BlogPage = {
 };
 
 /* ==========================================================================
-   CONTACT & INTERACTIVE LIVE CHAT CONTROLLER
+   CONTACT & LIVE CHAT CONTROLLER
    ========================================================================== */
 const ContactPage = {
   bind() {
@@ -2381,25 +2366,16 @@ const ContactPage = {
         f.reset();
       };
     }
-
-    // Interactive FAQ Accordion
-    $$(".faq-question").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const item = btn.closest(".faq-item");
-        item.classList.toggle("open");
-      });
-    });
   }
 };
 
-/* Automated Interactive Live Chatbot */
 const LiveChat = {
   init() {
     let bubble = $(".live-chat-bubble");
     if (!bubble) {
       bubble = document.createElement("div");
       bubble.className = "live-chat-bubble";
-      bubble.innerHTML = `<i class="fa-solid fa-comments"></i>`;
+      bubble.innerHTML = Icons.get("chat");
       bubble.title = "Live Customer Support";
       document.body.appendChild(bubble);
 
@@ -2415,7 +2391,7 @@ const LiveChat = {
               <small style="color:var(--ok)"><span class="agent-status-dot"></span> Online · Active Assistant</small>
             </div>
           </div>
-          <button id="chatCloseBtn" class="modal-close" style="position:static;width:28px;height:28px;font-size:0.8rem"><i class="fa-solid fa-times"></i></button>
+          <button id="chatCloseBtn" class="modal-close" style="position:static;width:28px;height:28px;font-size:0.8rem">${Icons.get("close")}</button>
         </div>
         <div class="chat-messages-body" id="chatMsgBody">
           <div class="chat-msg bot">
@@ -2424,7 +2400,7 @@ const LiveChat = {
         </div>
         <form class="chat-input-footer" id="chatInputForm">
           <input class="chat-input" id="chatInputField" placeholder="Type a message..." required>
-          <button class="btn btn-sm" type="submit"><i class="fa-solid fa-paper-plane"></i></button>
+          <button class="btn btn-sm" type="submit">${Icons.get("paperPlane")}</button>
         </form>
       `;
       document.body.appendChild(win);
@@ -2448,7 +2424,6 @@ const LiveChat = {
 
         SoundFX.play("click");
 
-        // Automated Intelligent Bot Response Simulator
         setTimeout(() => {
           const botMsg = document.createElement("div");
           botMsg.className = "chat-msg bot";
@@ -2529,15 +2504,15 @@ const Admin = {
     const q = ($("#productSearch")?.value || "").toLowerCase();
 
     tb.innerHTML = Store.products.filter((p) => p.name.toLowerCase().includes(q) || p.category.toLowerCase().includes(q)).map((p) => `<tr>
-      <td><img src="${escapeHtml(p.image || '')}" style="width:36px;height:36px;border-radius:4px;object-fit:cover" alt="${escapeHtml(p.name)}"></td>
+      <td><div style="width:36px;height:36px">${ProductArtwork.get(p.sku, p.name)}</div></td>
       <td><strong>${escapeHtml(p.name)}</strong><br><small style="color:var(--muted)">SKU: ${escapeHtml(p.sku || '')}</small></td>
       <td>${escapeHtml(p.category)}</td>
       <td>${Store.money(p.price)}</td>
       <td><span class="status ${p.status || 'active'}">${p.status || 'active'}</span></td>
       <td><strong class="${p.stock < 10 ? 'gold' : ''}">${p.stock}</strong></td>
       <td>
-        <button class="btn-sm btn-outline" data-edp="${p.id}"><i class="fa-solid fa-pen"></i></button>
-        <button class="btn-sm btn-ghost" data-delp="${p.id}" style="color:var(--danger)"><i class="fa-solid fa-trash"></i></button>
+        <button class="btn-sm btn-outline" data-edp="${p.id}">${Icons.get("edit")}</button>
+        <button class="btn-sm btn-ghost" data-delp="${p.id}" style="color:var(--danger)">${Icons.get("trash")}</button>
       </td>
     </tr>`).join("") || "<tr><td colspan='7'>No products found</td></tr>";
 
@@ -2551,13 +2526,13 @@ const Admin = {
     const tb = $("#categoriesTableBody");
     if (!tb) return;
     tb.innerHTML = Store.categories.map((c) => `<tr>
-      <td><i class="fa-solid ${escapeHtml(c.icon)} gold"></i></td>
+      <td><div class="gold" style="font-size:1.1rem">${Icons.get(c.icon || "gem")}</div></td>
       <td><strong>${escapeHtml(c.name)}</strong><br><small style="color:var(--muted)">${escapeHtml(c.nameBn || '')}</small></td>
       <td>${escapeHtml(c.description)}</td>
       <td>${Store.products.filter((p) => p.category.toLowerCase() === c.name.toLowerCase()).length}</td>
       <td>
-        <button class="btn-sm btn-outline" data-edc="${c.id}"><i class="fa-solid fa-pen"></i></button>
-        <button class="btn-sm btn-ghost" data-delc="${c.id}" style="color:var(--danger)"><i class="fa-solid fa-trash"></i></button>
+        <button class="btn-sm btn-outline" data-edc="${c.id}">${Icons.get("edit")}</button>
+        <button class="btn-sm btn-ghost" data-delc="${c.id}" style="color:var(--danger)">${Icons.get("trash")}</button>
       </td>
     </tr>`).join("");
   },
@@ -2577,8 +2552,8 @@ const Admin = {
         </select>
       </td>
       <td>
-        <button class="btn-sm btn-outline" data-vo="${o.id}"><i class="fa-solid fa-file-invoice"></i></button>
-        <button class="btn-sm btn-ghost" data-delo="${o.id}" style="color:var(--danger)"><i class="fa-solid fa-trash"></i></button>
+        <button class="btn-sm btn-outline" data-vo="${o.id}">${Icons.get("print")}</button>
+        <button class="btn-sm btn-ghost" data-delo="${o.id}" style="color:var(--danger)">${Icons.get("trash")}</button>
       </td>
     </tr>`).join("") || "<tr><td colspan='7'>No orders logged</td></tr>";
   },
@@ -2591,7 +2566,7 @@ const Admin = {
       <td>${c.type === 'percent' ? c.value + '%' : c.type === 'fixed' ? Store.money(c.value) : 'Free Delivery'}</td>
       <td>${Store.money(c.minOrder)}</td>
       <td>${escapeHtml(c.description)}</td>
-      <td><button class="btn-sm btn-ghost" data-delcoupon="${idx}" style="color:var(--danger)"><i class="fa-solid fa-trash"></i></button></td>
+      <td><button class="btn-sm btn-ghost" data-delcoupon="${idx}" style="color:var(--danger)">${Icons.get("trash")}</button></td>
     </tr>`).join("") || "<tr><td colspan='5'>No promo coupons created</td></tr>";
   },
 
@@ -2604,8 +2579,8 @@ const Admin = {
       <td>${p.date}</td>
       <td><span class="status ${p.status}">${p.status}</span></td>
       <td>
-        <button class="btn-sm btn-outline" data-edpost="${p.id}"><i class="fa-solid fa-pen"></i></button>
-        <button class="btn-sm btn-ghost" data-delpost="${p.id}" style="color:var(--danger)"><i class="fa-solid fa-trash"></i></button>
+        <button class="btn-sm btn-outline" data-edpost="${p.id}">${Icons.get("edit")}</button>
+        <button class="btn-sm btn-ghost" data-delpost="${p.id}" style="color:var(--danger)">${Icons.get("trash")}</button>
       </td>
     </tr>`).join("");
   },
@@ -2618,7 +2593,7 @@ const Admin = {
       <td>${escapeHtml(t.role)}</td>
       <td>${escapeHtml(t.text.slice(0, 48))}…</td>
       <td>${stars(t.rating)}</td>
-      <td><button class="btn-sm btn-ghost" data-delt="${t.id}" style="color:var(--danger)"><i class="fa-solid fa-trash"></i></button></td>
+      <td><button class="btn-sm btn-ghost" data-delt="${t.id}" style="color:var(--danger)">${Icons.get("trash")}</button></td>
     </tr>`).join("");
   },
 
@@ -2628,7 +2603,7 @@ const Admin = {
     tb.innerHTML = Store.subscribers.map((e, idx) => `<tr>
       <td>${escapeHtml(e)}</td>
       <td>Active</td>
-      <td><button class="btn-sm btn-ghost" data-delsub="${idx}" style="color:var(--danger)"><i class="fa-solid fa-trash"></i></button></td>
+      <td><button class="btn-sm btn-ghost" data-delsub="${idx}" style="color:var(--danger)">${Icons.get("trash")}</button></td>
     </tr>`).join("") || "<tr><td colspan='3'>No newsletter subscribers yet</td></tr>";
   },
 
@@ -2641,7 +2616,7 @@ const Admin = {
       <td>${(m.date || '').slice(0, 10)}</td>
       <td>
         <button class="btn-sm btn-outline" data-vm="${m.id}">Read</button>
-        <button class="btn-sm btn-ghost" data-delm="${m.id}" style="color:var(--danger)"><i class="fa-solid fa-trash"></i></button>
+        <button class="btn-sm btn-ghost" data-delm="${m.id}" style="color:var(--danger)">${Icons.get("trash")}</button>
       </td>
     </tr>`).join("") || "<tr><td colspan='4'>No customer inquiries</td></tr>";
   },
@@ -2699,11 +2674,9 @@ const Admin = {
     $$(".admin-nav-item[data-section]").forEach((b) => b.onclick = () => this.switchSection(b.dataset.section));
     $("#adminLogout")?.addEventListener("click", () => AdminAuth.logout());
 
-    // Mobile Sidebar Toggles
     $("#adminSidebarToggle")?.addEventListener("click", () => $(".admin-sidebar")?.classList.add("open"));
     $("#adminSidebarClose")?.addEventListener("click", () => $(".admin-sidebar")?.classList.remove("open"));
 
-    // Modal Open Buttons
     $$("[data-open-modal]").forEach((b) => b.onclick = () => {
       const id = b.dataset.openModal;
       const form = $("#" + id.replace("Modal", "Form"));
@@ -2712,10 +2685,8 @@ const Admin = {
     });
 
     $$("[data-close-modal]").forEach((b) => b.onclick = () => this.closeModals());
-
     $("#productSearch")?.addEventListener("input", () => this.products());
 
-    // Product Form Submit
     $("#productForm")?.addEventListener("submit", (e) => {
       e.preventDefault();
       const d = Object.fromEntries(new FormData(e.target));
@@ -2734,7 +2705,6 @@ const Admin = {
           ...d,
           id: uid(),
           reviews: 0,
-          gallery: d.image ? [d.image] : [],
           createdAt: new Date().toISOString().slice(0, 10)
         });
       }
@@ -2745,7 +2715,6 @@ const Admin = {
       toast("Product catalog updated", "success");
     });
 
-    // Category Form Submit
     $("#categoryForm")?.addEventListener("submit", (e) => {
       e.preventDefault();
       const d = Object.fromEntries(new FormData(e.target));
@@ -2761,7 +2730,6 @@ const Admin = {
       toast("Category saved", "success");
     });
 
-    // Coupon Form Submit
     $("#couponForm")?.addEventListener("submit", (e) => {
       e.preventDefault();
       const d = Object.fromEntries(new FormData(e.target));
@@ -2775,7 +2743,6 @@ const Admin = {
       toast("Coupon code created", "success");
     });
 
-    // Delegated Admin Actions
     document.addEventListener("click", (e) => {
       const edp = e.target.closest("[data-edp]");
       if (edp) {
@@ -2843,7 +2810,6 @@ const Admin = {
       }
     });
 
-    // Order Status Dropdown Change
     document.addEventListener("change", (e) => {
       const s = e.target.closest("[data-ost]");
       if (s) {
@@ -2857,7 +2823,6 @@ const Admin = {
       }
     });
 
-    // Database JSON Export
     $("#exportDbBtn")?.addEventListener("click", () => {
       const dump = {
         products: Store.products,
@@ -2879,7 +2844,7 @@ const Admin = {
 };
 
 /* ==========================================================================
-   APPLICATION BOOTSTRAPPER & ENTRY POINT
+   INITIALIZATION
    ========================================================================== */
 function boot() {
   Store.load();
@@ -2895,7 +2860,6 @@ function boot() {
 
   if ($(".admin-layout")) Admin.bind();
 
-  // Admin login page handler
   if ($("body.auth-page")) {
     $("#loginForm")?.addEventListener("submit", (e) => {
       e.preventDefault();
@@ -2907,7 +2871,7 @@ function boot() {
       }
     });
   }
-  // Register Service Worker for PWA
+
   if ("serviceWorker" in navigator) {
     navigator.serviceWorker.register("./sw.js").catch(() => {});
   }
@@ -2917,4 +2881,6 @@ document.addEventListener("DOMContentLoaded", boot);
 window.Store = Store;
 window.Admin = Admin;
 window.Auth = Auth;
+window.Icons = Icons;
+window.ProductArtwork = ProductArtwork;
 window.SoundFX = SoundFX;
