@@ -1,206 +1,461 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CMS Dashboard · Iqra Mart</title>
+  <meta name="description" content="CMS Dashboard · Iqra Online Mart">
+  <meta name="theme-color" content="#09090b">
+  <title>CMS Management Desk · Iqra Mart</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+
   <div class="admin-layout">
-    <button id="adminSidebarToggle" class="admin-sidebar-toggle"><i class="fas fa-bars"></i></button>
-    <div id="adminSidebarOverlay" class="admin-sidebar-overlay"></div>
+    <!-- Sidebar Toggle for Mobile -->
+    <button id="adminSidebarToggle" class="icon-btn" style="position:fixed;bottom:20px;left:20px;z-index:99;box-shadow:var(--shadow-lg)" aria-label="Open sidebar"><i class="fa-solid fa-bars"></i></button>
+
+    <!-- Admin Sidebar -->
     <aside class="admin-sidebar">
-      <button id="adminSidebarClose" class="admin-sidebar-close"><i class="fas fa-times"></i></button>
-      <div class="admin-logo"><div class="logo-mark" style="width:32px;height:32px;font-size:1rem">I</div> Iqra CMS</div>
-      <nav><ul class="admin-nav">
-        <li><button class="admin-nav-item active" data-section="dashboard"><i class="fas fa-chart-line"></i> Dashboard</button></li>
-        <li><button class="admin-nav-item" data-section="products"><i class="fas fa-box"></i> Products</button></li>
-        <li><button class="admin-nav-item" data-section="categories"><i class="fas fa-tags"></i> Categories</button></li>
-        <li><button class="admin-nav-item" data-section="orders"><i class="fas fa-bag-shopping"></i> Orders</button></li>
-        <li><button class="admin-nav-item" data-section="posts"><i class="fas fa-pen"></i> Journal</button></li>
-        <li><button class="admin-nav-item" data-section="testimonials"><i class="fas fa-quote-right"></i> Testimonials</button></li>
-        <li><button class="admin-nav-item" data-section="subscribers"><i class="fas fa-envelope"></i> Subscribers</button></li>
-        <li><button class="admin-nav-item" data-section="messages"><i class="fas fa-comments"></i> Messages</button></li>
-        <li><button class="admin-nav-item" data-section="pages"><i class="fas fa-file"></i> Pages</button></li>
-        <li><button class="admin-nav-item" data-section="settings"><i class="fas fa-gear"></i> Settings</button></li>
-        <li style="margin-top:1rem"><a href="index.html" class="admin-nav-item"><i class="fas fa-arrow-up-right-from-square"></i> View site</a></li>
-        <li><button class="admin-nav-item" id="adminLogout"><i class="fas fa-right-from-bracket"></i> Logout</button></li>
-      </ul></nav>
+      <div class="admin-logo">
+        <div class="logo-mark" style="width:36px;height:36px;font-size:1.1rem">I</div>
+        <span>Iqra House CMS</span>
+        <button id="adminSidebarClose" class="modal-close" style="position:static;margin-left:auto;width:28px;height:28px;font-size:0.8rem"><i class="fa-solid fa-times"></i></button>
+      </div>
+
+      <nav>
+        <ul class="admin-nav">
+          <li><button class="admin-nav-item active" data-section="dashboard"><i class="fa-solid fa-gauge"></i> Dashboard</button></li>
+          <li><button class="admin-nav-item" data-section="products"><i class="fa-solid fa-box-archive"></i> Products</button></li>
+          <li><button class="admin-nav-item" data-section="categories"><i class="fa-solid fa-tags"></i> Categories</button></li>
+          <li><button class="admin-nav-item" data-section="orders"><i class="fa-solid fa-bag-shopping"></i> Orders</button></li>
+          <li><button class="admin-nav-item" data-section="coupons"><i class="fa-solid fa-ticket"></i> Coupons</button></li>
+          <li><button class="admin-nav-item" data-section="posts"><i class="fa-solid fa-pen-nib"></i> Journal</button></li>
+          <li><button class="admin-nav-item" data-section="testimonials"><i class="fa-solid fa-quote-left"></i> Testimonials</button></li>
+          <li><button class="admin-nav-item" data-section="subscribers"><i class="fa-solid fa-envelope-open"></i> Subscribers</button></li>
+          <li><button class="admin-nav-item" data-section="messages"><i class="fa-solid fa-comments"></i> Inquiries</button></li>
+          <li><button class="admin-nav-item" data-section="pages"><i class="fa-solid fa-file-pen"></i> Page Copy</button></li>
+          <li><button class="admin-nav-item" data-section="settings"><i class="fa-solid fa-gear"></i> Settings</button></li>
+          <li style="margin-top:1.5rem"><a href="index.html" class="admin-nav-item" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i> View Store</a></li>
+          <li><button class="admin-nav-item" id="adminLogout" style="color:var(--danger)"><i class="fa-solid fa-right-from-bracket"></i> Log Out</button></li>
+        </ul>
+      </nav>
     </aside>
+
+    <!-- Main Content Work Area -->
     <main class="admin-main">
+
+      <!-- Section: Dashboard -->
       <section class="admin-content-section" id="section-dashboard">
-        <div class="admin-header"><div><h1>Dashboard</h1><p style="color:var(--muted)">House ledger</p></div>
-          <button id="themeToggle" class="theme-toggle"><i class="fas fa-moon"></i></button></div>
-        <div class="admin-stats" id="adminStats"></div>
-        <div class="contact-grid">
-          <div class="admin-section"><div class="admin-section-header"><h2>Recent orders</h2></div><div id="recentOrders"></div></div>
-          <div class="admin-section"><div class="admin-section-header"><h2>Top products</h2></div><div id="topProducts"></div></div>
+        <div class="admin-header">
+          <div>
+            <h1>Dashboard Overview</h1>
+            <p style="color:var(--muted)">Operational performance and financial metrics</p>
+          </div>
+          <div style="display:flex;gap:0.75rem">
+            <button class="btn btn-outline btn-sm" id="exportDbBtn"><i class="fa-solid fa-download"></i> Backup JSON</button>
+            <button id="themeToggle" class="icon-btn" style="width:36px;height:36px" title="Theme"><i class="fa-solid fa-moon"></i></button>
+          </div>
+        </div>
+
+        <div class="admin-stats-grid" id="adminStats"></div>
+
+        <!-- SVG Analytics Chart -->
+        <div class="checkout-card" style="margin-bottom:2rem">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem">
+            <h3><i class="fa-solid fa-chart-line gold"></i> Sales & Revenue Trajectory</h3>
+            <span style="font-size:0.8rem;color:var(--muted)">2026 Fiscal Trend (30 Days)</span>
+          </div>
+          <svg viewBox="0 0 700 160" style="width:100%;height:auto;overflow:visible">
+            <defs>
+              <linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#d4af37" stop-opacity="0.35"/>
+                <stop offset="100%" stop-color="#d4af37" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+            <path d="M0,130 C100,110 180,140 280,70 C380,20 480,90 580,40 C640,10 680,25 700,20 L700,160 L0,160 Z" fill="url(#chartGrad)"/>
+            <path d="M0,130 C100,110 180,140 280,70 C380,20 480,90 580,40 C640,10 680,25 700,20" fill="none" stroke="#d4af37" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="280" cy="70" r="5" fill="#d4af37"/>
+            <circle cx="580" cy="40" r="5" fill="#d4af37"/>
+            <circle cx="700" cy="20" r="5" fill="#d4af37"/>
+          </svg>
+        </div>
+
+        <div class="checkout-grid" style="grid-template-columns:1fr 1fr">
+          <div class="checkout-card">
+            <h3 style="margin-bottom:1rem"><i class="fa-solid fa-receipt gold"></i> Recent Orders</h3>
+            <div id="recentOrders"></div>
+          </div>
+          <div class="checkout-card">
+            <h3 style="margin-bottom:1rem"><i class="fa-solid fa-triangle-exclamation gold"></i> Inventory Attention</h3>
+            <p style="color:var(--muted);font-size:0.9rem">Manage low stock notifications and automatic restocking thresholds from the Products tab.</p>
+          </div>
         </div>
       </section>
 
+      <!-- Section: Products -->
       <section class="admin-content-section" id="section-products" style="display:none">
-        <div class="admin-header"><h1>Products</h1>
-          <div style="display:flex;gap:.6rem;flex-wrap:wrap">
-            <input class="form-input" id="productSearch" placeholder="Search…" style="width:200px">
-            <button class="btn" data-open-modal="productModal"><i class="fas fa-plus"></i> Add</button>
+        <div class="admin-header">
+          <div>
+            <h1>Products Catalog</h1>
+            <p style="color:var(--muted)">Manage SKU pricing, variants, inventory and descriptions</p>
+          </div>
+          <div style="display:flex;gap:0.75rem">
+            <input class="form-input" id="productSearch" placeholder="Search catalog..." style="width:220px">
+            <button class="btn" data-open-modal="productModal"><i class="fa-solid fa-plus"></i> Add Product</button>
           </div>
         </div>
-        <div class="admin-section"><table class="admin-table"><thead><tr><th></th><th>Name</th><th>Category</th><th>Price</th><th>Status</th><th>Stock</th><th></th></tr></thead><tbody id="productsTableBody"></tbody></table></div>
+
+        <div class="checkout-card" style="padding:0;overflow-x:auto">
+          <table class="admin-table">
+            <thead>
+              <tr><th></th><th>Name & SKU</th><th>Category</th><th>Price</th><th>Status</th><th>Stock</th><th>Actions</th></tr>
+            </thead>
+            <tbody id="productsTableBody"></tbody>
+          </table>
+        </div>
       </section>
 
+      <!-- Section: Categories -->
       <section class="admin-content-section" id="section-categories" style="display:none">
-        <div class="admin-header"><h1>Categories</h1><button class="btn" data-open-modal="categoryModal">Add</button></div>
-        <div class="admin-section"><table class="admin-table"><thead><tr><th></th><th>Name</th><th>Description</th><th>Products</th><th></th></tr></thead><tbody id="categoriesTableBody"></tbody></table></div>
-      </section>
-
-      <section class="admin-content-section" id="section-orders" style="display:none">
-        <div class="admin-header"><h1>Orders</h1></div>
-        <div class="admin-section"><table class="admin-table"><thead><tr><th>ID</th><th>Customer</th><th>Date</th><th>Items</th><th>Total</th><th>Status</th><th></th></tr></thead><tbody id="ordersTableBody"></tbody></table></div>
-      </section>
-
-      <section class="admin-content-section" id="section-posts" style="display:none">
-        <div class="admin-header"><h1>Journal</h1><button class="btn" data-open-modal="postModal">New post</button></div>
-        <div class="admin-section"><table class="admin-table"><thead><tr><th></th><th>Title</th><th>Category</th><th>Date</th><th>Status</th><th></th></tr></thead><tbody id="postsTableBody"></tbody></table></div>
-      </section>
-
-      <section class="admin-content-section" id="section-testimonials" style="display:none">
-        <div class="admin-header"><h1>Testimonials</h1><button class="btn" data-open-modal="testimonialModal">Add</button></div>
-        <div class="admin-section"><table class="admin-table"><thead><tr><th>Name</th><th>Role</th><th>Review</th><th>Rating</th><th></th></tr></thead><tbody id="testimonialsTableBody"></tbody></table></div>
-      </section>
-
-      <section class="admin-content-section" id="section-subscribers" style="display:none">
-        <div class="admin-header"><h1>Subscribers</h1></div>
-        <div class="admin-section"><table class="admin-table"><thead><tr><th>Email</th><th>Date</th><th></th></tr></thead><tbody id="subscribersTableBody"></tbody></table></div>
-      </section>
-
-      <section class="admin-content-section" id="section-messages" style="display:none">
-        <div class="admin-header"><h1>Messages</h1></div>
-        <div class="admin-section"><table class="admin-table"><thead><tr><th>From</th><th>Subject</th><th>Date</th><th></th></tr></thead><tbody id="messagesTableBody"></tbody></table></div>
-      </section>
-
-      <section class="admin-content-section" id="section-pages" style="display:none">
-        <div class="admin-header"><h1>Page copy</h1></div>
-        <div class="admin-section">
-          <div class="tabs" id="pageTabs">
-            <button class="tab active" data-page="hero">Hero</button>
-            <button class="tab" data-page="about">About</button>
-            <button class="tab" data-page="footer">Footer</button>
+        <div class="admin-header">
+          <div>
+            <h1>Collections & Categories</h1>
+            <p style="color:var(--muted)">Curate store departments and icons</p>
           </div>
-          <form id="pagesForm"><div id="pageContent"></div><button class="btn" style="margin-top:1rem">Save</button></form>
+          <button class="btn" data-open-modal="categoryModal"><i class="fa-solid fa-plus"></i> Add Category</button>
+        </div>
+
+        <div class="checkout-card" style="padding:0;overflow-x:auto">
+          <table class="admin-table">
+            <thead>
+              <tr><th>Icon</th><th>Category Name</th><th>Description</th><th>SKUs</th><th>Actions</th></tr>
+            </thead>
+            <tbody id="categoriesTableBody"></tbody>
+          </table>
         </div>
       </section>
 
-      <section class="admin-content-section" id="section-settings" style="display:none">
-        <div class="admin-header"><h1>Settings</h1></div>
-        <div class="admin-section">
-          <form id="settingsForm">
-            <div class="form-row">
-              <div class="form-group"><label class="form-label">Site name</label><input class="form-input" name="siteName"></div>
-              <div class="form-group"><label class="form-label">Tagline</label><input class="form-input" name="tagline"></div>
-            </div>
-            <div class="form-row">
-              <div class="form-group"><label class="form-label">Motto</label><input class="form-input" name="motto"></div>
-              <div class="form-group"><label class="form-label">Repo URL</label><input class="form-input" name="repoUrl"></div>
-            </div>
-            <div class="form-row">
-              <div class="form-group"><label class="form-label">Email</label><input class="form-input" name="email"></div>
-              <div class="form-group"><label class="form-label">Phone</label><input class="form-input" name="phone"></div>
-            </div>
-            <div class="form-group"><label class="form-label">Address</label><input class="form-input" name="address"></div>
-            <div class="form-row">
-              <div class="form-group"><label class="form-label">Currency</label><input class="form-input" name="currency"></div>
-              <div class="form-group"><label class="form-label">Free shipping over</label><input class="form-input" name="freeShippingThreshold" type="number"></div>
-            </div>
-            <div class="form-row">
-              <div class="form-group"><label class="form-label">Admin user</label><input class="form-input" name="adminUsername"></div>
-              <div class="form-group"><label class="form-label">New password</label><input class="form-input" name="adminPassword" type="password" placeholder="Leave blank to keep"></div>
-            </div>
-            <div class="form-row">
-              <div class="form-group"><label class="form-label">Facebook</label><input class="form-input" name="facebook"></div>
-              <div class="form-group"><label class="form-label">Twitter</label><input class="form-input" name="twitter"></div>
-            </div>
-            <div class="form-row">
-              <div class="form-group"><label class="form-label">Instagram</label><input class="form-input" name="instagram"></div>
-              <div class="form-group"><label class="form-label">LinkedIn</label><input class="form-input" name="linkedin"></div>
-            </div>
-            <button class="btn" style="margin-top:1rem">Save settings</button>
+      <!-- Section: Orders -->
+      <section class="admin-content-section" id="section-orders" style="display:none">
+        <div class="admin-header">
+          <div>
+            <h1>Order Ledger</h1>
+            <p style="color:var(--muted)">Track customer shipments, update fulfillment status, and generate invoices</p>
+          </div>
+        </div>
+
+        <div class="checkout-card" style="padding:0;overflow-x:auto">
+          <table class="admin-table">
+            <thead>
+              <tr><th>Order ID</th><th>Customer</th><th>Date</th><th>Items</th><th>Total</th><th>Status</th><th>Actions</th></tr>
+            </thead>
+            <tbody id="ordersTableBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Section: Coupons -->
+      <section class="admin-content-section" id="section-coupons" style="display:none">
+        <div class="admin-header">
+          <div>
+            <h1>Promo Coupons</h1>
+            <p style="color:var(--muted)">Discount codes and seasonal campaigns</p>
+          </div>
+          <button class="btn" data-open-modal="couponModal"><i class="fa-solid fa-plus"></i> Create Coupon</button>
+        </div>
+
+        <div class="checkout-card" style="padding:0;overflow-x:auto">
+          <table class="admin-table">
+            <thead>
+              <tr><th>Code</th><th>Discount</th><th>Min Order</th><th>Description</th><th>Actions</th></tr>
+            </thead>
+            <tbody id="couponsTableBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Section: Journal Posts -->
+      <section class="admin-content-section" id="section-posts" style="display:none">
+        <div class="admin-header">
+          <div>
+            <h1>Journal & Articles</h1>
+            <p style="color:var(--muted)">Publish editorial essays and announcements</p>
+          </div>
+          <button class="btn" data-open-modal="postModal"><i class="fa-solid fa-plus"></i> New Article</button>
+        </div>
+
+        <div class="checkout-card" style="padding:0;overflow-x:auto">
+          <table class="admin-table">
+            <thead>
+              <tr><th>Title</th><th>Category</th><th>Date</th><th>Status</th><th>Actions</th></tr>
+            </thead>
+            <tbody id="postsTableBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Section: Testimonials -->
+      <section class="admin-content-section" id="section-testimonials" style="display:none">
+        <div class="admin-header">
+          <div>
+            <h1>Customer Testimonials</h1>
+            <p style="color:var(--muted)">Manage homepage client reviews</p>
+          </div>
+          <button class="btn" data-open-modal="testimonialModal"><i class="fa-solid fa-plus"></i> Add Testimonial</button>
+        </div>
+
+        <div class="checkout-card" style="padding:0;overflow-x:auto">
+          <table class="admin-table">
+            <thead>
+              <tr><th>Name</th><th>Role</th><th>Review Text</th><th>Rating</th><th>Actions</th></tr>
+            </thead>
+            <tbody id="testimonialsTableBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Section: Subscribers -->
+      <section class="admin-content-section" id="section-subscribers" style="display:none">
+        <div class="admin-header">
+          <div>
+            <h1>Newsletter Subscribers</h1>
+            <p style="color:var(--muted)">Active mailing list contacts</p>
+          </div>
+        </div>
+
+        <div class="checkout-card" style="padding:0;overflow-x:auto">
+          <table class="admin-table">
+            <thead>
+              <tr><th>Email Address</th><th>Status</th><th>Actions</th></tr>
+            </thead>
+            <tbody id="subscribersTableBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Section: Messages -->
+      <section class="admin-content-section" id="section-messages" style="display:none">
+        <div class="admin-header">
+          <div>
+            <h1>Inquiries & Support Messages</h1>
+            <p style="color:var(--muted)">Messages submitted through the contact desk</p>
+          </div>
+        </div>
+
+        <div class="checkout-card" style="padding:0;overflow-x:auto">
+          <table class="admin-table">
+            <thead>
+              <tr><th>From</th><th>Subject</th><th>Date</th><th>Actions</th></tr>
+            </thead>
+            <tbody id="messagesTableBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Section: Page Copy -->
+      <section class="admin-content-section" id="section-pages" style="display:none">
+        <div class="admin-header">
+          <div>
+            <h1>Page Copy & Content</h1>
+            <p style="color:var(--muted)">Modify homepage headlines, subtext, and about statements</p>
+          </div>
+        </div>
+
+        <div class="checkout-card">
+          <div style="display:flex;gap:1rem;margin-bottom:1.5rem;border-bottom:1px solid var(--line-faint)">
+            <button class="pd-tab-btn active tab" data-page="hero">Hero Banner</button>
+            <button class="pd-tab-btn tab" data-page="about">About Statement</button>
+            <button class="pd-tab-btn tab" data-page="footer">Footer Tagline</button>
+          </div>
+          <form id="pagesForm">
+            <div id="pageContent"></div>
+            <button class="btn" style="margin-top:1.5rem"><i class="fa-solid fa-floppy-disk"></i> Save Content</button>
           </form>
         </div>
       </section>
+
+      <!-- Section: Settings -->
+      <section class="admin-content-section" id="section-settings" style="display:none">
+        <div class="admin-header">
+          <div>
+            <h1>Store Settings</h1>
+            <p style="color:var(--muted)">Global store configuration, thresholds, and administrative credentials</p>
+          </div>
+        </div>
+
+        <div class="checkout-card">
+          <form id="settingsForm">
+            <div class="form-row">
+              <div class="form-group"><label class="form-label">Storefront Name</label><input class="form-input" name="siteName"></div>
+              <div class="form-group"><label class="form-label">Tagline</label><input class="form-input" name="tagline"></div>
+            </div>
+            <div class="form-row">
+              <div class="form-group"><label class="form-label">House Motto</label><input class="form-input" name="motto"></div>
+              <div class="form-group"><label class="form-label">Repository / Source URL</label><input class="form-input" name="repoUrl"></div>
+            </div>
+            <div class="form-row">
+              <div class="form-group"><label class="form-label">Support Email</label><input class="form-input" name="email"></div>
+              <div class="form-group"><label class="form-label">Support Phone</label><input class="form-input" name="phone"></div>
+            </div>
+            <div class="form-group"><label class="form-label">Physical Address</label><input class="form-input" name="address"></div>
+            <div class="form-row">
+              <div class="form-group"><label class="form-label">Default Base Currency</label><input class="form-input" name="currency"></div>
+              <div class="form-group"><label class="form-label">Free Shipping Threshold (BDT)</label><input class="form-input" name="freeShippingThreshold" type="number"></div>
+            </div>
+            <div class="form-row">
+              <div class="form-group"><label class="form-label">Admin Username</label><input class="form-input" name="adminUsername"></div>
+              <div class="form-group"><label class="form-label">New Password (leave empty to keep current)</label><input class="form-input" name="adminPassword" type="password"></div>
+            </div>
+            <button class="btn" style="margin-top:1.5rem"><i class="fa-solid fa-floppy-disk"></i> Save Store Settings</button>
+          </form>
+        </div>
+      </section>
+
     </main>
   </div>
 
-  <div id="productModal" class="modal"><div class="modal-content">
-    <button class="modal-close" data-close-modal><i class="fas fa-times"></i></button>
-    <h2>Product</h2>
-    <form id="productForm">
-      <input type="hidden" name="id">
-      <div class="form-row"><div class="form-group"><label class="form-label">Name</label><input class="form-input" name="name" required></div>
-        <div class="form-group"><label class="form-label">Category</label><select class="form-select" name="category" required></select></div></div>
-      <div class="form-row"><div class="form-group"><label class="form-label">Price</label><input class="form-input" name="price" type="number" required></div>
-        <div class="form-group"><label class="form-label">Old price</label><input class="form-input" name="oldPrice" type="number"></div></div>
-      <div class="form-row"><div class="form-group"><label class="form-label">Icon</label><input class="form-input" name="icon" placeholder="fa-box" required></div>
-        <div class="form-group"><label class="form-label">Badge</label><select class="form-select" name="badge"><option value="">None</option><option value="new">New</option><option value="sale">Sale</option><option value="hot">Hot</option></select></div></div>
-      <div class="form-group"><label class="form-label">Description</label><textarea class="form-textarea" name="description" required></textarea></div>
-      <div class="form-row"><div class="form-group"><label class="form-label">Stock</label><input class="form-input" name="stock" type="number" required></div>
-        <div class="form-group"><label class="form-label">Rating</label><input class="form-input" name="rating" type="number" step="0.1" min="1" max="5" required></div></div>
-      <div class="form-group"><label class="form-label">Featured</label><select class="form-select" name="featured"><option value="false">No</option><option value="true">Yes</option></select></div>
-      <button class="btn" style="width:100%">Save</button>
-    </form>
-  </div></div>
+  <!-- Product Modal -->
+  <div id="productModal" class="modal">
+    <div class="modal-content modal-lg">
+      <button class="modal-close" data-close-modal><i class="fa-solid fa-times"></i></button>
+      <h2 style="font-family:var(--serif);margin-bottom:1.25rem">Product Specification</h2>
+      <form id="productForm">
+        <input type="hidden" name="id">
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Product Name (English)</label><input class="form-input" name="name" required></div>
+          <div class="form-group"><label class="form-label">Category</label><select class="form-select" name="category" required></select></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Price (BDT)</label><input class="form-input" name="price" type="number" required></div>
+          <div class="form-group"><label class="form-label">Old Price (Regular)</label><input class="form-input" name="oldPrice" type="number"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Image URL (Unsplash or direct CDN)</label><input class="form-input" name="image" placeholder="https://..."></div>
+          <div class="form-group"><label class="form-label">Badge</label>
+            <select class="form-select" name="badge">
+              <option value="">None</option>
+              <option value="new">New</option>
+              <option value="sale">Sale</option>
+              <option value="hot">Hot</option>
+              <option value="featured">Featured</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group"><label class="form-label">Description (English)</label><textarea class="form-textarea" name="description" required></textarea></div>
+        <div class="form-group"><label class="form-label">Description (বাংলা)</label><textarea class="form-textarea" name="descriptionBn"></textarea></div>
+        <div class="form-row-3">
+          <div class="form-group"><label class="form-label">Stock Units</label><input class="form-input" name="stock" type="number" required></div>
+          <div class="form-group"><label class="form-label">Rating (1.0–5.0)</label><input class="form-input" name="rating" type="number" step="0.1" min="1" max="5" required></div>
+          <div class="form-group"><label class="form-label">Featured on Home</label>
+            <select class="form-select" name="featured">
+              <option value="false">No</option>
+              <option value="true">Yes</option>
+            </select>
+          </div>
+        </div>
+        <button class="btn btn-lg" style="width:100%;margin-top:1rem">Save Product</button>
+      </form>
+    </div>
+  </div>
 
-  <div id="categoryModal" class="modal"><div class="modal-content">
-    <button class="modal-close" data-close-modal><i class="fas fa-times"></i></button>
-    <h2>Category</h2>
-    <form id="categoryForm">
-      <input type="hidden" name="id">
-      <div class="form-group"><label class="form-label">Name</label><input class="form-input" name="name" required></div>
-      <div class="form-group"><label class="form-label">Icon</label><input class="form-input" name="icon" required></div>
-      <div class="form-group"><label class="form-label">Description</label><textarea class="form-textarea" name="description" required></textarea></div>
-      <button class="btn" style="width:100%">Save</button>
-    </form>
-  </div></div>
+  <!-- Category Modal -->
+  <div id="categoryModal" class="modal">
+    <div class="modal-content">
+      <button class="modal-close" data-close-modal><i class="fa-solid fa-times"></i></button>
+      <h2 style="font-family:var(--serif);margin-bottom:1.25rem">Collection Category</h2>
+      <form id="categoryForm">
+        <input type="hidden" name="id">
+        <div class="form-group"><label class="form-label">Category Name</label><input class="form-input" name="name" required></div>
+        <div class="form-group"><label class="form-label">FontAwesome Icon Class</label><input class="form-input" name="icon" placeholder="fa-laptop" required></div>
+        <div class="form-group"><label class="form-label">Description</label><textarea class="form-textarea" name="description" required></textarea></div>
+        <button class="btn btn-lg" style="width:100%;margin-top:1rem">Save Category</button>
+      </form>
+    </div>
+  </div>
 
-  <div id="postModal" class="modal"><div class="modal-content">
-    <button class="modal-close" data-close-modal><i class="fas fa-times"></i></button>
-    <h2>Post</h2>
-    <form id="postForm">
-      <input type="hidden" name="id">
-      <div class="form-group"><label class="form-label">Title</label><input class="form-input" name="title" required></div>
-      <div class="form-row"><div class="form-group"><label class="form-label">Category</label><input class="form-input" name="category" required></div>
-        <div class="form-group"><label class="form-label">Read time</label><input class="form-input" name="readTime" required></div></div>
-      <div class="form-group"><label class="form-label">Icon</label><input class="form-input" name="icon" required></div>
-      <div class="form-group"><label class="form-label">Excerpt</label><textarea class="form-textarea" name="excerpt" required></textarea></div>
-      <div class="form-group"><label class="form-label">Content HTML</label><textarea class="form-textarea" name="content" required></textarea></div>
-      <div class="form-group"><label class="form-label">Status</label><select class="form-select" name="status"><option value="draft">Draft</option><option value="published">Published</option></select></div>
-      <button class="btn" style="width:100%">Save</button>
-    </form>
-  </div></div>
+  <!-- Coupon Modal -->
+  <div id="couponModal" class="modal">
+    <div class="modal-content">
+      <button class="modal-close" data-close-modal><i class="fa-solid fa-times"></i></button>
+      <h2 style="font-family:var(--serif);margin-bottom:1.25rem">Promo Coupon</h2>
+      <form id="couponForm">
+        <div class="form-group"><label class="form-label">Coupon Code (Uppercase)</label><input class="form-input" name="code" placeholder="EID2026" required></div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Discount Type</label>
+            <select class="form-select" name="type" required>
+              <option value="percent">Percentage (%)</option>
+              <option value="fixed">Fixed Amount (BDT)</option>
+              <option value="shipping">Free Shipping</option>
+            </select>
+          </div>
+          <div class="form-group"><label class="form-label">Value</label><input class="form-input" name="value" type="number" required></div>
+        </div>
+        <div class="form-group"><label class="form-label">Min Order Requirement</label><input class="form-input" name="minOrder" type="number" value="500" required></div>
+        <div class="form-group"><label class="form-label">Description</label><input class="form-input" name="description" required></div>
+        <button class="btn btn-lg" style="width:100%;margin-top:1rem">Create Coupon</button>
+      </form>
+    </div>
+  </div>
 
-  <div id="testimonialModal" class="modal"><div class="modal-content">
-    <button class="modal-close" data-close-modal><i class="fas fa-times"></i></button>
-    <h2>Testimonial</h2>
-    <form id="testimonialForm">
-      <input type="hidden" name="id">
-      <div class="form-row"><div class="form-group"><label class="form-label">Name</label><input class="form-input" name="name" required></div>
-        <div class="form-group"><label class="form-label">Role</label><input class="form-input" name="role" required></div></div>
-      <div class="form-group"><label class="form-label">Review</label><textarea class="form-textarea" name="text" required></textarea></div>
-      <div class="form-row"><div class="form-group"><label class="form-label">Rating</label><input class="form-input" name="rating" type="number" min="1" max="5" required></div>
-        <div class="form-group"><label class="form-label">Initials</label><input class="form-input" name="initials" maxlength="3" required></div></div>
-      <button class="btn" style="width:100%">Save</button>
-    </form>
-  </div></div>
+  <!-- Post Modal -->
+  <div id="postModal" class="modal">
+    <div class="modal-content modal-lg">
+      <button class="modal-close" data-close-modal><i class="fa-solid fa-times"></i></button>
+      <h2 style="font-family:var(--serif);margin-bottom:1.25rem">Journal Story</h2>
+      <form id="postForm">
+        <input type="hidden" name="id">
+        <div class="form-group"><label class="form-label">Title</label><input class="form-input" name="title" required></div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Category</label><input class="form-input" name="category" required></div>
+          <div class="form-group"><label class="form-label">Estimated Read Time</label><input class="form-input" name="readTime" value="4 min" required></div>
+        </div>
+        <div class="form-group"><label class="form-label">Short Excerpt</label><textarea class="form-textarea" name="excerpt" required></textarea></div>
+        <div class="form-group"><label class="form-label">Article Body HTML</label><textarea class="form-textarea" name="content" style="min-height:160px" required></textarea></div>
+        <div class="form-group"><label class="form-label">Publication Status</label>
+          <select class="form-select" name="status">
+            <option value="published">Published</option>
+            <option value="draft">Draft</option>
+          </select>
+        </div>
+        <button class="btn btn-lg" style="width:100%;margin-top:1rem">Save Article</button>
+      </form>
+    </div>
+  </div>
 
-  <div id="orderModal" class="modal"><div class="modal-content">
-    <button class="modal-close" data-close-modal><i class="fas fa-times"></i></button>
-    <h2>Order</h2>
-    <div id="orderContent"></div>
-  </div></div>
+  <!-- Testimonial Modal -->
+  <div id="testimonialModal" class="modal">
+    <div class="modal-content">
+      <button class="modal-close" data-close-modal><i class="fa-solid fa-times"></i></button>
+      <h2 style="font-family:var(--serif);margin-bottom:1.25rem">Client Review</h2>
+      <form id="testimonialForm">
+        <input type="hidden" name="id">
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Client Name</label><input class="form-input" name="name" required></div>
+          <div class="form-group"><label class="form-label">Role / Location</label><input class="form-input" name="role" required></div>
+        </div>
+        <div class="form-group"><label class="form-label">Testimonial Text</label><textarea class="form-textarea" name="text" required></textarea></div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Rating (1–5)</label><input class="form-input" name="rating" type="number" min="1" max="5" value="5" required></div>
+          <div class="form-group"><label class="form-label">Initials (2 letters)</label><input class="form-input" name="initials" maxlength="3" required></div>
+        </div>
+        <button class="btn btn-lg" style="width:100%;margin-top:1rem">Save Testimonial</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Order Detail Modal -->
+  <div id="orderModal" class="modal">
+    <div class="modal-content modal-lg">
+      <button class="modal-close" data-close-modal><i class="fa-solid fa-times"></i></button>
+      <div id="orderContent"></div>
+    </div>
+  </div>
+
   <script src="script.js"></script>
 </body>
 </html>

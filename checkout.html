@@ -1,48 +1,94 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Checkout · Iqra Mart</title>
+  <meta name="description" content="Secure Checkout · Iqra Online Mart">
+  <meta name="theme-color" content="#09090b">
+  <title>Checkout · Iqra Online Mart</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@300;400;500;600;700&family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header><div class="container header-inner">
-    <a href="index.html" class="logo"><div class="logo-mark">I</div><div class="logo-text">Iqra Mart</div></a>
-    <div class="header-actions">
-      <button id="themeToggle" class="theme-toggle"><i class="fas fa-moon"></i></button>
-      <button id="accountBtn" class="icon-btn"><i class="fas fa-user"></i></button>
+
+  <!-- Topbar -->
+  <div class="topbar">
+    <div class="container topbar-inner">
+      <div class="topbar-info">
+        <span><i class="fa-solid fa-lock gold"></i> 256-Bit Encrypted Secure Checkout</span>
+      </div>
+      <div class="topbar-actions">
+        <!-- Currency Dropdown -->
+        <div class="select-dropdown-wrap" id="currencyDropdownWrap">
+          <button class="select-trigger-btn" id="currencyBtn">
+            <i class="fa-solid fa-coins gold"></i> <span id="currentCurrencyLabel">BDT (৳)</span> <i class="fa-solid fa-chevron-down" style="font-size:0.65rem"></i>
+          </button>
+          <div class="dropdown-menu">
+            <button class="dropdown-item currency-option active" data-cur="BDT"><span>BDT</span> <strong>৳</strong></button>
+            <button class="dropdown-item currency-option" data-cur="USD"><span>USD</span> <strong>$</strong></button>
+            <button class="dropdown-item currency-option" data-cur="EUR"><span>EUR</span> <strong>€</strong></button>
+            <button class="dropdown-item currency-option" data-cur="GBP"><span>GBP</span> <strong>£</strong></button>
+            <button class="dropdown-item currency-option" data-cur="SAR"><span>SAR</span> <strong>﷼</strong></button>
+            <button class="dropdown-item currency-option" data-cur="AED"><span>AED</span> <strong>د.إ</strong></button>
+            <button class="dropdown-item currency-option" data-cur="INR"><span>INR</span> <strong>₹</strong></button>
+          </div>
+        </div>
+
+        <button id="themeToggle" class="icon-btn" style="width:32px;height:32px;font-size:0.85rem" title="Toggle Theme">
+          <i class="fa-solid fa-moon"></i>
+        </button>
+      </div>
     </div>
-  </div></header>
-  <section class="section"><div class="container">
-    <div class="section-header"><div class="section-tag">Checkout</div><h2 class="section-title">Complete your <span class="gradient-text">order</span></h2></div>
-    <div class="checkout-grid">
-      <div id="checkoutFormContainer"></div>
-      <div id="checkoutSummary" class="checkout-summary"></div>
+  </div>
+
+  <!-- Header -->
+  <header>
+    <div class="container header-inner">
+      <a href="index.html" class="logo">
+        <div class="logo-mark">I</div>
+        <div>
+          <div class="logo-text">Iqra Mart</div>
+          <div class="logo-sub">Express Checkout</div>
+        </div>
+      </a>
+      <div class="header-actions">
+        <a href="index.html#products" class="btn btn-outline btn-sm"><i class="fa-solid fa-arrow-left"></i> Continue Shopping</a>
+        <a href="account.html" class="icon-btn" title="Account"><i class="fa-solid fa-user"></i></a>
+      </div>
     </div>
-  </div></section>
-  <div id="authModal" class="modal"><div class="modal-content">
-    <button id="authClose" class="modal-close"><i class="fas fa-times"></i></button>
-    <div class="auth-tabs"><button class="auth-tab active" data-tab="login">Sign in</button><button class="auth-tab" data-tab="register">Register</button></div>
-    <form id="loginForm" class="auth-form" data-pane="login">
-      <div class="form-group"><label class="form-label">Email</label><input class="form-input" name="email" type="email" required></div>
-      <div class="form-group"><label class="form-label">Password</label><input class="form-input" name="password" type="password" required></div>
-      <button class="btn" style="width:100%">Sign in</button>
-    </form>
-    <form id="registerForm" class="auth-form" data-pane="register" style="display:none">
-      <div class="form-row"><div class="form-group"><label class="form-label">First</label><input class="form-input" name="firstName" required></div>
-      <div class="form-group"><label class="form-label">Last</label><input class="form-input" name="lastName" required></div></div>
-      <div class="form-group"><label class="form-label">Email</label><input class="form-input" name="email" type="email" required></div>
-      <div class="form-group"><label class="form-label">Phone</label><input class="form-input" name="phone"></div>
-      <div class="form-group"><label class="form-label">Password</label><input class="form-input" name="password" type="password" required></div>
-      <div class="form-group"><label class="form-label">Confirm</label><input class="form-input" name="confirmPassword" type="password" required></div>
-      <button class="btn" style="width:100%">Register</button>
-    </form>
-  </div></div>
+  </header>
+
+  <!-- Checkout Section -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">Express Settlement</div>
+        <h2 class="section-title">Finalize Your <span class="gradient-text">Order</span></h2>
+      </div>
+
+      <div class="checkout-grid">
+        <div id="checkoutFormContainer"></div>
+        <div id="checkoutSummary" class="checkout-summary"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-bottom" style="border:0;padding:0">
+        <div>© 2026 Iqra Online Mart · SSL Protected Order Engine</div>
+        <div class="footer-bottom-links">
+          <a href="contact.html">Support Hotline: +880 1617 040846</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
   <script src="script.js"></script>
 </body>
 </html>

@@ -1,74 +1,164 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Product · Iqra Mart</title>
+  <meta name="description" content="Product details · Iqra Online Mart">
+  <meta name="theme-color" content="#09090b">
+  <title>Product · Iqra Online Mart</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@300;400;500;600;700&family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="topbar"><div class="container topbar-inner">
-    <div class="topbar-info"><span><i class="fas fa-phone"></i><span data-cms="phone">01617040846</span></span></div>
-    <div class="topbar-actions">
-      <div class="lang-selector"><button id="langBtn" class="lang-btn"><i class="fas fa-globe"></i> <span id="currentLangLabel">English</span></button>
-        <div class="lang-dropdown"><button data-lang="en" class="lang-option">English</button><button data-lang="bn" class="lang-option">বাংলা</button></div></div>
-      <button id="themeToggle" class="theme-toggle"><i class="fas fa-moon"></i></button>
+
+  <!-- Topbar -->
+  <div class="topbar">
+    <div class="container topbar-inner">
+      <div class="topbar-info">
+        <span><i class="fa-solid fa-phone"></i><span data-cms="phone">+880 1617 040846</span></span>
+        <span><i class="fa-solid fa-envelope"></i><span data-cms="email">iqrabintesobuj@gmail.com</span></span>
+        <span><i class="fa-solid fa-truck-fast"></i> Free nationwide shipping on orders over ৳1,500</span>
+      </div>
+      <div class="topbar-actions">
+        <!-- Currency Dropdown -->
+        <div class="select-dropdown-wrap" id="currencyDropdownWrap">
+          <button class="select-trigger-btn" id="currencyBtn">
+            <i class="fa-solid fa-coins gold"></i> <span id="currentCurrencyLabel">BDT (৳)</span> <i class="fa-solid fa-chevron-down" style="font-size:0.65rem"></i>
+          </button>
+          <div class="dropdown-menu">
+            <button class="dropdown-item currency-option active" data-cur="BDT"><span>BDT</span> <strong>৳</strong></button>
+            <button class="dropdown-item currency-option" data-cur="USD"><span>USD</span> <strong>$</strong></button>
+            <button class="dropdown-item currency-option" data-cur="EUR"><span>EUR</span> <strong>€</strong></button>
+            <button class="dropdown-item currency-option" data-cur="GBP"><span>GBP</span> <strong>£</strong></button>
+            <button class="dropdown-item currency-option" data-cur="SAR"><span>SAR</span> <strong>﷼</strong></button>
+            <button class="dropdown-item currency-option" data-cur="AED"><span>AED</span> <strong>د.إ</strong></button>
+            <button class="dropdown-item currency-option" data-cur="INR"><span>INR</span> <strong>₹</strong></button>
+          </div>
+        </div>
+
+        <!-- Language Dropdown -->
+        <div class="select-dropdown-wrap" id="langDropdownWrap">
+          <button class="select-trigger-btn" id="langBtn">
+            <i class="fa-solid fa-globe gold"></i> <span id="currentLangLabel">English</span> <i class="fa-solid fa-chevron-down" style="font-size:0.65rem"></i>
+          </button>
+          <div class="dropdown-menu">
+            <button class="dropdown-item lang-option active" data-lang="en">English</button>
+            <button class="dropdown-item lang-option" data-lang="bn">বাংলা (Bengali)</button>
+          </div>
+        </div>
+
+        <button id="themeToggle" class="icon-btn" style="width:32px;height:32px;font-size:0.85rem" title="Toggle Theme">
+          <i class="fa-solid fa-moon"></i>
+        </button>
+      </div>
     </div>
-  </div></div>
-  <header><div class="container header-inner">
-    <a href="index.html" class="logo"><div class="logo-mark">I</div><div><div class="logo-text">Iqra Mart</div><div class="logo-sub">Quality over quantity</div></div></a>
-    <nav><ul class="nav-links">
-      <li><a href="index.html">Home</a></li><li><a href="index.html#products">Products</a></li>
-      <li><a href="blog.html">Journal</a></li><li><a href="contact.html">Contact</a></li>
-    </ul></nav>
-    <div class="header-actions">
-      <button id="searchBtn" class="icon-btn"><i class="fas fa-search"></i></button>
-      <button id="cartBtn" class="icon-btn"><i class="fas fa-bag-shopping"></i><span class="cart-badge" style="display:none">0</span></button>
-      <button id="accountBtn" class="icon-btn"><i class="fas fa-user"></i></button>
-      <button id="mobileMenuBtn" class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
+  </div>
+
+  <!-- Header -->
+  <header>
+    <div class="container header-inner">
+      <a href="index.html" class="logo">
+        <div class="logo-mark">I</div>
+        <div>
+          <div class="logo-text">Iqra Mart</div>
+          <div class="logo-sub">Quality over quantity</div>
+        </div>
+      </a>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="index.html#products">Products</a></li>
+          <li><a href="index.html#categories">Categories</a></li>
+          <li><a href="blog.html">Journal</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="admin.html">CMS</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <button id="searchBtn" class="icon-btn" title="Search"><i class="fa-solid fa-magnifying-glass"></i></button>
+        <button id="cartBtn" class="icon-btn" title="Bag"><i class="fa-solid fa-bag-shopping"></i><span class="cart-badge" style="display:none">0</span></button>
+        <button id="accountBtn" class="icon-btn" title="Account" onclick="location.href='account.html'"><i class="fa-solid fa-user"></i></button>
+        <button id="mobileMenuBtn" class="mobile-menu-btn icon-btn"><i class="fa-solid fa-bars"></i></button>
+      </div>
     </div>
-  </div></header>
-  <section class="section"><div class="container" id="productDetail"></div></section>
-  <section class="section"><div class="container">
-    <div class="section-header"><div class="section-tag">Related</div><h2 class="section-title">You may also <span class="gradient-text">like</span></h2></div>
-    <div class="products-grid" id="relatedProducts"></div>
-  </div></section>
-  <footer><div class="container"><div class="footer-bottom" style="border:0;padding:0"><div>© 2026 Iqra Online Mart</div></div></div></footer>
+  </header>
+
+  <!-- Product Details Root -->
+  <section class="section">
+    <div class="container" id="productDetail"></div>
+  </section>
+
+  <!-- Related Products -->
+  <section class="section" style="border-top:1px solid var(--line-faint)">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">Recommendations</div>
+        <h2 class="section-title">You May Also <span class="gradient-text">Appreciate</span></h2>
+      </div>
+      <div class="products-grid" id="relatedProducts"></div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-bottom" style="border:0;padding:0">
+        <div>© 2026 Iqra Online Mart · Designed to International Standard</div>
+        <div class="footer-bottom-links">
+          <a href="index.html">Storefront</a>
+          <a href="account.html">Account</a>
+          <a href="contact.html">Support</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Slide-Over Shopping Cart Drawer -->
   <div id="cartDrawerOverlay" class="cart-drawer-overlay"></div>
   <div id="cartDrawer" class="cart-drawer">
-    <div class="cart-drawer-header"><h3>Bag</h3><button id="cartClose" class="modal-close"><i class="fas fa-times"></i></button></div>
+    <div class="cart-drawer-header">
+      <h3><i class="fa-solid fa-bag-shopping gold"></i> Shopping Bag</h3>
+      <button id="cartClose" class="modal-close" style="position:static"><i class="fa-solid fa-times"></i></button>
+    </div>
+    <div id="freeShippingBox" class="free-shipping-box"></div>
     <div class="cart-drawer-body" id="cartDrawerBody"></div>
-    <div class="cart-drawer-footer"><div class="cart-total-row"><span>Total</span><span class="total" id="cartTotalValue">৳0</span></div>
-      <button id="checkoutBtn" class="btn btn-lg" style="width:100%">Checkout</button></div>
+    <div class="cart-drawer-footer">
+      <div class="promo-input-wrap">
+        <input class="promo-input" id="couponCodeInput" placeholder="PROMO CODE">
+        <button class="btn btn-sm" id="applyCouponBtn">Apply</button>
+      </div>
+      <div class="cart-total-row"><span>Subtotal</span><span id="cartSubtotalValue">৳0</span></div>
+      <div class="cart-total-row grand-total"><span>Total</span><span class="gold" id="cartTotalValue">৳0</span></div>
+      <button id="checkoutBtn" class="btn btn-lg" style="width:100%"><i class="fa-solid fa-lock"></i> Checkout</button>
+    </div>
   </div>
-  <div id="searchModal" class="modal"><div class="modal-content search-content">
-    <button id="searchClose" class="modal-close"><i class="fas fa-times"></i></button>
-    <h2>Search</h2>
-    <div class="search-input-wrap"><i class="fas fa-search"></i><input id="searchInput" class="search-big-input" placeholder="Search…"></div>
-    <div id="searchResults"></div>
-  </div></div>
-  <div id="authModal" class="modal"><div class="modal-content">
-    <button id="authClose" class="modal-close"><i class="fas fa-times"></i></button>
-    <div class="auth-tabs"><button class="auth-tab active" data-tab="login">Sign in</button><button class="auth-tab" data-tab="register">Register</button></div>
-    <form id="loginForm" class="auth-form" data-pane="login">
-      <div class="form-group"><label class="form-label">Email</label><input class="form-input" name="email" type="email" required></div>
-      <div class="form-group"><label class="form-label">Password</label><input class="form-input" name="password" type="password" required></div>
-      <button class="btn" style="width:100%">Sign in</button>
-    </form>
-    <form id="registerForm" class="auth-form" data-pane="register" style="display:none">
-      <div class="form-row"><div class="form-group"><label class="form-label">First</label><input class="form-input" name="firstName" required></div>
-      <div class="form-group"><label class="form-label">Last</label><input class="form-input" name="lastName" required></div></div>
-      <div class="form-group"><label class="form-label">Email</label><input class="form-input" name="email" type="email" required></div>
-      <div class="form-group"><label class="form-label">Phone</label><input class="form-input" name="phone"></div>
-      <div class="form-group"><label class="form-label">Password</label><input class="form-input" name="password" type="password" required></div>
-      <div class="form-group"><label class="form-label">Confirm</label><input class="form-input" name="confirmPassword" type="password" required></div>
-      <button class="btn" style="width:100%">Register</button>
-    </form>
-  </div></div>
+
+  <!-- Search Modal -->
+  <div id="searchModal" class="modal">
+    <div class="modal-content search-modal-box">
+      <button id="searchClose" class="modal-close"><i class="fa-solid fa-times"></i></button>
+      <h2 style="font-family:var(--serif)">Search Catalog</h2>
+      <div class="search-input-wrap">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input id="searchInput" class="search-big-input" placeholder="Search products, brands, or categories...">
+      </div>
+      <div id="searchResults"></div>
+    </div>
+  </div>
+
+  <!-- Mobile Bottom Sticky Navigation -->
+  <div class="mobile-bottom-nav">
+    <a href="index.html" class="mob-nav-item"><i class="fa-solid fa-house"></i><span>Home</span></a>
+    <a href="index.html#products" class="mob-nav-item"><i class="fa-solid fa-box"></i><span>Shop</span></a>
+    <button class="mob-nav-item" onclick="$('#searchModal')?.classList.add('open')"><i class="fa-solid fa-magnifying-glass"></i><span>Search</span></button>
+    <button class="mob-nav-item" onclick="UI.openCart(true)"><i class="fa-solid fa-bag-shopping"></i><span>Bag</span></button>
+    <a href="account.html" class="mob-nav-item"><i class="fa-solid fa-user"></i><span>Account</span></a>
+  </div>
+
   <script src="script.js"></script>
 </body>
 </html>
