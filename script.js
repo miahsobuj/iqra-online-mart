@@ -677,6 +677,13 @@ const Store = {
         return structuredClone(def);
       }
     };
+    const getRaw = (k, def) => {
+      try {
+        return localStorage.getItem(STORE_KEY + k) || def;
+      } catch {
+        return def;
+      }
+    };
 
     this.products = get("products", DEFAULT_PRODUCTS);
     this.categories = get("categories", DEFAULT_CATEGORIES);
@@ -691,9 +698,9 @@ const Store = {
     this.compareList = get("compare", []);
     this.settings = { ...DEFAULT_SETTINGS, ...get("settings", {}) };
     this.pages = get("pages", DEFAULT_PAGES);
-    this.lang = localStorage.getItem(STORE_KEY + "lang") || "en";
-    this.theme = localStorage.getItem(STORE_KEY + "theme") || "dark";
-    this.currency = localStorage.getItem(STORE_KEY + "currency") || this.settings.currency || "BDT";
+    this.lang = getRaw("lang", "en");
+    this.theme = getRaw("theme", "dark");
+    this.currency = getRaw("currency", this.settings.currency || "BDT");
     this.appliedCoupon = get("appliedCoupon", null);
   },
 
@@ -850,13 +857,13 @@ const Auth = {
   users() {
     try { return JSON.parse(localStorage.getItem(STORE_KEY + "users")) || []; } catch { return []; }
   },
-  saveUsers(u) { localStorage.setItem(STORE_KEY + "users", JSON.stringify(u)); },
+  saveUsers(u) { try { localStorage.setItem(STORE_KEY + "users", JSON.stringify(u)); } catch {} },
   session() {
     try { return JSON.parse(localStorage.getItem(STORE_KEY + "session")); } catch { return null; }
   },
-  setSession(u) { localStorage.setItem(STORE_KEY + "session", JSON.stringify(u)); },
+  setSession(u) { try { localStorage.setItem(STORE_KEY + "session", JSON.stringify(u)); } catch {} },
   logout() {
-    localStorage.removeItem(STORE_KEY + "session");
+    try { localStorage.removeItem(STORE_KEY + "session"); } catch {}
     location.reload();
   },
   register(data) {
@@ -899,17 +906,17 @@ const Auth = {
 };
 
 const AdminAuth = {
-  is() { return localStorage.getItem(STORE_KEY + "admin") === "1"; },
+  is() { try { return localStorage.getItem(STORE_KEY + "admin") === "1"; } catch { return false; } },
   login(user, pass) {
     const c = Store.settings.adminCredentials || DEFAULT_SETTINGS.adminCredentials;
     if (user === c.username && pass === c.password) {
-      localStorage.setItem(STORE_KEY + "admin", "1");
+      try { localStorage.setItem(STORE_KEY + "admin", "1"); } catch {}
       return true;
     }
     return false;
   },
   logout() {
-    localStorage.removeItem(STORE_KEY + "admin");
+    try { localStorage.removeItem(STORE_KEY + "admin"); } catch {}
     location.href = "admin-login.html";
   }
 };
@@ -1373,7 +1380,7 @@ const UI = {
     $$("#themeToggle, .theme-toggle").forEach((btn) => {
       btn.addEventListener("click", () => {
         Store.theme = Store.theme === "dark" ? "light" : "dark";
-        localStorage.setItem(STORE_KEY + "theme", Store.theme);
+        try { localStorage.setItem(STORE_KEY + "theme", Store.theme); } catch {}
         this.applyChrome();
         SoundFX.play("click");
       });
@@ -1388,7 +1395,7 @@ const UI = {
     $$(".lang-option").forEach((btn) => {
       btn.addEventListener("click", () => {
         Store.lang = btn.dataset.lang;
-        localStorage.setItem(STORE_KEY + "lang", Store.lang);
+        try { localStorage.setItem(STORE_KEY + "lang", Store.lang); } catch {}
         location.reload();
       });
     });
@@ -1402,7 +1409,7 @@ const UI = {
     $$(".currency-option").forEach((btn) => {
       btn.addEventListener("click", () => {
         Store.currency = btn.dataset.cur;
-        localStorage.setItem(STORE_KEY + "currency", Store.currency);
+        try { localStorage.setItem(STORE_KEY + "currency", Store.currency); } catch {}
         $("#currencyDropdownWrap")?.classList.remove("open");
         this.applyChrome();
         this.renderHome();
@@ -1791,8 +1798,15 @@ const ProductDetail = {
     });
 
     $("#shareCopyBtn")?.addEventListener("click", () => {
-      navigator.clipboard.writeText(location.href);
-      toast("Link copied to clipboard!", "success");
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(location.href).then(() => {
+          toast("Link copied to clipboard!", "success");
+        }).catch(() => {
+          toast("Couldn't copy link", "danger");
+        });
+      } else {
+        toast("Copy not supported on this browser", "danger");
+      }
     });
 
     $("#productReviewForm")?.addEventListener("submit", (e) => {
